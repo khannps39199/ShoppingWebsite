@@ -55,7 +55,7 @@ public class CategoryController {
 	   // Fetch all categories from the database
 	   List<Category> allCate = categoryRepo.findAll(); 
 	   model.addAttribute("categories", allCate);
-	   int id =Integer.parseInt(x);
+	   int id =Integer.parseInt(x)-1;
 	   model.addAttribute("category", allCate.get(id));
 	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
 	}
