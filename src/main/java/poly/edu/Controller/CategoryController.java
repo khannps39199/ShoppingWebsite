@@ -40,6 +40,8 @@ public class CategoryController {
 		   model.addAttribute("category", new Category());
 		   return "CategoriesCRUD.html";
 		}
+	 
+	 // ADD COMMENT 
 	 @PostMapping("/categories/save")
 	  public String newCategory(@ModelAttribute("category")  Category category,Model model) throws JsonProcessingException {
 		 categoryRepo.save(category); 
