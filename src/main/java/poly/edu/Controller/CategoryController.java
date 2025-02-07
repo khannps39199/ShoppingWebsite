@@ -31,16 +31,17 @@ public class CategoryController {
 	   List<Category> allCate = categoryRepo.findAll(); 
 	   model.addAttribute("categories", allCate);
 	   model.addAttribute("category", allCate.get(0));
-	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
+	   return "CategoriesCRUD.html"; 
 	} 
-	 @GetMapping("/newcategory")
+	 @GetMapping("/getcategories/newcategory")
 	  public String newCate(Model model) throws JsonProcessingException {
-		   // Fetch all categories from the database
 		   List<Category> allCate = categoryRepo.findAll(); 
 		   model.addAttribute("categories", allCate);
 		   model.addAttribute("category", new Category());
-		   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
+		   return "CategoriesCRUD.html";
 		}
+	 
+	 // ADD COMMENT 
 	 @PostMapping("/categories/save")
 	  public String newCategory(@ModelAttribute("category")  Category category,Model model) throws JsonProcessingException {
 		 categoryRepo.save(category); 
@@ -50,13 +51,15 @@ public class CategoryController {
 	   model.addAttribute("category", newCate);
 	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
 	}
-	 @GetMapping("/categories/edit/{id}")
-	  public String editMedhod(Model model, @PathVariable("id") String x) throws JsonProcessingException {
+	 @GetMapping("/getcategories/edit")
+	  public String editMedhod(Model model, @RequestParam("id") String x) throws JsonProcessingException {
 	   // Fetch all categories from the database
 	   List<Category> allCate = categoryRepo.findAll(); 
 	   model.addAttribute("categories", allCate);
+
 	   int id =Integer.parseInt(x)-1;
 	   model.addAttribute("category", allCate.get(id));
+
 	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
 	}
 	
