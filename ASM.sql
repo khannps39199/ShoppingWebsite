@@ -1,18 +1,20 @@
 ﻿Create database PS39199_Java5_ASMSQL;
+use master
+--drop database PS39199_Java5_ASMSQL
 use PS39199_Java5_ASMSQL;
 -- drop database PS39199_Java5_ASMSQL;
 --use PolyOE;
 CREATE TABLE Users (
     UserID INT IDENTITY PRIMARY KEY,
     Username NVARCHAR(50) NOT NULL UNIQUE,
-    PasswordHash NVARCHAR(255) NOT NULL,
+    password_hash NVARCHAR(255) NOT NULL,
     Email NVARCHAR(100) NOT NULL UNIQUE,
-    FullName NVARCHAR(100),
-    Phone NVARCHAR(15),
+    full_name NVARCHAR(100),
+    Phone NVARCHAR(15),	
     Address NVARCHAR(255),
     Role NVARCHAR(20) DEFAULT 'Customer', -- Customer, Admin
-    IsActivated BIT DEFAULT 0,
-    CreatedAt DATETIME DEFAULT GETDATE()
+    is_activated BIT DEFAULT 0,
+    created_at DATETIME DEFAULT GETDATE()
 );
 
 CREATE TABLE Categories (
@@ -72,4 +74,3 @@ CREATE TABLE UserActivity (
     IsCompleted BIT DEFAULT 0,
     CONSTRAINT FK_UserActivity_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
