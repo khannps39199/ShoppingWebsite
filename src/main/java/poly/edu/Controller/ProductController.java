@@ -11,6 +11,9 @@ import poly.edu.Repository.ProductRepository;
 import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
 
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.*;
+
 @Controller
 public class ProductController {
     @Autowired
@@ -19,18 +22,17 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryRepo;
 
-    // Phương thức này dùng để hiển thị tất cả sản phẩm
+    // Hiển thị danh sách sản phẩm và form mặc định
     @GetMapping("/getproducts")
     public String getAllProducts(Model model) {
-        List<Product> allProducts = productRepo.findAll();
-        model.addAttribute("products", allProducts);  // Thêm danh sách sản phẩm vào model
-        model.addAttribute("product", new Product());  // Để dùng khi tạo sản phẩm mới
-        model.addAttribute("categories", categoryRepo.findAll());  // Danh sách các danh mục
-        return "ProductsCRUD.html";
+        model.addAttribute("products", productRepo.findAll()); 
+        model.addAttribute("product", new Product()); 
+        model.addAttribute("categories", categoryRepo.findAll());
+        return "ProductsCRUD";
     }
 
-    // Phương thức này hiển thị form tạo mới sản phẩm
-    @GetMapping("/getproducts/newproduct")
+    // Tạo sản phẩm mới với giá trị mặc định
+    @GetMapping("/products/new")
     public String newProduct(Model model) {
         model.addAttribute("product", new Product());  // Tạo mới sản phẩm
         model.addAttribute("categories", categoryRepo.findAll());  // Danh sách các danh mục
@@ -38,38 +40,68 @@ public class ProductController {
         return "ProductsCRUD.html";
     }
 
-    // Phương thức này dùng để lưu hoặc cập nhật sản phẩm vào cơ sở dữ liệu
+
+    // Lưu hoặc cập nhật sản phẩm
     @PostMapping("/products/save")
-    public String saveProduct(@ModelAttribute("product") Product product) {
-        // Nếu sản phẩm đã có id, tức là đang chỉnh sửa
-        if (product.getId() != null) {
-            // Cập nhật sản phẩm
+    public String saveProduct(@ModelAttribute("product") Product product,
+                              @RequestParam("imageFile") MultipartFile file) {
+        try {
+            if (!file.isEmpty()) {
+                // Lấy tên file gốc
+                String fileName = file.getOriginalFilename();
+                String uploadDir = "src/main/resources/static/images/";
+
+                // Tạo thư mục nếu chưa tồn tại
+                Path uploadPath = Paths.get(uploadDir);
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                // Lưu file vào thư mục
+                Path path = uploadPath.resolve(fileName);
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                // Cập nhật tên file ảnh vào product
+                product.setImage(fileName);
+            } else {
+                // Nếu không có file mới, giữ nguyên ảnh cũ (tránh bị NULL)
+                Product existingProduct = productRepo.findById(product.getId()).orElse(null);
+                if (existingProduct != null) {
+                    product.setImage(existingProduct.getImage());
+                }
+            }
+
+            // Lưu sản phẩm vào database
             productRepo.save(product);
-        } else {
-            // Lưu sản phẩm mới
-            productRepo.save(product);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // Quay lại trang danh sách sản phẩm
         return "redirect:/getproducts";
     }
 
-    // Phương thức này dùng để hiển thị thông tin sản phẩm cần chỉnh sửa
-    @GetMapping("/getproducts/edit")
-    public String editProduct(Model model, @RequestParam("id") Long id) {
+
+    // Chỉnh sửa sản phẩm
+    @GetMapping("/products/edit/{id}")
+    public String editProduct(Model model, @PathVariable("id") Long id) {
         Product product = productRepo.findById(id).orElse(null);
         if (product == null) {
-            return "redirect:/getproducts";  // Nếu không tìm thấy sản phẩm, điều hướng về trang danh sách
+            return "redirect:/getproducts"; // Nếu không tìm thấy, quay về danh sách sản phẩm
         }
-        model.addAttribute("product", product);  // Thêm sản phẩm cần chỉnh sửa vào model
-        model.addAttribute("categories", categoryRepo.findAll());  // Danh sách các danh mục
-        model.addAttribute("products", productRepo.findAll());  // Danh sách các sản phẩm hiện có
-        return "ProductsCRUD.html";  // Trả về trang chỉnh sửa sản phẩm
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("products", productRepo.findAll());
+        return "ProductsCRUD"; // Đảm bảo file này tồn tại trong thư mục templates
     }
 
-    // Phương thức này dùng để xóa sản phẩm
-    @GetMapping("/getproducts/delete")
-    public String deleteProduct(@RequestParam("id") Long id) {
-        productRepo.deleteById(id);  // Xóa sản phẩm theo id
+
+    // Xóa sản phẩm
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable("id") Long id) {  // Sử dụng @PathVariable thay vì @RequestParam
+        if (productRepo.existsById(id)) {  // Kiểm tra nếu sản phẩm tồn tại
+            productRepo.deleteById(id);
+        }
         return "redirect:/getproducts";  // Quay lại danh sách sản phẩm
     }
+
 }

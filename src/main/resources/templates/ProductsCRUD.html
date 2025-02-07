@@ -10,11 +10,19 @@
     <div class="container mt-5">
         <h2 class="text-center text-primary">Quản lý Sản phẩm</h2>
 
+        <!-- Thông báo -->
+        <div th:if="${successMessage}" class="alert alert-success text-center">
+            <span th:text="${successMessage}"></span>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-danger text-center">
+            <span th:text="${errorMessage}"></span>
+        </div>
+
         <!-- Form Thêm/Sửa Sản phẩm -->
         <div class="card mb-4">
             <div class="card-header bg-success text-white">Thêm / Chỉnh sửa Sản phẩm</div>
             <div class="card-body">
-                <form th:object="${product}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/products/save}" th:object="${product}" method="post" enctype="multipart/form-data">
                     <input type="hidden" th:field="*{id}">
                     <div class="mb-3">
                         <label class="form-label">Tên sản phẩm</label>
@@ -38,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Hình ảnh</label>
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="imageFile" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Danh mục</label>
@@ -47,6 +55,7 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="/products/new" class="btn btn-success">Tạo Mới</a>
                 </form>
             </div>
         </div>
@@ -78,12 +87,15 @@
                             <td th:text="${product.discount} + '%'" th:if="${product.discount != null}"></td>
                             <td th:text="${product.stock}"></td>
                             <td>
-                                <img th:src="@{'/images/' + ${product.image}}" alt="Hình ảnh sản phẩm" width="50">
+								<img th:src="@{'/images/' + ${product.image}}" alt="Hình ảnh sản phẩm" width="100">
                             </td>
                             <td th:text="${product.category.name}"></td>
                             <td>
-                                <a th:href="@{/getproducts/edit(id=${product.id})}" class="btn btn-warning btn-sm">Sửa</a>
-                                <a th:href="@{/getproducts/delete(id=${product.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+								<a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Sửa</a>
+
+                                <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm" 
+								   onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+
                             </td>
                         </tr>
                     </tbody>
