@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,9 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)	
     @Column(name = "UserID")
     private Integer userId;
 
@@ -44,6 +46,7 @@ public class User {
 
     @Column(name = "CreatedAt", nullable = false, columnDefinition = "datetime default GETDATE()")
     private Timestamp createdAt;
+
 
 	public Integer getUserId() {
 		return userId;
@@ -125,6 +128,8 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
+=======
+>>>>>>> 1b0db16ddd3cd80dbaaab46cbaa9b79bf4767ac4
 	
     
 }

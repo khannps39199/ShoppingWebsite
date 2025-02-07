@@ -1,5 +1,6 @@
 package poly.edu.Controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import poly.edu.Entity.Category;
 import poly.edu.Entity.User;
 import poly.edu.Repository.UserRepository;
 
@@ -21,47 +19,69 @@ public class UsersController {
     @Autowired
     private UserRepository us;
 
+    // Lấy danh sách người dùng và form mặc định
     @GetMapping("/getUser")
-    public String getMethodUser(Model model) throws JsonProcessingException {
+    public String getMethodUser(Model model) {
         List<User> allUser = us.findAll();
-        model.addAttribute("users", allUser); // Đảm bảo tên là 'users'
-        model.addAttribute("newUser", new User());
-        return "UsersCRUD"; // Trả về view với tên 'UsersCRUD'
+        model.addAttribute("users", allUser); 
+        model.addAttribute("newUser", new User()); // Form mặc định rỗng
+        return "UsersCRUD"; 
     }
 
-
-    @GetMapping("/newUser")
-    public String newCate(Model model) throws JsonProcessingException {
-        List<User> allUser = us.findAll(); 
-        model.addAttribute("ListAll", allUser);
-        model.addAttribute("newUser", new User()); // Đảm bảo bạn truyền đúng đối tượng vào model
+    // Tạo người dùng mới với giá trị mặc định
+    @GetMapping("/users/new")
+    public String createNewUser(Model model) {
+        User newUser = new User();
+        newUser.setCreatedAt(new Timestamp(System.currentTimeMillis())); // Gán thời gian mặc định
+        model.addAttribute("newUser", newUser);
+        model.addAttribute("users", us.findAll()); // Giữ nguyên danh sách
         return "UsersCRUD";
     }
 
+    // Lưu hoặc cập nhật người dùng
     @PostMapping("/users/save")
-    public String newCategory(@ModelAttribute("newUser") User user, Model model) throws JsonProcessingException {
+    public String saveUser(@ModelAttribute("newUser") User user) {
+        if (user.getUserId() == null) {
+            // Trường hợp tạo mới
+            user.setCreatedAt(new Timestamp(System.currentTimeMillis())); 
+            if (user.getPasswordHash() == null || user.getPasswordHash().isEmpty()) {
+                user.setPasswordHash("defaultPassword"); 
+            }
+        } else {
+            // Trường hợp cập nhật
+            User existingUser = us.findById(user.getUserId()).orElse(null);
+            if (existingUser != null) {
+                user.setCreatedAt(existingUser.getCreatedAt()); // Giữ nguyên ngày tạo
+                if (user.getPasswordHash() == null || user.getPasswordHash().isEmpty()) {
+                    user.setPasswordHash(existingUser.getPasswordHash()); // Giữ nguyên mật khẩu cũ
+                }
+            }
+        }
         us.save(user);
-        List<User> allUser = us.findAll(); 
-        model.addAttribute("ListAll", allUser);
-        model.addAttribute("newUser", new User()); // Reset form sau khi lưu
-        return "UsersCRUD"; // Trở lại trang UsersCRUD
+        return "redirect:/getUser";
     }
 
+    // Chỉnh sửa người dùng
     @GetMapping("/users/edit/{id}")
-    public String editMedhod(Model model, @PathVariable("id") String x) throws JsonProcessingException {
-        List<User> allUser = us.findAll(); 
-        model.addAttribute("ListAll", allUser);
-        int id = Integer.parseInt(x) - 1;
-        model.addAttribute("newUser", allUser.get(id)); // Dùng newUser thay vì category
-        return "UsersCRUD"; // Trở lại trang UsersCRUD
+    public String editMethod(Model model, @PathVariable("id") int id) {
+        List<User> allUsers = us.findAll(); // Lấy danh sách tất cả người dùng
+        model.addAttribute("users", allUsers); // Giữ nguyên danh sách trong bảng
+
+        User user = us.findById(id).orElse(null); // Lấy thông tin người cần sửa
+        if (user == null) {
+            return "redirect:/getUser"; // Nếu không tìm thấy user, quay lại danh sách
+        }
+        
+        model.addAttribute("newUser", user); // Đổ dữ liệu lên form
+        return "UsersCRUD";
     }
+
+    // Xóa người dùng
     @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id, Model model) {
-        us.deleteById(id); // Xóa người dùng theo id
-        List<User> allUser = us.findAll(); 
-        model.addAttribute("users", allUser); // Cập nhật danh sách sau khi xóa
-        return "UsersCRUD"; // Quay lại trang danh sách người dùng
+    public String deleteUser(@PathVariable("id") int id) {
+        if (us.existsById(id)) {
+            us.deleteById(id);
+        }
+        return "redirect:/getUser";
     }
-
 }
-
