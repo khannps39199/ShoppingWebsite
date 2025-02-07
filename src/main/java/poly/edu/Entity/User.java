@@ -3,6 +3,7 @@ package poly.edu.Entity;
 import java.sql.Timestamp;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,19 +125,6 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
-	public User(Integer userId, String username, String passwordHash, String email, String fullName, String phone,
-			String address, String role, Boolean isActivated, Timestamp createdAt) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.passwordHash = passwordHash;
-		this.email = email;
-		this.fullName = fullName;
-		this.phone = phone;
-		this.address = address;
-		this.role = role;
-		this.isActivated = isActivated;
-		this.createdAt = createdAt;
-	}
+	
     
 }
