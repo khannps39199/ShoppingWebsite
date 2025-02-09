@@ -128,8 +128,6 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
-=======
->>>>>>> 1b0db16ddd3cd80dbaaab46cbaa9b79bf4767ac4
 	
     
 }
