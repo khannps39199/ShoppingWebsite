@@ -5,10 +5,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.Transient;
+
+import java.time.Instant;
+
 @Entity
 @Table(name = "products")
 @Data
-@NoArgsConstructor  // Lombok tự động tạo constructor không tham số
+@NoArgsConstructor
 public class Product {
     
     @Id
@@ -36,44 +41,17 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", nullable = false)
-    private Category category;  // Mối quan hệ khóa ngoại với Category
+    private Category category;
 
     @Column(name = "Created_At", updatable = false, nullable = false)
     private Timestamp createdAt;
 
     @Transient
-    private String idCategory;
+    private MultipartFile imageFile;
 
-    // Phương thức này trả về mã danh mục dưới dạng String
-    public String getIdCategory() {
-        return (category != null) ? String.valueOf(category.getId()) : "0";
-    }
-
-    // Constructor đầy đủ
-    public Product(Long id, String name, String description, double price, double discount, int stock, String image,
-                   Timestamp createdAt, Category category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.discount = discount;
-        this.stock = stock;
-        this.image = image;
-        this.createdAt = createdAt;
-        this.category = category;
-    }
-
-    // Constructor với idCategory là String (thường dùng khi nhập từ form)
-    public Product(Long id, String name, String description, double price, double discount, int stock, String image,
-                   Timestamp createdAt, String idCategory) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.discount = discount;
-        this.stock = stock;
-        this.image = image;
-        this.createdAt = createdAt;
-        this.idCategory = idCategory;
+    // Hàm tự động gán giá trị cho createdAt trước khi lưu vào database
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = Timestamp.from(Instant.now());
     }
 }
