@@ -8,6 +8,6 @@ public class PayController {
 
     @GetMapping("/pay")
     public String showPayPage() {
-        return "pay"; // Trả về giao diện pay.html
+        return "pay"; 
     }
 }
