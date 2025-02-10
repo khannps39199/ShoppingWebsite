@@ -51,7 +51,7 @@ public class CategoryController {
 	   model.addAttribute("category", newCate);
 	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
 	}
-	 @GetMapping("/getcategories/edit")
+	 @GetMapping("/categories/edit")
 	  public String editMedhod(Model model, @RequestParam("id") String x) throws JsonProcessingException {
 	   // Fetch all categories from the database
 	   List<Category> allCate = categoryRepo.findAll(); 
