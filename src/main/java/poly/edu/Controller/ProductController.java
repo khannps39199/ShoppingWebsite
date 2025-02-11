@@ -2,6 +2,9 @@ package poly.edu.Controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +27,25 @@ public class ProductController {
 
     // Hiển thị danh sách sản phẩm và form mặc định
     @GetMapping("/getproducts")
-    public String getAllProducts(Model model) {
-        model.addAttribute("products", productRepo.findAll()); 
+    public String getAllProducts(
+            @RequestParam(defaultValue = "0") int page, 
+            @RequestParam(defaultValue = "10") int size, 
+            Model model) {
+        
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productRepo.findAll(pageable);
+
+        model.addAttribute("products", productPage.getContent());  
+        model.addAttribute("currentPage", page);                   
+        model.addAttribute("totalPages", productPage.getTotalPages()); 
+        model.addAttribute("pageSize", size);
         model.addAttribute("product", new Product()); 
         model.addAttribute("categories", categoryRepo.findAll());
+
         return "ProductsCRUD";
     }
+
+
 
     // Tạo sản phẩm mới với giá trị mặc định
     @GetMapping("/products/new")
