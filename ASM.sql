@@ -1,8 +1,7 @@
 ﻿Create database PS39199_Java5_ASMSQL;
 use master
---drop database PS39199_Java5_ASMSQL
 use PS39199_Java5_ASMSQL;
--- drop database PS39199_Java5_ASMSQL;
+--drop database PS39199_Java5_ASMSQL;
 --use PolyOE;
 CREATE TABLE Users (
     UserID INT IDENTITY PRIMARY KEY,
@@ -74,3 +73,7 @@ CREATE TABLE UserActivity (
     IsCompleted BIT DEFAULT 0,
     CONSTRAINT FK_UserActivity_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+USE master;
+ALTER DATABASE msdb SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DBCC CHECKDB (msdb, REPAIR_ALLOW_DATA_LOSS);
+ALTER DATABASE msdb SET MULTI_USER;

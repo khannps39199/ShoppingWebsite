@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import poly.edu.Entity.User;
 import poly.edu.Repository.UserRepository;
 
@@ -21,12 +24,30 @@ public class UsersController {
 
     // Lấy danh sách người dùng và form mặc định
     @GetMapping("/getUser")
-    public String getMethodUser(Model model) {
-        List<User> allUser = us.findAll();
-        model.addAttribute("users", allUser); 
-        model.addAttribute("newUser", new User()); // Form mặc định rỗng
-        return "UsersCRUD"; 
+    public String getMethodUser(Model model, 
+                                @RequestParam(defaultValue = "0") int page, 
+                                @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> userPage = us.findAll(pageable);
+        
+        // Đảm bảo page không vượt quá số trang hợp lệ
+        if (page >= userPage.getTotalPages()) {
+            page = Math.max(userPage.getTotalPages() - 1, 0);
+            pageable = PageRequest.of(page, size);
+            userPage = us.findAll(pageable);
+        }
+
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", userPage.getTotalPages());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("size", size);
+        
+        return "UsersCRUD";
     }
+
+
+
 
     // Tạo người dùng mới với giá trị mặc định
     @GetMapping("/users/new")
