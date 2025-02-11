@@ -97,18 +97,28 @@ public class ProductController {
     }
 
 
-    // Chỉnh sửa sản phẩm
     @GetMapping("/products/edit/{id}")
-    public String editProduct(Model model, @PathVariable("id") Long id) {
+    public String editProduct(Model model, @PathVariable("id") Long id,
+                              @RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "10") int size) {
         Product product = productRepo.findById(id).orElse(null);
         if (product == null) {
-            return "redirect:/getproducts"; // Nếu không tìm thấy, quay về danh sách sản phẩm
+            return "redirect:/getproducts?page=" + page + "&size=" + size;
         }
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productRepo.findAll(pageable);
+
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryRepo.findAll());
-        model.addAttribute("products", productRepo.findAll());
-        return "ProductsCRUD"; // Đảm bảo file này tồn tại trong thư mục templates
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+
+        return "ProductsCRUD"; // Đảm bảo file này tồn tại
     }
+
 
 
     // Xóa sản phẩm

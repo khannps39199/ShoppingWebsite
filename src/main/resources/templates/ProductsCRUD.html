@@ -140,10 +140,17 @@
                                     <img th:src="@{'/images/' + ${product.image}}" alt="Hình ảnh sản phẩm" width="80">
                                 </td>
                                 <td th:text="${product.category.name}"></td>
-                                <td>
-                                    <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Sửa</a>
-                                    <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</a>
-                                </td>
+								<td>
+								    <a th:href="@{/products/edit/{id}(id=${product.id}, page=${currentPage}, size=${pageSize})}" 
+								       class="btn btn-warning btn-sm">
+								        Sửa
+								    </a>
+								    <a th:href="@{/products/delete/{id}(id=${product.id})}" 
+								       class="btn btn-danger btn-sm" 
+								       onclick="return confirm('Bạn có chắc muốn xóa?');">
+								        Xóa
+								    </a>
+								</td>
                             </tr>
                         </tbody>
                     </table>
