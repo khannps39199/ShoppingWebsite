@@ -21,6 +21,17 @@
         .equal-height .card {
             flex: 1;
         }
+		.small-select {
+		    width: 80px; 
+		    font-size: 14px;
+			right: 20px	;
+		}
+		.select-container {
+		    display: flex;
+		    justify-content: flex-end; /* Đẩy select về bên phải */
+		    align-items: center; /* Căn giữa theo chiều dọc */
+		    width: 100%; /* Chiếm toàn bộ chiều rộng */
+		}
     </style>
 </head>
 <body class="bg-light">
@@ -104,9 +115,9 @@
         <div class="col-md-9">
             <div class="card p-3">
                 <h3>Danh sách Sản phẩm</h3>
-				<div class="mb-3">
+				<div class="mb-3 select-container">
 				    <label for="pageSize" class="form-label">Số lượng sản phẩm mỗi trang:</label>
-				    <select id="pageSize" class="form-select" onchange="changePageSize()">
+				    <select id="pageSize" class="form-select small-select" onchange="changePageSize()">
 				        <option value="5" th:selected="${pageSize == 5}">5</option>
 				        <option value="10" th:selected="${pageSize == 10}">10</option>
 				        <option value="20" th:selected="${pageSize == 20}">20</option>
