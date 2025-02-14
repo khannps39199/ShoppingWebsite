@@ -126,5 +126,10 @@ public class ProductController {
         }
         return "redirect:/getproducts";  // Quay lại danh sách sản phẩm
     }
+    @GetMapping("/products")
+    public String getForUser(Model model) {  // Sử dụng @PathVariable thay vì @RequestParam
+       model.addAttribute("Component","Products.html");
+        return "UserLayout";  // Quay lại danh sách sản phẩm
+    }
 
 }

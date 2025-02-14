@@ -16,12 +16,12 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/"); // Trỏ đúng vào static/images/
     }
-    @Bean
-    public FilterRegistrationBean<AdminFilter> adminFilter() {
-        FilterRegistrationBean<AdminFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new AdminFilter());
-        registrationBean.addUrlPatterns("/admin/*");
-        registrationBean.setOrder(1); 
-        return registrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean<AdminFilter> adminFilter() {
+//        FilterRegistrationBean<AdminFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new AdminFilter());
+//        registrationBean.addUrlPatterns("/pay","/admin/*","/cart");
+//        registrationBean.setOrder(1); 
+//        return registrationBean;
+//    }
 }
