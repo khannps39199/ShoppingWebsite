@@ -11,5 +11,4 @@ public class HomeController {
    public String getMethodName() {
        return "homePage";
    }
-   
 }

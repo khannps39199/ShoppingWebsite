@@ -19,7 +19,7 @@ public class UsersController {
     private UserRepository us;
 
     // Lấy danh sách người dùng với phân trang
-    @GetMapping("/getUser")
+    @GetMapping("/admin/getUser")
     public String getUsers(Model model, 
                            @RequestParam(defaultValue = "0") int page, 
                            @RequestParam(defaultValue = "5") int size) {
@@ -31,8 +31,8 @@ public class UsersController {
         model.addAttribute("totalPages", userPage.getTotalPages());
         model.addAttribute("newUser", new User());
         model.addAttribute("size", size);
-        
-        return "UsersCRUD";
+        model.addAttribute("CRUD","UsersCRUD.html");
+        return "CRUD";
     }
 
     // Tạo người dùng mới

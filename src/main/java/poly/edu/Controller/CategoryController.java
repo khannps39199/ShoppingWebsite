@@ -25,13 +25,14 @@ public class CategoryController {
 	    public void TempController(CategoryRepository categoryRepo) {
 	        this.categoryRepo = categoryRepo;
 	    }
-	 @GetMapping("/getcategories")
+	 @GetMapping("/admin/getcategories")
 	  public String getMethodName(Model model) throws JsonProcessingException {
 	   // Fetch all categories from the database
 	   List<Category> allCate = categoryRepo.findAll(); 
 	   model.addAttribute("categories", allCate);
 	   model.addAttribute("category", allCate.get(0));
-	   return "CategoriesCRUD.html"; 
+	   model.addAttribute("CRUD","CategoriesCRUD.html");
+	   return "CRUD"; 
 	} 
 	 @GetMapping("/getcategories/newcategory")
 	  public String newCate(Model model) throws JsonProcessingException {
