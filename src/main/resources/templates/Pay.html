@@ -53,65 +53,67 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-light">
+	
+   <div class="container mt-4 content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card p-3">
+					<table class="table table-dark table-striped">
+					            <thead>
+					                <tr>
+					                    <th>Sản phẩm</th>
+					                    <th>Số lượng</th>
+					                    <th>Giá</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+					                <tr>
+					                    <td>Áo Thun Nam</td>
+					                    <td>1</td>
+					                    <td>250.000đ</td>
+					                </tr>
+					                <tr>
+					                    <td>Quần Jean</td>
+					                    <td>1</td>
+					                    <td>450.000đ</td>
+					                </tr>
+					            </tbody>
+					        </table>
 
-<div class="container">
-    <div class="checkout-container">
-        <h2 class="text-center mb-4">💳 Thanh Toán</h2>
-        
-        <!-- Thông tin giỏ hàng -->
-        <h5>🛒 Giỏ hàng</h5>
-        <table class="table table-dark table-striped">
-            <thead>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Áo Thun Nam</td>
-                    <td>1</td>
-                    <td>250.000đ</td>
-                </tr>
-                <tr>
-                    <td>Quần Jean</td>
-                    <td>1</td>
-                    <td>450.000đ</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Form thông tin thanh toán -->
-        <h5>📌 Thông tin thanh toán</h5>
-        <form>
-            <div class="mb-3">
-                <label for="fullName" class="form-label">Họ và Tên</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên" required>
+					        <!-- Form thông tin thanh toán -->
+					        <h5>📌 Thông tin thanh toán</h5>
+					        <form>
+					            <div class="mb-3">
+					                <label for="fullName" class="form-label">Họ và Tên</label>
+					                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên" required>
+					            </div>
+					            <div class="mb-3">
+					                <label for="phoneNumber" class="form-label">Số điện thoại</label>
+					                <input type="tel" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại" required>
+					            </div>
+					            <div class="mb-3">
+					                <label for="address" class="form-label">Địa chỉ</label>
+					                <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ giao hàng" required>
+					            </div>
+					            <div class="mb-3">
+					                <label for="paymentMethod" class="form-label">Phương thức thanh toán</label>
+					                <select class="form-select" id="paymentMethod" required>
+					                    <option value="cod">💵 Thanh toán khi nhận hàng (COD)</option>
+					                    <option value="bank">🏦 Chuyển khoản ngân hàng</option>
+					                    <option value="visa">💳 Thẻ tín dụng / Ghi nợ</option>
+					                </select>
+					            </div>
+					            <div class="text-center">
+					                <button type="submit" class="btn btn-custom">✅ Xác nhận thanh toán</button>
+					            </div>
+					        </form>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Số điện thoại</label>
-                <input type="tel" class="form-control" id="phoneNumber" placeholder="Nhập số điện thoại" required>
-            </div>
-            <div class="mb-3">
-                <label for="address" class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ giao hàng" required>
-            </div>
-            <div class="mb-3">
-                <label for="paymentMethod" class="form-label">Phương thức thanh toán</label>
-                <select class="form-select" id="paymentMethod" required>
-                    <option value="cod">💵 Thanh toán khi nhận hàng (COD)</option>
-                    <option value="bank">🏦 Chuyển khoản ngân hàng</option>
-                    <option value="visa">💳 Thẻ tín dụng / Ghi nợ</option>
-                </select>
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-custom">✅ Xác nhận thanh toán</button>
-            </div>
-        </form>
+            
+        </div>
     </div>
-</div>
+
 
 </body>
 </html>

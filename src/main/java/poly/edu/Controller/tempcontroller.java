@@ -23,22 +23,14 @@ import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
 
 
-@RestController
+@Controller
 public class tempcontroller {
-	@Autowired
-	 private CategoryRepository categoryRepo ;
-
-    @Autowired
-    public void TempController(CategoryRepository categoryRepo) {
-        this.categoryRepo = categoryRepo;
-    }
-	@GetMapping("/tempgetcategory")
-	  public List<Category> getMethodName() throws JsonProcessingException {
+	
+	@GetMapping("/Layout")
+	  public String getMethodName() {
       // Fetch all categories from the database
-      List<Category> allCate = categoryRepo.findAll().stream()
-              .peek(category -> category.setProducts(null)) // Exclude products
-              .toList();
-      return allCate; // Spring Boot automatically converts this to JSON
+     
+      return "CRUD.html"; // Spring Boot automatically converts this to JSON
   }
 	
 	

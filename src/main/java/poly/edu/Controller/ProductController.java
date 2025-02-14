@@ -24,9 +24,7 @@ public class ProductController {
 
     @Autowired
     private CategoryRepository categoryRepo;
-
-    // Hiển thị danh sách sản phẩm và form mặc định
-    @GetMapping("/getproducts")
+    @GetMapping("/admin/getproducts")
     public String getAllProducts(
             @RequestParam(defaultValue = "0") int page, 
             @RequestParam(defaultValue = "10") int size, 
@@ -42,17 +40,16 @@ public class ProductController {
         model.addAttribute("product", new Product()); 
         model.addAttribute("categories", categoryRepo.findAll());
 
-        return "ProductsCRUD";
+        model.addAttribute("CRUD","ProductsCRUD.html");
+        return "CRUD";
     }
 
 
-
-    // Tạo sản phẩm mới với giá trị mặc định
     @GetMapping("/products/new")
     public String newProduct(Model model) {
-        model.addAttribute("product", new Product());  // Tạo mới sản phẩm
-        model.addAttribute("categories", categoryRepo.findAll());  // Danh sách các danh mục
-        model.addAttribute("products", productRepo.findAll());  // Thêm danh sách sản phẩm vào model
+        model.addAttribute("product", new Product());  
+        model.addAttribute("categories", categoryRepo.findAll());  
+        model.addAttribute("products", productRepo.findAll()); 
         return "ProductsCRUD.html";
     }
 
@@ -128,6 +125,11 @@ public class ProductController {
             productRepo.deleteById(id);
         }
         return "redirect:/getproducts";  // Quay lại danh sách sản phẩm
+    }
+    @GetMapping("/products")
+    public String getForUser(Model model) {  // Sử dụng @PathVariable thay vì @RequestParam
+       model.addAttribute("Component","Products.html");
+        return "UserLayout";  // Quay lại danh sách sản phẩm
     }
 
 }
