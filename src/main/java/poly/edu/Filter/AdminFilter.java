@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-@WebFilter({"/admin/*","/pay","/cart"})
+@WebFilter({"/admin/*","/pay","/cart","/addToCart"})
 public class AdminFilter implements Filter{
 	@Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
