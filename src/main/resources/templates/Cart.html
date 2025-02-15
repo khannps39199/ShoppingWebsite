@@ -4,62 +4,23 @@
   <meta charset="UTF-8">
   <title>Giỏ Hàng - Voucher & Số lượng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap CSS qua CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <!-- Font Awesome cho icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-light">
-
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-  			        <a class="navbar-brand" href="#">Quản lý Hệ thống</a>
-  			        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-  			            <span class="navbar-toggler-icon"></span>
-  			        </button>
-  			        <div class="collapse navbar-collapse" id="navbarNav">
-  			            <ul class="navbar-nav">
-  			                <li class="nav-item">
-  			                    <a class="nav-link" th:href="@{/getcategories}">Trang chủ</a>
-  			                </li>
-  			                <li class="nav-item">
-  			                    <a class="nav-link" th:href="@{/getproducts}">Sản phẩm</a>
-  			                </li>
-  			                <li class="nav-item">
-  			                    <a class="nav-link" th:href="@{/getUser}">Người dùng</a>
-  			                </li>
-  			                <li class="nav-item">
-  			                    <a class="nav-link" th:href="@{/cart}">Giỏ hàng</a>
-  			                </li>
-  			                <li class="nav-item">
-  			                    <a class="nav-link" th:href="@{/pay}">Thanh toán</a>
-  			                </li>
-  			                <li class="nav-item">
-  			                    <a class="nav-link" href="/#">Danh mục</a>
-  			                </li>
-  			            </ul>
-  			        </div>
-  			        <div class="ms-auto">
-  			            <a href="#" class="btn btn-outline-light me-2">Đăng nhập</a>
-  			            <a href="#" class="btn btn-outline-light">Đăng Ký</a>
-  			        </div>
-  			    </nav>
-
-  <!-- Main Section Giỏ Hàng -->
   <section class="h-100 h-custom" style="background-color: #eee;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
           <div class="card">
             <div class="card-body p-4">
-				<h5 class="mb-3">
-				                    <a href="#" class="text-body">
-				                      <i class="fas fa-long-arrow-alt-left me-2"></i>Tiếp tục mua sắm
-				                    </a>
-				                  </h5>
-				                  <hr>
+              <h5 class="mb-3">
+                <a href="#" class="text-body">
+                  <i class="fas fa-long-arrow-alt-left me-2"></i>Tiếp tục mua sắm
+                </a>
+              </h5>
+              <hr>
               <div class="row">
-                <!-- Left Column: Danh sách sản phẩm -->
                 <div class="col-lg-7">
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
@@ -68,25 +29,23 @@
                     </div>
                   </div>
                   
-                  <!-- Sản phẩm mẫu 1 (giá đơn vị: 100,000 VND, số lượng ban đầu: 2) -->
-                  <div class="card mb-3 item" data-unitprice="100000">
+                  <div class="card mb-3 item" data-unitprice="100000" th:each="cartItem : ${cartList}">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox chọn sản phẩm -->
                         <div class="form-check">
                           <input class="form-check-input item-checkbox" type="checkbox" id="item1">
                         </div>
                         <div class="d-flex flex-row align-items-center">
                           <div>
-                            <img src="https://via.placeholder.com/65" class="img-fluid rounded-3" alt="Sản phẩm 1" style="width: 65px;">
+                            <img src="https://via.placeholder.com/65" class="img-fluid rounded-3" alt="Sản phẩm" style="width: 65px;">
                           </div>
                           <div class="ms-3">
-                            <h5>Tên sản phẩm 1</h5>
+                            <h5 th:text="${cartItem.product.name}">Tên sản phẩm</h5>
                             <p class="small mb-0">
-                              Giá: <span class="unit-price">100,000</span> VND<br>
+                              Giá: <span class="unit-price" th:text="${cartItem.product.price}">100,000</span> VND<br>
                               Số lượng: 
-                              <input type="number" class="item-quantity" min="1" value="2" style="width: 60px;">
-                              = <span class="item-total-price">200,000</span> VND
+                              <input type="number" class="item-quantity" min="1" th:value="${cartItem.quantity}" style="width: 60px;">
+                              = <span class="item-total-price">100,000</span> VND
                             </p>
                           </div>
                         </div>
@@ -96,78 +55,16 @@
                       </div>
                     </div>
                   </div>
-                  
-                  <!-- Sản phẩm mẫu 2 (giá đơn vị: 150,000 VND, số lượng ban đầu: 1) -->
-                  <div class="card mb-3 item" data-unitprice="150000">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                          <input class="form-check-input item-checkbox" type="checkbox" id="item2">
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                          <div>
-                            <img src="https://via.placeholder.com/65" class="img-fluid rounded-3" alt="Sản phẩm 2" style="width: 65px;">
-                          </div>
-                          <div class="ms-3">
-                            <h5>Tên sản phẩm 2</h5>
-                            <p class="small mb-0">
-                              Giá: <span class="unit-price">150,000</span> VND<br>
-                              Số lượng: 
-                              <input type="number" class="item-quantity" min="1" value="1" style="width: 60px;">
-                              = <span class="item-total-price">150,000</span> VND
-                            </p>
-                          </div>
-                        </div>
-                        <div>
-                          <a href="#" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Sản phẩm mẫu 3 (giá đơn vị: 80,000 VND, số lượng ban đầu: 4) -->
-                  <div class="card mb-3 item" data-unitprice="80000">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                          <input class="form-check-input item-checkbox" type="checkbox" id="item3">
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                          <div>
-                            <img src="https://via.placeholder.com/65" class="img-fluid rounded-3" alt="Sản phẩm 3" style="width: 65px;">
-                          </div>
-                          <div class="ms-3">
-                            <h5>Tên sản phẩm 3</h5>
-                            <p class="small mb-0">
-                              Giá: <span class="unit-price">80,000</span> VND<br>
-                              Số lượng: 
-                              <input type="number" class="item-quantity" min="1" value="4" style="width: 60px;">
-                              = <span class="item-total-price">320,000</span> VND
-                            </p>
-                          </div>
-                        </div>
-                        <div>
-                          <a href="#" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Kết thúc danh sách sản phẩm -->
+				  
+				  
                 </div>
-
-                <!-- Right Column: Chi tiết thanh toán & voucher -->
+                
                 <div class="col-lg-5">
                   <div class="card bg-primary text-white rounded-3">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="mb-0">Chi tiết thanh toán</h5>
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                             class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
                       </div>
-
-                      <!-- Voucher: nhập mã và áp dụng -->
                       <div class="mb-3">
                         <label for="voucher" class="form-label">Mã Voucher</label>
                         <div class="input-group">
@@ -176,41 +73,27 @@
                         </div>
                         <small id="voucher-message" class="text-warning"></small>
                       </div>
-
-                      <!-- Hiển thị giảm giá nếu có -->
                       <div class="d-flex justify-content-between" id="voucher-discount-section" style="display: none;">
                         <p class="mb-2">Giảm giá</p>
                         <p class="mb-2" id="voucher-discount">0 VND</p>
                       </div>
-
                       <div class="d-flex justify-content-between">
                         <p class="mb-2">Tạm tính</p>
                         <p class="mb-2" id="sub-total">0 VND</p>
                       </div>
-
-                      <div class="d-flex justify-content-between">
-                        <p class="mb-2">Phí vận chuyển</p>
-                        <p class="mb-2" id="shipping-fee">20,000 VND</p>
-                      </div>
-
                       <div class="d-flex justify-content-between mb-4">
                         <p class="mb-2">Tổng (Bao gồm thuế)</p>
-                        <p class="mb-2" id="total-amount">20,000 VND</p>
+                        <p class="mb-2" id="total-amount">0 VND</p>
                       </div>
-						
-					  <a class="nav-link" th:href="@{/pay}">
-						<button type="button" class="btn btn-info btn-block btn-lg">
-						           <div class="d-flex justify-content-between">
-						           <span id="btn-total">20,000 VND</span>
-						           <span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-						     </div>
-						  </button>
-					  </a>
+                      <button type="button" class="btn btn-info btn-block btn-lg" id="checkout-btn">
+                        <div class="d-flex justify-content-between">
+                          <span id="btn-total">0 VND</span>
+                          <span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
-                <!-- End Right Column -->
-
               </div>
             </div>
           </div>
@@ -218,104 +101,11 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
+  
   <footer class="bg-dark text-white text-center p-3 mt-4">
     &copy; 2025 - Quản lý Giỏ Hàng
   </footer>
 
-  <!-- Bootstrap JS Bundle (bao gồm Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- JavaScript cập nhật số lượng, voucher và tổng thanh toán -->
-  <script>
-    // Lấy các phần tử
-    const checkboxes     = document.querySelectorAll('.item-checkbox');
-    const quantityInputs = document.querySelectorAll('.item-quantity');
-    const subTotalEl     = document.getElementById('sub-total');
-    const totalAmountEl  = document.getElementById('total-amount');
-    const btnTotalEl     = document.getElementById('btn-total');
-    const itemCountEl    = document.getElementById('item-count');
-    const shippingFee    = 20000;
-    const voucherInput   = document.getElementById('voucher');
-    const applyVoucherBtn= document.getElementById('apply-voucher');
-    const voucherMessage = document.getElementById('voucher-message');
-    const voucherDiscountSection = document.getElementById('voucher-discount-section');
-    const voucherDiscountEl = document.getElementById('voucher-discount');
-
-    // Biến lưu giá trị giảm giá từ voucher (đơn vị VND)
-    let discountAmount = 0;
-
-    // Hàm cập nhật tổng tiền của 1 sản phẩm theo số lượng
-    function updateItemTotalPrice(item) {
-      const unitPrice = parseInt(item.getAttribute('data-unitprice'));
-      const quantityInput = item.querySelector('.item-quantity');
-      const quantity = parseInt(quantityInput.value) || 0;
-      const totalPrice = unitPrice * quantity;
-      item.querySelector('.item-total-price').textContent = totalPrice.toLocaleString();
-    }
-
-    // Hàm cập nhật tổng tiền giỏ hàng (tính theo sản phẩm được chọn)
-    function updateTotals() {
-      let subTotal = 0;
-      let count = 0;
-      document.querySelectorAll('.item').forEach(item => {
-        const checkbox = item.querySelector('.item-checkbox');
-        if (checkbox.checked) {
-          const unitPrice = parseInt(item.getAttribute('data-unitprice'));
-          const quantity = parseInt(item.querySelector('.item-quantity').value) || 0;
-          subTotal += unitPrice * quantity;
-          count++;
-        }
-      });
-      subTotalEl.textContent = subTotal.toLocaleString() + ' VND';
-      // Tính tổng = tạm tính + phí vận chuyển - giảm giá (không cho tổng < 0)
-      let total = subTotal + shippingFee - discountAmount;
-      if(total < 0) total = 0;
-      totalAmountEl.textContent = total.toLocaleString() + ' VND';
-      btnTotalEl.textContent = total.toLocaleString() + ' VND';
-      itemCountEl.textContent = 'Bạn có ' + count + ' sản phẩm được chọn';
-    }
-
-    // Cập nhật lại tổng tiền cho từng sản phẩm khi số lượng thay đổi
-    quantityInputs.forEach(input => {
-      input.addEventListener('change', () => {
-        const item = input.closest('.item');
-        updateItemTotalPrice(item);
-        updateTotals();
-      });
-    });
-
-    // Cập nhật tổng thanh toán khi checkbox thay đổi
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', updateTotals);
-    });
-
-    // Xử lý voucher khi ấn "Áp dụng"
-    applyVoucherBtn.addEventListener('click', () => {
-      const code = voucherInput.value.trim();
-      // Ví dụ: nếu nhập "DISCOUNT10" giảm 10,000 VND, "DISCOUNT20" giảm 20,000 VND
-      if(code === "DISCOUNT10") {
-        discountAmount = 10000;
-        voucherMessage.textContent = "Voucher hợp lệ: Giảm 10,000 VND";
-        voucherDiscountEl.textContent = discountAmount.toLocaleString() + " VND";
-        voucherDiscountSection.style.display = "flex";
-      } else if(code === "DISCOUNT20") {
-        discountAmount = 20000;
-        voucherMessage.textContent = "Voucher hợp lệ: Giảm 20,000 VND";
-        voucherDiscountEl.textContent = discountAmount.toLocaleString() + " VND";
-        voucherDiscountSection.style.display = "flex";
-      } else {
-        discountAmount = 0;
-        voucherMessage.textContent = "Mã voucher không hợp lệ";
-        voucherDiscountSection.style.display = "none";
-      }
-      updateTotals();
-    });
-
-    // Khởi tạo: cập nhật giá sản phẩm và tổng tiền
-    document.querySelectorAll('.item').forEach(item => updateItemTotalPrice(item));
-    updateTotals();
-  </script>
 </body>
 </html>
