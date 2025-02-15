@@ -107,5 +107,94 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+      // Lấy các phần tử
+      const checkboxes     = document.querySelectorAll('.item-checkbox');
+      const quantityInputs = document.querySelectorAll('.item-quantity');
+      const subTotalEl     = document.getElementById('sub-total');
+      const totalAmountEl  = document.getElementById('total-amount');
+      const btnTotalEl     = document.getElementById('btn-total');
+      const itemCountEl    = document.getElementById('item-count');
+      const shippingFee    = 20000;
+      const voucherInput   = document.getElementById('voucher');
+      const applyVoucherBtn= document.getElementById('apply-voucher');
+      const voucherMessage = document.getElementById('voucher-message');
+      const voucherDiscountSection = document.getElementById('voucher-discount-section');
+      const voucherDiscountEl = document.getElementById('voucher-discount');
+
+      // Biến lưu giá trị giảm giá từ voucher (đơn vị VND)
+      let discountAmount = 0;
+
+      // Hàm cập nhật tổng tiền của 1 sản phẩm theo số lượng
+      function updateItemTotalPrice(item) {
+        const unitPrice = parseInt(item.getAttribute('data-unitprice'));
+        const quantityInput = item.querySelector('.item-quantity');
+        const quantity = parseInt(quantityInput.value) || 0;
+        const totalPrice = unitPrice * quantity;
+        item.querySelector('.item-total-price').textContent = totalPrice.toLocaleString();
+      }
+
+      // Hàm cập nhật tổng tiền giỏ hàng (tính theo sản phẩm được chọn)
+      function updateTotals() {
+        let subTotal = 0;
+        let count = 0;
+        document.querySelectorAll('.item').forEach(item => {
+          const checkbox = item.querySelector('.item-checkbox');
+          if (checkbox.checked) {
+            const unitPrice = parseInt(item.getAttribute('data-unitprice'));
+            const quantity = parseInt(item.querySelector('.item-quantity').value) || 0;
+            subTotal += unitPrice * quantity;
+            count++;
+          }
+        });
+        subTotalEl.textContent = subTotal.toLocaleString() + ' VND';
+        // Tính tổng = tạm tính + phí vận chuyển - giảm giá (không cho tổng < 0)
+        let total = subTotal + shippingFee - discountAmount;
+        if(total < 0) total = 0;
+        totalAmountEl.textContent = total.toLocaleString() + ' VND';
+        btnTotalEl.textContent = total.toLocaleString() + ' VND';
+        itemCountEl.textContent = 'Bạn có ' + count + ' sản phẩm được chọn';
+      }
+
+      // Cập nhật lại tổng tiền cho từng sản phẩm khi số lượng thay đổi
+      quantityInputs.forEach(input => {
+        input.addEventListener('change', () => {
+          const item = input.closest('.item');
+          updateItemTotalPrice(item);
+          updateTotals();
+        });
+      });
+
+      // Cập nhật tổng thanh toán khi checkbox thay đổi
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateTotals);
+      });
+
+      // Xử lý voucher khi ấn "Áp dụng"
+      applyVoucherBtn.addEventListener('click', () => {
+        const code = voucherInput.value.trim();
+        // Ví dụ: nếu nhập "DISCOUNT10" giảm 10,000 VND, "DISCOUNT20" giảm 20,000 VND
+        if(code === "DISCOUNT10") {
+          discountAmount = 10000;
+          voucherMessage.textContent = "Voucher hợp lệ: Giảm 10,000 VND";
+          voucherDiscountEl.textContent = discountAmount.toLocaleString() + " VND";
+          voucherDiscountSection.style.display = "flex";
+        } else if(code === "DISCOUNT20") {
+          discountAmount = 20000;
+          voucherMessage.textContent = "Voucher hợp lệ: Giảm 20,000 VND";
+          voucherDiscountEl.textContent = discountAmount.toLocaleString() + " VND";
+          voucherDiscountSection.style.display = "flex";
+        } else {
+          discountAmount = 0;
+          voucherMessage.textContent = "Mã voucher không hợp lệ";
+          voucherDiscountSection.style.display = "none";
+        }
+        updateTotals();
+      });
+
+      // Khởi tạo: cập nhật giá sản phẩm và tổng tiền
+      document.querySelectorAll('.item').forEach(item => updateItemTotalPrice(item));
+      updateTotals();
+    </script>
 </body>
 </html>
