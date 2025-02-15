@@ -31,7 +31,10 @@ public class CartController {
 	    private CartRepository cartRepo;
 	@GetMapping("/cart")
 	public String getMethodName(Model model) {
-		model.addAttribute("Component","GioHang.html");
+		User user=sessionService.get("login");
+		model.addAttribute("cartList",user.getCarts());
+//		model.addAttribute("Component","GioHang.html");
+		model.addAttribute("Component","Cart.html");
 		return "UserLayout";
 	}
 	@PostMapping("/addToCart")
@@ -68,22 +71,9 @@ public class CartController {
 	            cartRepo.save(newCart);
 	        }
 	    }
-	    // Chuyển danh sách giỏ hàng thành Map<ProductID, Cart>
-	  
-//	    if (cartMap.get(productId).getProduct().getId()==productId) {
-//	        Cart existingCart = cartMap.get(productId);
-//	        existingCart.setQuantity(existingCart.getQuantity() + 1);
-//	        cartRepo.save(existingCart);
-//	    } else {
-//	        // Nếu sản phẩm chưa có trong giỏ hàng, thêm mới
-//	        Product product = productRepo.findById(productId).orElse(null);
-//	        if (product != null) {
-//	            Cart newCart = new Cart(userId, product, 1);
-//	            cartRepo.save(newCart);
-//	        }
-//	    }
-//	    model.addAttribute("cartList",userId.getCarts());
-		model.addAttribute("Component","GioHang.html");
+	   
+	    model.addAttribute("cartList",userId.getCarts());
+		model.addAttribute("Component","Cart.html");
 		return "UserLayout";
 	}
 	
