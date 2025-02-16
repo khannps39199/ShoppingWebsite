@@ -2,8 +2,13 @@ package poly.edu.Entity;
 
 import java.sql.Timestamp;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.Transient;
@@ -12,14 +17,17 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "products")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductID")
-    private Long productId;
+    private Long productID;
 
     @Column(name = "Name", nullable = false)
     private String name;
@@ -54,4 +62,6 @@ public class Product {
     protected void onCreate() {
         this.createdAt = Timestamp.from(Instant.now());
     }
+
+	
 }

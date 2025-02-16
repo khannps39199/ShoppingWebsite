@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
    @GetMapping("/asm")
    public String getMethodName(Model model) {
-	   model.addAttribute("Component","Products.html");
-       return "UserLayout";
+	   
+       return "redirect:/user/products";
    }
+   
 }

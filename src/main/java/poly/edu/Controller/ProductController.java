@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,19 +31,43 @@ public class ProductController {
             @RequestParam(defaultValue = "10") int size, 
             Model model) {
         
-        Pageable pageable = PageRequest.of(page, size);
+    	Pageable pageable = PageRequest.of(page, size, Sort.by("productID").ascending());
         Page<Product> productPage = productRepo.findAll(pageable);
 
         model.addAttribute("products", productPage.getContent());  
-        model.addAttribute("currentPage", page);                   
+        model.addAttribute("currentPage", productPage.getNumber());
         model.addAttribute("totalPages", productPage.getTotalPages()); 
         model.addAttribute("pageSize", size);
+        model.addAttribute("totalItems", productPage.getTotalElements());
+        model.addAttribute("hasNext", productPage.hasNext());
+        model.addAttribute("hasPrevious", productPage.hasPrevious());
         model.addAttribute("product", new Product()); 
         model.addAttribute("categories", categoryRepo.findAll());
 
         model.addAttribute("CRUD","ProductsCRUD.html");
         return "CRUD";
     }
+
+ // load trang san pham nguoi dung
+    @GetMapping("/user/products")
+    public String loadProduct(Model model,
+            @RequestParam(defaultValue = "0") Integer page,  // Đổi từ `int` sang `Integer`
+            @RequestParam(defaultValue = "8") Integer size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productRepo.findAll(pageable);
+
+        model.addAttribute("products", productPage.getContent());  
+        model.addAttribute("currentPage", (page != null) ? page : 0);  // Tránh `null`
+        model.addAttribute("totalPages", productPage.getTotalPages()); 
+        model.addAttribute("pageSize", size);
+        model.addAttribute("product", new Product()); 
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("Component", "Products.html");
+
+        return "UserLayout";
+    }
+
 
 
     @GetMapping("/products/new")
@@ -78,10 +103,14 @@ public class ProductController {
                 product.setImage(fileName);
             } else {
                 // Nếu không có file mới, giữ nguyên ảnh cũ (tránh bị NULL)
-                Product existingProduct = productRepo.findById(product.getProductId()).orElse(null);
-                if (existingProduct != null) {
-                    product.setImage(existingProduct.getImage());
-                }
+
+            	if (product.getProductID() != null) {
+            	    Product existingProduct = productRepo.findById(product.getProductID()).orElse(null);
+            	    if (existingProduct != null) {
+            	        product.setImage(existingProduct.getImage());
+            	    }
+            	}
+
             }
 
             // Lưu sản phẩm vào database
@@ -90,7 +119,8 @@ public class ProductController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/getproducts";
+        return "redirect:/admin/getproducts";
+
     }
 
 
@@ -100,7 +130,8 @@ public class ProductController {
                               @RequestParam(defaultValue = "10") int size) {
         Product product = productRepo.findById(id).orElse(null);
         if (product == null) {
-            return "redirect:/getproducts?page=" + page + "&size=" + size;
+        	return "redirect:/admin/getproducts?page=" + page + "&size=" + size;
+
         }
 
         Pageable pageable = PageRequest.of(page, size);
@@ -120,16 +151,22 @@ public class ProductController {
 
     // Xóa sản phẩm
     @GetMapping("/products/delete/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {  // Sử dụng @PathVariable thay vì @RequestParam
-        if (productRepo.existsById(id)) {  // Kiểm tra nếu sản phẩm tồn tại
-            productRepo.deleteById(id);
+    public String deleteProduct(@PathVariable("id") Long id) {
+        try {
+            if (productRepo.existsById(id)) {
+                productRepo.deleteById(id);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/admin/getproducts?error=delete_failed";
         }
-        return "redirect:/getproducts";  // Quay lại danh sách sản phẩm
+        return "redirect:/admin/getproducts";
     }
+
     @GetMapping("/products")
     public String getForUser(Model model) {  // Sử dụng @PathVariable thay vì @RequestParam
        model.addAttribute("Component","Products.html");
         return "UserLayout";  // Quay lại danh sách sản phẩm
     }
-
+    
 }
