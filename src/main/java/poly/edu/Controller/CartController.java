@@ -45,12 +45,12 @@ public class CartController {
 	    List<Cart> cartData = userId.getCarts();
 	    Map<Long, Product> cartMap = new HashMap<>();
 	    for (Cart cartItem : cartData) {
-	    	 System.out.println(cartItem.getProduct().getId()+" "+productId);
+	    	 System.out.println(cartItem.getProduct().getProductId()+" "+productId);
   	    }
 	    if(!cartData.isEmpty()) {
 	    	 for (Cart cartItem : cartData) {
-	  	        cartMap.put(cartItem.getProduct().getId(), cartItem.getProduct());
-	  	       System.out.println(cartItem.getCartId()+cartItem.getProduct().getId());
+	  	        cartMap.put(cartItem.getProduct().getProductId(), cartItem.getProduct());
+	  	       System.out.println(cartItem.getCartId()+cartItem.getProduct().getProductId());
 	  	    }
 	    	 
 	  	  if (cartMap.containsKey(productId)) {

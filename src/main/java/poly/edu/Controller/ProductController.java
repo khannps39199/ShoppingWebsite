@@ -78,7 +78,7 @@ public class ProductController {
                 product.setImage(fileName);
             } else {
                 // Nếu không có file mới, giữ nguyên ảnh cũ (tránh bị NULL)
-                Product existingProduct = productRepo.findById(product.getId()).orElse(null);
+                Product existingProduct = productRepo.findById(product.getProductId()).orElse(null);
                 if (existingProduct != null) {
                     product.setImage(existingProduct.getImage());
                 }

@@ -161,3 +161,7 @@ VALUES
 ('sebastian_young', 'sebastian505hashed', 'sebastian.young@example.com', 'Sebastian Young', '0989014567', '181 Pine Crest', 'Customer', 1),
 ('lily_hernandez', 'lily606hashed', 'lily.hernandez@example.com', 'Lily Hernandez', '0990125678', '191 Birch Heights', 'Customer', 1),
 ('jack_carter', 'jack707hashed', 'jack.carter@example.com', 'Jack Carter', '0901236789', '201 Oak Haven', 'Customer', 1);
+
+UPDATE Products 
+SET Image = CONCAT(ProductID, '.png') 
+WHERE ProductID BETWEEN 1 AND 50;

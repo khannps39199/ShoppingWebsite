@@ -19,7 +19,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductID")
-    private Long id;
+    private Long productId;
 
     @Column(name = "Name", nullable = false)
     private String name;
@@ -39,7 +39,7 @@ public class Product {
     @Column(name = "Image")
     private String image;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", nullable = false)
     private Category category;
 
