@@ -12,8 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -51,17 +49,17 @@ public class CategoryController {
 	   model.addAttribute("category", newCate);
 	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
 	}
-	 @GetMapping("/getcategories/edit")
-	  public String editMedhod(Model model, @RequestParam("id") String x) throws JsonProcessingException {
-	   // Fetch all categories from the database
-	   List<Category> allCate = categoryRepo.findAll(); 
-	   model.addAttribute("categories", allCate);
+	 @GetMapping("/getcategories/edit/{id}")
+	 public String editCategory(Model model, @PathVariable("id") Integer id) {
+	     Category category = categoryRepo.findById(id).orElse(null);
+	     if (category == null) {
+	         return "redirect:/getcategories"; // Nếu không tìm thấy, quay về danh sách danh mục
+	     }
+	     model.addAttribute("category", category);
+	     model.addAttribute("categories", categoryRepo.findAll());
+	     return "CategoriesCRUD"; // Đảm bảo file này tồn tại trong thư mục templates
+	 }
 
-	   int id =Integer.parseInt(x)-1;
-	   model.addAttribute("category", allCate.get(id));
-
-	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
-	}
 	
 	
 	
