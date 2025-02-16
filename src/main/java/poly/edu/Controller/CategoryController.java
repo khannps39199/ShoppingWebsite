@@ -61,7 +61,7 @@ public class CategoryController {
 	   int id =Integer.parseInt(x)-1;
 	   model.addAttribute("category", allCate.get(id));
 
-	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
+	   return "CategoriesCRUD.html"; 
 	}
 	
 	
