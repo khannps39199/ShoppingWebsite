@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html th:fragment="view(title, content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}">TITLE</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<style>
+       article {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            position: relative;
+            color: #fff;
+        }
+
+        .glass-container {
+            position: relative;
+            width: 380px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border: none;
+            font-size: 16px;
+            padding: 10px;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+
+        .form-label {
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 14px;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+<body>	
+	<!--
+	<nav th:if="${session.login == null or session.login.role != 'Admin'}" th:replace="~{UserMenu}"></nav>
+	<nav th:unless="${session.login != null and session.login.role == 'Admin'}" th:replace="~{menu}"></nav>-->
+	<div th:if="${session.login == null or session.login.role != 'Admin'}">
+	    <nav th:replace="~{UserMenu}"></nav>
+	</div>
+	<div th:unless="${session.login == null or session.login.role != 'Admin'}">
+	    <nav th:replace="~{menu}"></nav>
+	</div>
+
+
+ <article th:replace="${content}">CONTENT</article>
+<footer>
+    <hr/>
+    <th:block th:utext="#{footer.copy}">
+        &copy; 2024 by FPT Polytechnic. All rights reserved.
+    </th:block>
+</footer>
+</body>
+</html>

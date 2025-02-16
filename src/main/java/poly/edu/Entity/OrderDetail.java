@@ -6,6 +6,8 @@ import lombok.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "OrderDetails")
 public class OrderDetail {
 
@@ -31,52 +33,6 @@ public class OrderDetail {
     @Column(name = "Discount", nullable = false, columnDefinition = "decimal(5, 2) default 0")
     private double discount;
 
-	public Integer getOrderDetailId() {
-		return orderDetailId;
-	}
-
-	public void setOrderDetailId(Integer orderDetailId) {
-		this.orderDetailId = orderDetailId;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public double getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
+	
     
 }

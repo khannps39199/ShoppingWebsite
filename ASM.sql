@@ -1,8 +1,7 @@
 ﻿Create database PS39199_Java5_ASMSQL;
 use master
---drop database PS39199_Java5_ASMSQL
 use PS39199_Java5_ASMSQL;
--- drop database PS39199_Java5_ASMSQL;
+--drop database PS39199_Java5_ASMSQL;
 --use PolyOE;
 CREATE TABLE Users (
     UserID INT IDENTITY PRIMARY KEY,
@@ -36,16 +35,17 @@ CREATE TABLE Products (
     Created_At DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Products_Category FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
-
+drop table Cart;
 CREATE TABLE Cart (
     CartID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
-    ProductID INT NOT NULL, -- FK tới Products
-    Quantity INT NOT NULL DEFAULT 1,
-    AddedAt DATETIME DEFAULT GETDATE(),
+    ProductID INT NOT NULL Unique, -- FK tới Products
+    Quantity INT NOT NULL DEFAULT 1,	
+    Added_At DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Cart_User FOREIGN KEY (UserID) REFERENCES Users(UserID),
     CONSTRAINT FK_Cart_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
 CREATE TABLE Orders (
     OrderID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
@@ -74,3 +74,7 @@ CREATE TABLE UserActivity (
     IsCompleted BIT DEFAULT 0,
     CONSTRAINT FK_UserActivity_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+USE master;
+ALTER DATABASE msdb SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DBCC CHECKDB (msdb, REPAIR_ALLOW_DATA_LOSS);
+ALTER DATABASE msdb SET MULTI_USER;
