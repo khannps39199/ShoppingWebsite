@@ -16,21 +16,28 @@ public class Cart {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "CartID")
-	    private Integer cartId;
+	    private Long cartId;
 
-	    @ManyToOne(fetch = FetchType.LAZY)
+	    @ManyToOne(fetch = FetchType.EAGER)
 	    @JoinColumn(name = "UserID", nullable = false)
 	    private User user; // Reference to User entity
 
-	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "ProductID", nullable = false)
+	    @ManyToOne(fetch = FetchType.EAGER)
+	    @JoinColumn(name = "ProductID", nullable = false, unique = true)
 	    private Product product; // Reference to Product entity
 
 	    @Column(name = "Quantity", nullable = false, columnDefinition = "int default 1")
 	    private Integer quantity = 1;
 
-	    @Column(name = "AddedAt", nullable = false, columnDefinition = "datetime default GETDATE()")
+	    @Column(name = "Added_At", nullable = false)
 	    private Timestamp addedAt;
+
+	    @PrePersist
+	    protected void onCreate() {
+	        if (addedAt == null) {
+	            addedAt = Timestamp.from(Instant.now());
+	        }
+	    }
 
 	    // Custom constructor
 	    public Cart(User user, Product product, Integer quantity) {
@@ -40,44 +47,5 @@ public class Cart {
 	        this.addedAt = Timestamp.from(Instant.now()); // Automatically set AddedAt to now
 	    }
 
-		public Integer getCartId() {
-			return cartId;
-		}
-
-		public void setCartId(Integer cartId) {
-			this.cartId = cartId;
-		}
-
-		public User getUser() {
-			return user;
-		}
-
-		public void setUser(User user) {
-			this.user = user;
-		}
-
-		public Product getProduct() {
-			return product;
-		}
-
-		public void setProduct(Product product) {
-			this.product = product;
-		}
-
-		public Integer getQuantity() {
-			return quantity;
-		}
-
-		public void setQuantity(Integer quantity) {
-			this.quantity = quantity;
-		}
-
-		public Timestamp getAddedAt() {
-			return addedAt;
-		}
-
-		public void setAddedAt(Timestamp addedAt) {
-			this.addedAt = addedAt;
-		}
 	    
 }

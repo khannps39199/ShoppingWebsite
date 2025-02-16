@@ -1,6 +1,7 @@
 package poly.edu.Entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,9 @@ public class User {
 
     @Column(name = "CreatedAt", nullable = false, columnDefinition = "datetime default GETDATE()")
     private Timestamp createdAt;
+    
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Cart> carts;
 
 
 	public Integer getUserId() {
