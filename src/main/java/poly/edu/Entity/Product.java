@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.Transient;
@@ -14,8 +17,9 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "products")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Product {
@@ -43,7 +47,7 @@ public class Product {
     @Column(name = "Image")
     private String image;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CategoryID", nullable = false)
     private Category category;
 
@@ -58,4 +62,6 @@ public class Product {
     protected void onCreate() {
         this.createdAt = Timestamp.from(Instant.now());
     }
+
+	
 }

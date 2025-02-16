@@ -51,20 +51,24 @@ public class ProductController {
  // load trang san pham nguoi dung
     @GetMapping("/user/products")
     public String loadProduct(Model model,
-    		@RequestParam(defaultValue = "0") int page, 
-            @RequestParam(defaultValue = "10") int size) {
-    	Pageable pageable = PageRequest.of(page, size);
+            @RequestParam(defaultValue = "0") Integer page,  // Đổi từ `int` sang `Integer`
+            @RequestParam(defaultValue = "8") Integer size) {
+
+        Pageable pageable = PageRequest.of(page, size);
         Page<Product> productPage = productRepo.findAll(pageable);
-    	model.addAttribute("products", productPage.getContent());  
-        model.addAttribute("currentPage", page);                   
+
+        model.addAttribute("products", productPage.getContent());  
+        model.addAttribute("currentPage", (page != null) ? page : 0);  // Tránh `null`
         model.addAttribute("totalPages", productPage.getTotalPages()); 
         model.addAttribute("pageSize", size);
         model.addAttribute("product", new Product()); 
         model.addAttribute("categories", categoryRepo.findAll());
-        System.out.println(productPage.getContent());
+        model.addAttribute("Component", "Products.html");
 
-    	return "Products";
+        return "UserLayout";
     }
+
+
 
     @GetMapping("/products/new")
     public String newProduct(Model model) {
