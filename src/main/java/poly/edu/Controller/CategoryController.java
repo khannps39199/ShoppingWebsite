@@ -1,71 +1,58 @@
 package poly.edu.Controller;
 
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 @Controller
+@RequestMapping("/categories") // Định tuyến chung cho danh mục
 public class CategoryController {
-	@Autowired
-	 private CategoryRepository categoryRepo ;
-	 @Autowired
-	    public void TempController(CategoryRepository categoryRepo) {
-	        this.categoryRepo = categoryRepo;
-	    }
-	 @GetMapping("/admin/getcategories")
-	  public String getMethodName(Model model) throws JsonProcessingException {
-	   // Fetch all categories from the database
-	   List<Category> allCate = categoryRepo.findAll(); 
-	   model.addAttribute("categories", allCate);
-	   model.addAttribute("category", allCate.get(0));
-	   model.addAttribute("CRUD","CategoriesCRUD.html");
-	   return "CRUD"; 
-	} 
-	 @GetMapping("/getcategories/newcategory")
-	  public String newCate(Model model) throws JsonProcessingException {
-		   List<Category> allCate = categoryRepo.findAll(); 
-		   model.addAttribute("categories", allCate);
-		   model.addAttribute("category", new Category());
-		   return "CategoriesCRUD.html";
-		}
-	 
-	 // ADD COMMENT 
-	 @PostMapping("/categories/save")
-	  public String newCategory(@ModelAttribute("category")  Category category,Model model) throws JsonProcessingException {
-		 categoryRepo.save(category); 
-	   List<Category> allCate = categoryRepo.findAll(); 
-	   model.addAttribute("categories", allCate);
-	   Category newCate=new Category();
-	   model.addAttribute("category", newCate);
-	   return "CategoriesCRUD.html"; // Spring Boot automatically converts this to JSON
-	}
-	 @GetMapping("/categories/edit")
-	  public String editMedhod(Model model, @RequestParam("id") String x) throws JsonProcessingException {
-	   // Fetch all categories from the database
-	   List<Category> allCate = categoryRepo.findAll(); 
-	   model.addAttribute("categories", allCate);
+    
+    @Autowired
+    private CategoryRepository categoryRepo;
 
-	   int id =Integer.parseInt(x)-1;
-	   model.addAttribute("category", allCate.get(id));
+    // Lấy danh sách danh mục
+    @GetMapping
+    public String getAllCategories(Model model) {
+        List<Category> allCate = categoryRepo.findAll();
+        model.addAttribute("categories", allCate);
+        model.addAttribute("category", new Category()); // Form trống khi load trang
+        return "CategoriesCRUD.html";
+    }
 
-	   return "CategoriesCRUD.html"; 
-	}
-	
-	
-	
-	
-	
+
+    // Thêm mới danh mục (Form sẽ được làm trống sau khi thêm)
+    @PostMapping("/save")
+    public String saveCategory(@ModelAttribute("category") Category category, Model model) {
+        if (category.getCreatedAt() == null) {
+            category.setCreatedAt(new Timestamp(System.currentTimeMillis())); // Gán thời gian tạo
+        }
+        categoryRepo.save(category);
+        return "redirect:/categories"; // Redirect để form trống sau khi thêm
+    }
+
+    // Chỉnh sửa danh mục (Hiển thị thông tin cần chỉnh sửa)
+    @GetMapping("/edit/{id}")
+    public String editCategory(@PathVariable("id") Integer id, Model model) {
+        Category category = categoryRepo.findById(id).orElse(null);
+        if (category == null) {
+            return "redirect:/categories"; // Nếu không tìm thấy, quay về danh sách danh mục
+        }
+        model.addAttribute("category", category);
+        model.addAttribute("categories", categoryRepo.findAll());
+        return "CategoriesCRUD.html";
+    }
+
+    // Xóa danh mục
+    @GetMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable("id") Integer id) {
+        categoryRepo.deleteById(id);
+        return "redirect:/categories"; // Quay lại danh sách sau khi xóa
+    }
 }
