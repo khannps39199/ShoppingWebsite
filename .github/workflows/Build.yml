@@ -1,19 +1,19 @@
-name: Build Spring Boot App
+name: Build and Deploy Spring Boot
 
 on:
   push:
     branches:
-      - main
+      - main  # Chạy khi có code mới đẩy lên nhánh main
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Chạy trên Ubuntu
 
     steps:
-      - name: Checkout code
+      - name: Lấy mã nguồn
         uses: actions/checkout@v3
 
-      - name: Cài đặt JDK 17
+      - name: Thiết lập JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -23,7 +23,12 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Upload file JAR
-        uses: actions/upload-artifact@v2
+        uses: github-actions/upload-artifact@latest  # Sử dụng phiên bản mới nhất của github-actions/upload-artifact
         with:
           name: spring-boot-app
           path: target/*.jar
+
+      - name: Run Spring Boot app
+        run: |
+          java -jar target/*.jar &
+          sleep 10  # Chờ 10 giây để ứng dụng Spring Boot khởi động (có thể điều chỉnh thời gian tùy vào ứng dụng)
