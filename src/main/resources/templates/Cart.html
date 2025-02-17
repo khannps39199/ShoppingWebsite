@@ -29,7 +29,7 @@
                     </div>
                   </div>
                   
-                  <div class="card mb-3 item" data-unitprice="100000" th:each="cartItem : ${cartList}">
+                  <div class="card mb-3 item" data-unitprice="${cartItem.price}" th:each="cartItem : ${cartList}">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="form-check">
@@ -45,7 +45,7 @@
                               Giá: <span class="unit-price" th:text="${cartItem.product.price}">100,000</span> VND<br>
                               Số lượng: 
                               <input type="number" class="item-quantity" min="1" th:value="${cartItem.quantity}" style="width: 60px;">
-                              = <span class="item-total-price">100,000</span> VND
+                              = <span class="item-total-price" th:text="${cartItem.price}"></span> VND
                             </p>
                           </div>
                         </div>
