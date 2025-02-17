@@ -1,0 +1,29 @@
+name: Build and Deploy Spring Boot
+
+on:
+  push:
+    branches:
+      - main  # Chạy khi có code mới đẩy lên nhánh main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Chạy trên Ubuntu
+
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v3
+
+      - name: Thiết lập JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build ứng dụng với Maven
+        run: mvn clean package -DskipTests
+
+      - name: Upload file JAR
+        uses: actions/upload-artifact@v2  # Đổi thành v2 thay vì v3
+        with:
+          name: spring-boot-app
+          path: target/*.jar
