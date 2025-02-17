@@ -22,8 +22,8 @@ jobs:
       - name: Build ứng dụng với Maven
         run: mvn clean package -DskipTests
 
-      - name: Upload file JAR
-        uses: @actions/artifact@v0  # Thay thế upload-artifact bằng @actions/artifact
+      - name: Upload file WAR
+        uses: actions/upload-artifact@latest  # Sử dụng phiên bản mới nhất
         with:
           name: spring-boot-app
-          path: target/*.jar
+          path: target/*.war  # Chỉ định đường dẫn đến file WAR
