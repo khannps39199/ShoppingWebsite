@@ -3,11 +3,20 @@ package poly.edu.Repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import poly.edu.Entity.Category;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import poly.edu.Entity.Product;
-import poly.edu.Entity.User;
 
-public interface  ProductRepository extends JpaRepository<Product, Long>{
-	Page<Product> findAll(Pageable pageable);
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+    @Query(value = "SELECT * FROM Products WHERE price BETWEEN :minPrice AND :maxPrice", nativeQuery = true)
+    Page<Product> findProductsByPriceRangeNative(
+        @Param("minPrice") Double minPrice, 
+        @Param("maxPrice") Double maxPrice, 
+        Pageable pageable
+    );
+    Page<Product> findByCategory_IdAndPriceBetween(Long id, Double minPrice, Double maxPrice, Pageable pageable);
+    
+    Page<Product> findByCategory_Id(Long id, Pageable pageable);
 }
+
