@@ -85,12 +85,16 @@
                         <p class="mb-2">Tổng (Bao gồm thuế)</p>
                         <p class="mb-2" id="total-amount">0 VND</p>
                       </div>
-                      <button type="button" class="btn btn-info btn-block btn-lg" id="checkout-btn">
-                        <div class="d-flex justify-content-between">
-                          <span id="btn-total">0 VND</span>
-                          <span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                        </div>
-                      </button>
+					  <form th:action="@{/order}" method="post">
+						<button type="submit" class="btn btn-info btn-block btn-lg" id="checkout-btn">
+						                        <div class="d-flex justify-content-between">
+													
+						                          <span id="btn-total">0 VND</span>
+						                          <span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+						                        </div>
+						 </button>						
+					  </form>
+                      
                     </div>
                   </div>
                 </div>
