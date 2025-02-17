@@ -28,6 +28,6 @@
 			        <div class="ms-auto">
 						<a th:if="${session.login != null}" th:href="@{/account/logout}" class="btn btn-outline-light me-2">Đăng xuất</a>
 						<a th:if="${session.login == null}" th:href="@{/Login}" class="btn btn-outline-light me-2">Đăng nhập</a>
-			            <a th:href="@{/Register}" class="btn btn-outline-light">Đăng Ký</a>
+			            <a th:if="${session.login == null}" th:href="@{/Register}" class="btn btn-outline-light">Đăng Ký</a>
 			        </div>
 			    </nav>

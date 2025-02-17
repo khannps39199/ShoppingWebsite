@@ -50,8 +50,8 @@ public class Category {
 		this.description = description;
 		this.createdAt = createdAt;
 	}
-	public Integer getId() {
-		return id;
+	public Integer getCategoryID() {
+	    return this.id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
