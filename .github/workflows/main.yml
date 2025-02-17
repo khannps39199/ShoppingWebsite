@@ -23,7 +23,7 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Upload file JAR
-        uses: actions/upload-artifact@v3 # Đổi thành v2 thay vì v3
+        uses: @actions/artifact@v0  # Thay thế upload-artifact bằng @actions/artifact
         with:
           name: spring-boot-app
           path: target/*.jar
