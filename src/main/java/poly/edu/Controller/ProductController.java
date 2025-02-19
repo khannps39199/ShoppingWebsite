@@ -46,7 +46,7 @@ public class ProductController {
         model.addAttribute("categories", categoryRepo.findAll());
 
         model.addAttribute("CRUD","ProductsCRUD.html");
-        return "ProductsCRUD";
+        return "CRUD";
     }
 
  // load trang san pham nguoi dung
@@ -144,8 +144,8 @@ public class ProductController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
         model.addAttribute("pageSize", size);
-
-        return "ProductsCRUD"; // Đảm bảo file này tồn tại
+        model.addAttribute("CRUD","ProductsCRUD.html");
+        return "CRUD";
     }
 
 
@@ -183,6 +183,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    
     @GetMapping("/products/filter")
     public String filterProducts(
             @RequestParam(required = false) Long categoryID,
