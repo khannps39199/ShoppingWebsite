@@ -1,29 +1,29 @@
-name: Build and Deploy Spring Boot
+name: Deploy Spring Boot to Railway
 
 on:
   push:
     branches:
-      - main  # Chạy khi có code mới đẩy lên nhánh main
+      - main  # Chạy khi có commit mới trên branch main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Chạy trên Ubuntu
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Lấy mã nguồn
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Thiết lập JDK 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Build ứng dụng với Maven
+      - name: Build Spring Boot app
         run: mvn clean package -DskipTests
 
-      - name: Upload file WAR
-        uses: actions/upload-artifact@latest  # Sử dụng phiên bản mới nhất
-        with:
-          name: spring-boot-app
-          path: target/*.war  # Chỉ định đường dẫn đến file WAR
+      - name: Deploy to Railway
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          railway login --token ${{ secrets.RAILWAY_API_KEY }}
+          railway up

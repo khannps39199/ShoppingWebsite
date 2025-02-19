@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import poly.edu.Entity.User;
 import poly.edu.Repository.*;
 import poly.edu.Service.CookieService;
 import poly.edu.Service.ParamService;
@@ -24,6 +25,8 @@ public class OderController {
 	@Autowired
 	OrderRepository orderRepo;
 	@Autowired
+	UserRepository	userRepo;
+	@Autowired
 	OrderDetailsRepository odertDetailRepo;
 	@GetMapping("/order")
 	public String getOrder(Model model) {
@@ -32,6 +35,8 @@ public class OderController {
 	}
 	@PostMapping("/order")
 	public String insertOrder(Model model) {
+		User user=userRepo.findById( ((User) sessionService.get("login")).getUserId()).orElse(null);
+			
 		model.addAttribute("Component","UsersOrder.html");
 		return "redirect:/order";
 	}
