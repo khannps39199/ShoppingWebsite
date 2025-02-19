@@ -1,4 +1,4 @@
-use PS39199_Java5_ASMSQL;
+﻿use PS39199_Java5_ASMSQL;
 INSERT INTO Categories (Name, Description)
 VALUES 
     ('Electronics', 'Devices, gadgets, and other electronic products'),
@@ -128,3 +128,74 @@ VALUES
     ('Loveseat R', 'Comfortable loveseat for small spaces', 399.99, 0, 90, 'https://example.com/loveseat_r.jpg', 5),
     ('Bench S', 'Wooden bench for entryway or dining area', 79.99, 15, 120, 'https://example.com/bench_s.jpg', 5),
     ('Recliner T', 'Leather recliner for ultimate relaxation', 499.99, 5, 50, 'https://example.com/recliner_t.jpg', 5);
+
+
+	INSERT INTO Users (Username, password_hash, Email, full_name, Phone, Address, Role, is_activated)
+VALUES 
+('admin', '123456hashed', 'admin@example.com', 'Admin User', '0123456789', '123 Admin Street', 'Admin', 1),
+('john_doe', 'abcdef123hashed', 'john@example.com', 'John Doe', '0987654321', '456 User Lane', 'Customer', 1),
+('jane_smith', 'xyz987hashed', 'jane@example.com', 'Jane Smith', '0912345678', '789 Customer Ave', 'Customer', 1),
+('michael_nguyen', 'mnp456hashed', 'michael@example.com', 'Michael Nguyen', '0934567890', '567 Market St', 'Customer', 1),
+('susan_lee', 'susan123hashed', 'susan@example.com', 'Susan Lee', '0976543210', '321 Park Blvd', 'Customer', 1),
+('william_johnson', 'william123hashed', 'william.johnson@example.com', 'William Johnson', '0967123456', '23 Maple Street', 'Customer', 1),
+('olivia_martin', 'olivia456hashed', 'olivia.martin@example.com', 'Olivia Martin', '0908123456', '88 Rose Avenue', 'Customer', 1),
+('ethan_clark', 'ethan789hashed', 'ethan.clark@example.com', 'Ethan Clark', '0945236789', '12 Oak Road', 'Customer', 1),
+('ava_robinson', 'ava111hashed', 'ava.robinson@example.com', 'Ava Robinson', '0987456321', '56 Sunflower St', 'Customer', 1),
+('james_white', 'james222hashed', 'james.white@example.com', 'James White', '0923456789', '99 Lakeview Dr', 'Customer', 1),
+('charlotte_adams', 'charlotte123hashed', 'charlotte.adams@example.com', 'Charlotte Adams', '0912345678', '14 Elm Street', 'Customer', 1),
+('daniel_baker', 'daniel456hashed', 'daniel.baker@example.com', 'Daniel Baker', '0923456789', '22 Pine Avenue', 'Customer', 1),
+('mia_wilson', 'mia789hashed', 'mia.wilson@example.com', 'Mia Wilson', '0934567890', '33 Cedar Road', 'Customer', 1),
+('benjamin_moore', 'benjamin111hashed', 'benjamin.moore@example.com', 'Benjamin Moore', '0945678901', '44 Birch Lane', 'Customer', 1),
+('sophia_taylor', 'sophia222hashed', 'sophia.taylor@example.com', 'Sophia Taylor', '0956789012', '55 Magnolia Blvd', 'Customer', 1),
+('logan_anderson', 'logan333hashed', 'logan.anderson@example.com', 'Logan Anderson', '0967890123', '66 Oak Street', 'Customer', 1),
+('harper_thomas', 'harper444hashed', 'harper.thomas@example.com', 'Harper Thomas', '0978901234', '77 Redwood Drive', 'Customer', 1),
+('alexander_jackson', 'alexander555hashed', 'alexander.jackson@example.com', 'Alexander Jackson', '0989012345', '88 Cypress Ave', 'Customer', 1),
+('amelia_harris', 'amelia666hashed', 'amelia.harris@example.com', 'Amelia Harris', '0990123456', '99 Cherry Lane', 'Customer', 1),
+('elijah_martinez', 'elijah777hashed', 'elijah.martinez@example.com', 'Elijah Martinez', '0901234567', '100 Maple Drive', 'Customer', 1),
+('ella_thompson', 'ella888hashed', 'ella.thompson@example.com', 'Ella Thompson', '0912345670', '111 Pine Grove', 'Customer', 1),
+('matthew_garcia', 'matthew999hashed', 'matthew.garcia@example.com', 'Matthew Garcia', '0923456701', '121 Birchwood St', 'Customer', 1),
+('scarlett_lopez', 'scarlett000hashed', 'scarlett.lopez@example.com', 'Scarlett Lopez', '0934567012', '131 Willow Road', 'Customer', 1),
+('henry_lee', 'henry101hashed', 'henry.lee@example.com', 'Henry Lee', '0945670123', '141 Oak Park', 'Customer', 1),
+('grace_hall', 'grace202hashed', 'grace.hall@example.com', 'Grace Hall', '0956781234', '151 Cedar Path', 'Customer', 1),
+('jackson_allen', 'jackson303hashed', 'jackson.allen@example.com', 'Jackson Allen', '0967892345', '161 Redwood Terrace', 'Customer', 1),
+('chloe_walker', 'chloe404hashed', 'chloe.walker@example.com', 'Chloe Walker', '0978903456', '171 Maple Grove', 'Customer', 1),
+('sebastian_young', 'sebastian505hashed', 'sebastian.young@example.com', 'Sebastian Young', '0989014567', '181 Pine Crest', 'Customer', 1),
+('lily_hernandez', 'lily606hashed', 'lily.hernandez@example.com', 'Lily Hernandez', '0990125678', '191 Birch Heights', 'Customer', 1),
+('jack_carter', 'jack707hashed', 'jack.carter@example.com', 'Jack Carter', '0901236789', '201 Oak Haven', 'Customer', 1);
+
+UPDATE Products 
+SET Image = CONCAT(ProductID, '.png') 
+WHERE ProductID BETWEEN 1 AND 50;
+
+-- Chèn dữ liệu vào bảng Orders (UserID từ 2 đến 11)
+INSERT INTO Orders (UserID, OrderDate, TotalAmount, Status, ShippingAddress)
+VALUES
+    (2, '2024-02-01 10:15:00', 1299.97, 'Completed', '123 Main St, New York'),
+    (3, '2024-02-02 14:30:00', 799.99, 'Pending', '456 Elm St, California'),
+    (4, '2024-02-03 09:45:00', 459.98, 'Shipped', '789 Pine St, Texas'),
+    (5, '2024-02-04 16:20:00', 199.99, 'Cancelled', '321 Oak St, Florida'),
+    (6, '2024-02-05 11:10:00', 1499.95, 'Delivered', '654 Maple St, Washington'),
+    (7, '2024-02-06 18:05:00', 999.99, 'Pending', '987 Cedar St, Nevada'),
+    (8, '2024-02-07 12:40:00', 249.98, 'Completed', '159 Birch St, Colorado'),
+    (9, '2024-02-08 08:55:00', 549.99, 'Shipped', '753 Willow St, Arizona'),
+    (10, '2024-02-09 17:25:00', 699.97, 'Completed', '852 Redwood St, Oregon'),
+    (11, '2024-02-10 13:35:00', 1999.99, 'Pending', '963 Palm St, Illinois');
+
+-- Chèn dữ liệu vào bảng OrderDetails
+INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price, Discount)
+VALUES
+    (1, 2, 2, 599.99, 10),
+    (1, 5, 1, 129.99, 0),
+    (2, 8, 1, 799.99, 5),
+    (3, 11, 2, 349.99, 0),
+    (3, 14, 1, 399.99, 10),
+    (4, 17, 1, 199.99, 0),
+    (5, 20, 3, 149.99, 5),
+    (5, 22, 2, 89.99, 5),
+    (6, 25, 1, 999.99, 10),
+    (7, 3, 1, 249.99, 0),
+    (8, 6, 1, 549.99, 15),
+    (9, 9, 1, 499.99, 5),
+    (9, 12, 2, 79.99, 0),
+    (10, 15, 3, 499.99, 10),
+    (10, 18, 2, 699.99, 5);
