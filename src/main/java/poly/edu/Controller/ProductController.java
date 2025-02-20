@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import poly.edu.Entity.Product;
 import poly.edu.Repository.ProductRepository;
+import poly.edu.Service.ProductService;
 import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
 
@@ -45,7 +46,7 @@ public class ProductController {
         model.addAttribute("categories", categoryRepo.findAll());
 
         model.addAttribute("CRUD","ProductsCRUD.html");
-        return "CRUD";
+        return "ProductsCRUD";
     }
 
  // load trang san pham nguoi dung
@@ -103,6 +104,7 @@ public class ProductController {
                 product.setImage(fileName);
             } else {
                 // Nếu không có file mới, giữ nguyên ảnh cũ (tránh bị NULL)
+
             	if (product.getProductID() != null) {
             	    Product existingProduct = productRepo.findById(product.getProductID()).orElse(null);
             	    if (existingProduct != null) {
@@ -163,9 +165,58 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public String getForUser(Model model) {  // Sử dụng @PathVariable thay vì @RequestParam
-       model.addAttribute("Component","Products.html");
-        return "UserLayout";  // Quay lại danh sách sản phẩm
+    public String getForUser(Model model) {
+        // Sử dụng phân trang mặc định (ví dụ: trang 0, 8 sản phẩm mỗi trang)
+        Pageable pageable = PageRequest.of(0, 8);
+        Page<Product> productPage = productRepo.findAll(pageable);
+
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("currentPage", productPage.getNumber());
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("pageSize", productPage.getSize());
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("Component", "Products.html");
+
+        return "UserLayout";
     }
-    
+
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("/products/filter")
+    public String filterProducts(
+            @RequestParam(required = false) Long categoryID,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "8") int size,
+            Model model) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage;
+
+        if (categoryID != null && minPrice != null && maxPrice != null) {
+            productPage = productRepo.findByCategory_IdAndPriceBetween(categoryID, minPrice, maxPrice, pageable);
+        } else if (minPrice != null && maxPrice != null) {
+            productPage = productService.getProductsByPriceRange(minPrice, maxPrice, pageable);
+        } else if (categoryID != null) {
+            productPage = productRepo.findByCategory_Id(categoryID, pageable);
+        } else {
+            productPage = productRepo.findAll(pageable);
+        }
+
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("Component", "Products.html");
+        
+        // Thêm các giá trị lọc vào model để giữ lại trong các liên kết phân trang
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("categoryID", categoryID);
+
+        return "UserLayout";
+    }
 }

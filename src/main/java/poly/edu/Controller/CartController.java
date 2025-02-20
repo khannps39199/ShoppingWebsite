@@ -28,31 +28,27 @@ public class CartController {
 	@Autowired
 	ProductRepository productRepo;
 	@Autowired
+	UserRepository userRepo;
+	@Autowired
 	    private CartRepository cartRepo;
 	@GetMapping("/cart")
 	public String getMethodName(Model model) {
-		User user=sessionService.get("login");
+		User user=userRepo.findById( ((User) sessionService.get("login")).getUserId()).orElse(null);
 		model.addAttribute("cartList",user.getCarts());
-//		model.addAttribute("Component","GioHang.html");
 		model.addAttribute("Component","Cart.html");
 		return "UserLayout";
 	}
+	
 	@PostMapping("/addToCart")
 	public String addToCart(Model model) {
 		long productId=(long) paramService.getInt("productId", 0);
-		User userId=sessionService.get("login");
-		
+		User userId=userRepo.findById( ((User) sessionService.get("login")).getUserId()).orElse(null);		
 	    List<Cart> cartData = userId.getCarts();
-	    Map<Long, Product> cartMap = new HashMap<>();
-	    for (Cart cartItem : cartData) {
-	    	 System.out.println(cartItem.getProduct().getProductID()+" "+productId);
-  	    }
+	    Map<Long, Product> cartMap = new HashMap<>();	  
 	    if(!cartData.isEmpty()) {
 	    	 for (Cart cartItem : cartData) {
 	  	        cartMap.put(cartItem.getProduct().getProductID(), cartItem.getProduct());
-	  	       System.out.println(cartItem.getCartId()+cartItem.getProduct().getProductID());
-	  	    }
-	    	 
+	  	    }	    	 
 	  	  if (cartMap.containsKey(productId)) {
 		        Cart existingCart =(Cart) cartRepo.getCartByUserAndProduct( userId.getUserId(), productId);
 		        existingCart.setQuantity(existingCart.getQuantity() + 1);

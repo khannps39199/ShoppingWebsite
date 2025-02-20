@@ -26,6 +26,7 @@ public class CategoryController {
         return "CategoriesCRUD.html";
     }
 
+
     // Thêm mới danh mục (Form sẽ được làm trống sau khi thêm)
     @PostMapping("/save")
     public String saveCategory(@ModelAttribute("category") Category category, Model model) {

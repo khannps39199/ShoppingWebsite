@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 
 @Table(name = "categories")  // Optional: Defines the table name
-public class Category {
+public class   {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CategoryID")  // Matches the column name in the database
@@ -50,8 +50,8 @@ public class Category {
 		this.description = description;
 		this.createdAt = createdAt;
 	}
-	public Integer getId() {
-		return id;
+	public Integer getCategoryID() {
+	    return this.id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
