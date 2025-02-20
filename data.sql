@@ -132,8 +132,8 @@ VALUES
 
 	INSERT INTO Users (Username, password_hash, Email, full_name, Phone, Address, Role, is_activated)
 VALUES 
-('admin', '123456hashed', 'admin@example.com', 'Admin User', '0123456789', '123 Admin Street', 'Admin', 1),
-('john_doe', 'abcdef123hashed', 'john@example.com', 'John Doe', '0987654321', '456 User Lane', 'Customer', 1),
+('admin', '123', 'admin@example.com', 'Admin User', '0123456789', '123 Admin Street', 'Admin', 1),
+('john_doe', '123', 'john@example.com', 'John Doe', '0987654321', '456 User Lane', 'Customer', 1),
 ('jane_smith', 'xyz987hashed', 'jane@example.com', 'Jane Smith', '0912345678', '789 Customer Ave', 'Customer', 1),
 ('michael_nguyen', 'mnp456hashed', 'michael@example.com', 'Michael Nguyen', '0934567890', '567 Market St', 'Customer', 1),
 ('susan_lee', 'susan123hashed', 'susan@example.com', 'Susan Lee', '0976543210', '321 Park Blvd', 'Customer', 1),
