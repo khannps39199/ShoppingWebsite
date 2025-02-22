@@ -8,12 +8,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "OrderDetails")
+@Table(name = "order_details")
 public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OrderDetailID")
+    @Column(name = "order_detail_id")
     private Integer orderDetailId;
 
     @ManyToOne
@@ -33,6 +33,4 @@ public class OrderDetail {
     @Column(name = "Discount", nullable = false, columnDefinition = "decimal(5, 2) default 0")
     private double discount;
 
-	
-    
 }

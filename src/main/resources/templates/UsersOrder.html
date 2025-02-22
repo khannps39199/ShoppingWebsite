@@ -1,22 +1,213 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Giỏ Hàng - Voucher & Số lượng</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-light">
-  <section class="h-100 h-custom" style="background-color: #eee;">
- 
-  </section>
-  
-  <footer class="bg-dark text-white text-center p-3 mt-4">
-    &copy; 2025 - Quản lý Giỏ Hàng
-  </footer>
+<meta charset="UTF-8">
+<title>Đơn hàng đã mua</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+body {
+	background: linear-gradient(135deg, #1a1a2e, #16213e);
+	color: #ffffff;
+}
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
+h2 {
+	color: #00bfff;
+	text-align: center;
+	margin-bottom: 20px;
+	text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+}
+
+.nav-tabs .nav-link {
+	color: #00bfff;
+}
+
+.nav-tabs .nav-link.active {
+	background-color: #00bfff;
+	color: #121212;
+	border-radius: 5px;
+}
+
+.table {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.table thead {
+	background-color: #00bfff !important;
+	color: #000000 !important;
+}
+
+.table td, .table th {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border-color: #444444 !important;
+}
+
+.product-img {
+	width: 80px;
+	height: 80px;
+	border-radius: 6px;
+	box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.btn-detail {
+	background: linear-gradient(45deg, #00c6ff, #0072ff);
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 5px;
+	box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.btn-detail:hover {
+	background: linear-gradient(45deg, #0072ff, #00c6ff);
+	transform: scale(1.05);
+	box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+.btn-primary {
+	background: linear-gradient(45deg, #00c6ff, #0072ff);
+	border: none;
+	font-size: 16px;
+	padding: 10px;
+	transition: 0.3s;
+	box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-size: 14px;
+}
+</style>
+</head>
+<body>
+	<section class="h-100 h-custom">
+		<div th:fragment="content" class="container mt-4">
+			<h2>🛒 Quản lý Đơn Hàng</h2>
+
+			<!-- 🟡 Tabs đơn hàng -->
+			<ul class="nav nav-tabs" id="orderTabs">
+				<li class="nav-item" th:each="status : ${orderStatuses}"><a
+					class="nav-link"
+					th:classappend="${currentTab == status} ? 'active' : ''"
+					data-bs-toggle="tab"
+					th:href="'#' + ${#strings.toLowerCase(status)}"> <span
+						th:switch="${#strings.toLowerCase(status)}"> <span
+							th:case="'pending'">🟡 Chờ xác nhận</span> <span
+							th:case="'processing'">📦 Chờ lấy hàng</span> <span
+							th:case="'shipped'">🚚 Chờ giao hàng</span> <span
+							th:case="'delivered'">✅ Đã giao</span> <span
+							th:case="'cancelled'">❌ Trả hàng / Hủy</span> <span th:case="*">📋
+								Khác</span>
+					</span>
+				</a></li>
+
+			</ul>
+
+			<!-- 🔹 Nội dung các tab -->
+			<div class="tab-content mt-3">
+				<div class="tab-pane fade" th:each="status : ${orderStatuses}"
+					th:id="${#strings.toLowerCase(status)}"
+					th:classappend="${currentTab == status} ? 'show active' : ''">
+
+					<h5>
+						<span th:switch="${#strings.toLowerCase(status)}"> <span
+							th:case="'pending'">🟡 Đơn hàng chờ xác nhận</span> <span
+							th:case="'processing'">📦 Đơn hàng chờ lấy hàng</span> <span
+							th:case="'shipped'">🚚 Đơn hàng đang giao</span> <span
+							th:case="'delivered'">✅ Đơn hàng đã giao</span> <span
+							th:case="'cancelled'">❌ Đơn hàng đã hủy</span> <span th:case="*">📋
+								Danh sách đơn hàng</span>
+						</span>
+					</h5>
+
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Hình ảnh</th>
+								<th>Tên sản phẩm</th>
+								<th>Số lượng</th>
+								<th>Tổng tiền</th>
+								<th>Ngày đặt</th>
+								<th>Hành động</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								th:if="${#lists.isEmpty(ordersByStatus[#strings.toLowerCase(status)])}">
+								<td colspan="6" class="text-center text-muted">📭 Không có
+									đơn hàng nào</td>
+							</tr>
+							<tr
+								th:each="userOrder : ${ordersByStatus[#strings.toLowerCase(status)]}">
+								<td>
+									<ul style="list-style: none; padding: 0; margin: 0;">
+										<li th:each="detail : ${userOrder.order.orderDetails}"><img
+											th:src="@{'/Hinh/' + ${detail.product.image}}"
+											alt="Ảnh sản phẩm" class="product-img"></li>
+									</ul>
+								</td>
+								<!-- Ảnh sản phẩm -->
+
+								<td>
+									<ul style="list-style: none; padding: 0; margin: 0;">
+										<li th:each="detail : ${userOrder.order.orderDetails}"
+											th:text="${detail.product.name}"></li>
+									</ul>
+								</td>
+								<!-- Tên sản phẩm -->
+
+								<td>
+									<ul style="list-style: none; padding: 0; margin: 0;">
+										<li th:each="detail : ${userOrder.order.orderDetails}"
+											th:text="${detail.quantity}"></li>
+									</ul>
+								</td>
+								<!-- Số lượng -->
+
+								<td
+									th:text="${#numbers.formatDecimal(userOrder.order.totalAmount, 1, 2)} + ' VND'"></td>
+								<!-- Tổng tiền -->
+
+								<td
+									th:text="${#dates.format(userOrder.order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+								<!-- Ngày đặt -->
+
+								<td><a
+									th:href="@{/order-detail(orderId=${userOrder.order.orderId})}"
+									class="btn-detail">🔍 Xem</a></td>
+								<!-- Link chi tiết -->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+			<div class="text-center mt-3">
+				<a href="/" class="btn btn-primary">⬅️ Quay lại</a>
+			</div>
+		</div>
+	</section>
+
+
+
+	<footer class="footer bg-dark text-white text-center p-3 mt-4">
+		&copy; 2025 - Quản lý Giỏ Hàng </footer>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
