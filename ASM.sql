@@ -35,11 +35,13 @@ CREATE TABLE Products (
     Created_At DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Products_Category FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
+-- 22/02 update fix lỗi duplicate đối với user khác thêm giửo hàng ngoài john
+-- step: drop table Cart -> recreate table Cart
 drop table Cart;
 CREATE TABLE Cart (
     CartID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
-    ProductID INT NOT NULL Unique, -- FK tới Products
+    ProductID INT NOT NULL , -- FK tới Products
     Quantity INT NOT NULL DEFAULT 1,	
     Added_At DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Cart_User FOREIGN KEY (UserID) REFERENCES Users(UserID),

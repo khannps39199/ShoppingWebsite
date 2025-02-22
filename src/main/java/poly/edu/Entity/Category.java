@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 
 @Table(name = "categories")  // Optional: Defines the table name
-public class Category {
+public class Category  {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CategoryID")  // Matches the column name in the database
