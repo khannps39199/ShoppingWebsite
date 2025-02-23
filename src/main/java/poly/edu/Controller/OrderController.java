@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import poly.edu.Entity.*;
@@ -26,7 +27,7 @@ public class OrderController {
     private SessionService sessionService;
 
     @Autowired
-    private OrderService orderService;
+    OrderRepository orderRepo;
 
     @GetMapping("/user/order")
     public String getOrder(@RequestParam(defaultValue = "Pending") String status, Model model) {
@@ -70,5 +71,17 @@ public class OrderController {
         return "UserLayout";
     }
 
+    
+    @GetMapping("/shipper/orders")
+    public String listOrders(Model model) {
+        List<Order> orders = orderRepo.findByStatus("Đang giao");
+        model.addAttribute("orders", orders);
+        return "shipper_orders";
+    }
 
+    @PostMapping("/shipper/update-status")
+    public String updateOrderStatus(@RequestParam("orderId") Integer orderId) {
+//    	orderRepo.(orderId, "Đã giao");
+        return "redirect:/shipper/orders";
+    }
 }

@@ -31,7 +31,7 @@ public class CartController {
 	UserRepository userRepo;
 	@Autowired
 	    private CartRepository cartRepo;
-	@GetMapping("/	")
+	@GetMapping("/cart")
 	public String getMethodName(Model model) {
 		User user=userRepo.findById( ((User) sessionService.get("login")).getUserId()).orElse(null);
 		model.addAttribute("cartList",user.getCarts());

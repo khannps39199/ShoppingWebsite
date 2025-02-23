@@ -1,4 +1,5 @@
 ﻿Use PS39199_Java5_ASMSQL;
+use master;
 go
 CREATE TRIGGER trg_CheckPendingOrder
 ON Orders
