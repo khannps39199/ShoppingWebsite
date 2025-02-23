@@ -59,10 +59,13 @@ CREATE TABLE Orders (
     UserID INT NOT NULL, -- FK tới Users
     Order_Date DATETIME DEFAULT GETDATE(),
     Total_Amount DECIMAL(18, 2) NOT NULL,
+	Payment_method NVARCHAR(50) DEFAULT 'WHEN_RECEIVE',
     Status NVARCHAR(50) DEFAULT 'Pending', -- Pending, Shipped, Delivered, Cancelled
     Shipping_Address NVARCHAR(255),
     CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+
 CREATE TABLE Order_Details (
     OrderDetailID INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL, -- FK tới Orders

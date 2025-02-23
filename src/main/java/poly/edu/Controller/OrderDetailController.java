@@ -53,11 +53,13 @@ public class OrderDetailController {
 	public String insertOrder(Model model) {
 		User user=userRepo.findById( ((User) sessionService.get("login")).getUserId()).orElse(null);
 		List<Cart> cartToOrder=user.getCarts();
+		String paymentMethod=paramService.getString("Payment_method", "WHEN_RECEIVE");
+		System.out.println(paymentMethod);
 		double totalAmount=0;
 		for(Cart tempItem:cartToOrder) {
 			totalAmount=totalAmount+tempItem.getQuantity()*tempItem.getProduct().getPrice()*tempItem.getProduct().getDiscount();
 		}
-		Order order=new Order( user,Timestamp.from(Instant.now()),totalAmount,"Pending",user.getAddress());
+		Order order=new Order( user,Timestamp.from(Instant.now()),totalAmount,"Pending",user.getAddress(),paymentMethod);
 		orderRepo.save(order);
 		
 		List<OrderDetails> listOrderDetails = new ArrayList<>();
