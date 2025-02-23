@@ -1,3 +1,4 @@
+
 package poly.edu.Controller;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import poly.edu.Entity.*;
 import poly.edu.Repository.*;
 import poly.edu.Service.CookieService;
 import poly.edu.Service.ParamService;
+
 import poly.edu.Service.SessionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class OderController {
+public class OrderDetailController {
 	@Autowired
 	CookieService cookieService;
 	@Autowired
@@ -39,6 +41,11 @@ public class OderController {
 	OrderDetailsRepository odertDetailRepo;
 	@GetMapping("/order")
 	public String getOrder(Model model) {
+		model.addAttribute("Component","UsersOrder.html");
+		return "UserLayout";
+	}
+	@GetMapping("/orderDetail")
+	public String getOrderDetails(Model model) {
 		model.addAttribute("Component","UsersOrder.html");
 		return "UserLayout";
 	}
@@ -71,3 +78,4 @@ public class OderController {
 		return "redirect:/order";
 	}
 }
+

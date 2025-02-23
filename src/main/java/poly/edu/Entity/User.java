@@ -51,7 +51,6 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cart> carts;
 
-
 	public Integer getUserId() {
 		return userId;
 	}
@@ -131,7 +130,4 @@ public class User {
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-
-	
-    
 }

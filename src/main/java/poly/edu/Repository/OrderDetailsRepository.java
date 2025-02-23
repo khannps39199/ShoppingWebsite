@@ -6,5 +6,5 @@ import poly.edu.Entity.OrderDetails;
 
 
 public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Integer> {
-    // Additional query methods (if needed) can be added here
+    
 }
