@@ -40,6 +40,9 @@ public class Order {
     @Column(name = "shipping_address", length = 255)
     private String shippingAddress;
     
+    @Column(name = "Payment_method", length = 50, nullable = false)
+    private String paymentMethod = "WHEN_RECEIVE"; // Default: WHEN_RECEIVE
+    
     @OneToMany(mappedBy = "order")
     private List<OrderDetails> orderDetails;
 
@@ -74,12 +77,13 @@ public class Order {
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-	public Order(User user, Timestamp orderDate, double totalAmount, String status, String shippingAddress) {
+	public Order(User user, Timestamp orderDate, double totalAmount, String status, String shippingAddress,String paymentMethod) {
 	    this.user = user;
 	    this.orderDate = orderDate;
 	    this.totalAmount = totalAmount;
 	    this.status = status;
 	    this.shippingAddress = shippingAddress;
+	    this.paymentMethod = paymentMethod;
 	}
     
 }

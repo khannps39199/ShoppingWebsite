@@ -86,12 +86,17 @@
                         <p class="mb-2" id="total-amount">0 VND</p>
                       </div>
 					  <form th:action="@{/order}" method="post">
+						<div class="input-group">
+						    <select id="Payment_method" name="Payment_method" class="form-control">
+						        <option value="QR_CODE">QR Code</option>
+						        <option value="WHEN_RECEIVE">Pay When Receive</option>
+						    </select>
+						</div>
 						<button type="submit" class="btn btn-info btn-block btn-lg" id="checkout-btn">
-						                        <div class="d-flex justify-content-between">
-													
-						                          <span id="btn-total">0 VND</span>
-						                          <span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-						                        </div>
+						     <div class="d-flex justify-content-between">
+								<span id="btn-total">0 VND</span>
+						       	<span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+						      </div>
 						 </button>						
 					  </form>
                       
