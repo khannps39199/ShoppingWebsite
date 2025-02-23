@@ -35,7 +35,7 @@ CREATE TABLE Products (
     Created_At DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Products_Category FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
-drop table Cart;
+--drop table Cart;
 CREATE TABLE Cart (
     CartID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
