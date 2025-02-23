@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # ✅ Chạy trên Windows
 
     steps:
       - name: Checkout code
@@ -22,8 +22,10 @@ jobs:
       - name: Build Spring Boot app
         run: mvn clean package -DskipTests
 
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
       - name: Deploy to Railway
         run: |
-          curl -fsSL https://railway.app/install.sh | sh
           railway login --token ${{ secrets.RAILWAY_API_KEY }}
           railway up

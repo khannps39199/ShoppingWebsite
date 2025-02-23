@@ -51,7 +51,7 @@ CREATE TABLE Cart (
 );
 
 go
-drop table OrderDetails ;
+drop table Order_Details ;
 go
 drop table Orders;
 CREATE TABLE Orders (
