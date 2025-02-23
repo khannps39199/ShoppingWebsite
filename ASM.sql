@@ -47,17 +47,20 @@ CREATE TABLE Cart (
     CONSTRAINT FK_Cart_User FOREIGN KEY (UserID) REFERENCES Users(UserID),
     CONSTRAINT FK_Cart_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
-
+go
+drop table OrderDetails ;
+go
+drop table Orders;
 CREATE TABLE Orders (
     OrderID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
-    OrderDate DATETIME DEFAULT GETDATE(),
-    TotalAmount DECIMAL(18, 2) NOT NULL,
+    Order_Date DATETIME DEFAULT GETDATE(),
+    Total_Amount DECIMAL(18, 2) NOT NULL,
     Status NVARCHAR(50) DEFAULT 'Pending', -- Pending, Shipped, Delivered, Cancelled
-    ShippingAddress NVARCHAR(255),
+    Shipping_Address NVARCHAR(255),
     CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-CREATE TABLE OrderDetails (
+CREATE TABLE Order_Details (
     OrderDetailID INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL, -- FK tới Orders
     ProductID INT NOT NULL, -- FK tới Products

@@ -1,8 +1,10 @@
 package poly.edu.Entity;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "orders")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +24,7 @@ public class Order {
     private User user;
 
     @Column(name = "OrderDate", nullable = false, columnDefinition = "datetime default GETDATE()")
-    private Timestamp orderDate;
+    private Timestamp orderDate=Timestamp.from(Instant.now());;
 
     @Column(name = "TotalAmount", nullable = false)
     private double totalAmount;
@@ -78,6 +81,13 @@ public class Order {
 
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
+	}
+	public Order(User user, Timestamp orderDate, double totalAmount, String status, String shippingAddress) {
+	    this.user = user;
+	    this.orderDate = orderDate;
+	    this.totalAmount = totalAmount;
+	    this.status = status;
+	    this.shippingAddress = shippingAddress;
 	}
     
 }
