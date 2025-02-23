@@ -75,10 +75,7 @@ public class OrderController {
         	                        * (1 - detail.getDiscount().doubleValue() / 100.0))
         	    .sum();
         	model.addAttribute("grandTotal", grandTotal);
-
-
-
-        model.addAttribute("Component", "UserOrderDetail.html");
+        	model.addAttribute("Component", "UserOrderDetail.html");
         return "UserLayout";
     }
 
