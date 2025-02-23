@@ -22,9 +22,6 @@ public class OrderDetail {
     @JoinColumn(name = "OrderID", nullable = false, referencedColumnName = "OrderID")
     private Order order;
 
-    @Column(name = "ProductID", nullable = false)
-    private Integer productId;
-
     @ManyToOne
     @JoinColumn(name = "ProductID", insertable = false, updatable = false)
     private Product product;
