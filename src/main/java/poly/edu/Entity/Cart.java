@@ -23,7 +23,7 @@ public class Cart {
 	    private User user; // Reference to User entity
 
 	    @ManyToOne(fetch = FetchType.EAGER)
-	    @JoinColumn(name = "ProductID", nullable = false, unique = true)
+	    @JoinColumn(name = "ProductID", nullable = false, unique = false)
 	    private Product product; // Reference to Product entity
 
 	    @Column(name = "Quantity", nullable = false, columnDefinition = "int default 1")
