@@ -150,10 +150,10 @@ h2 {
 									đơn hàng nào</td>
 							</tr>
 							<tr
-								th:each="userOrder : ${ordersByStatus[#strings.toLowerCase(status)]}">
+								th:each="order : ${ordersByStatus[#strings.toLowerCase(status)]}">
 								<td>
 									<ul style="list-style: none; padding: 0; margin: 0;">
-										<li th:each="detail : ${userOrder.order.orderDetails}"><img
+										<li th:each="detail : ${order.orderDetails}"><img
 											th:src="@{'/Hinh/' + ${detail.product.image}}"
 											alt="Ảnh sản phẩm" class="product-img"></li>
 									</ul>
@@ -162,7 +162,7 @@ h2 {
 
 								<td>
 									<ul style="list-style: none; padding: 0; margin: 0;">
-										<li th:each="detail : ${userOrder.order.orderDetails}"
+										<li th:each="detail : ${order.orderDetails}"
 											th:text="${detail.product.name}"></li>
 									</ul>
 								</td>
@@ -170,33 +170,27 @@ h2 {
 
 								<td>
 									<ul style="list-style: none; padding: 0; margin: 0;">
-										<li th:each="detail : ${userOrder.order.orderDetails}"
+										<li th:each="detail : ${order.orderDetails}"
 											th:text="${detail.quantity}"></li>
 									</ul>
 								</td>
 								<!-- Số lượng -->
 
 								<td
-									th:text="${#numbers.formatDecimal(userOrder.order.totalAmount, 1, 2)} + ' VND'"></td>
+									th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)} + ' VND'"></td>
 								<!-- Tổng tiền -->
 
 								<td
-									th:text="${#dates.format(userOrder.order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+									th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
 								<!-- Ngày đặt -->
 
-								<td><a
-									th:href="@{/order-detail(orderId=${userOrder.order.orderId})}"
-									class="btn-detail">🔍 Xem</a></td>
+								<td><a th:href="@{/user/order-detail(orderId=${order.orderId})}" class="btn-detail">🔍 Xem</a></td>
 								<!-- Link chi tiết -->
 							</tr>
+
 						</tbody>
 					</table>
 				</div>
-			</div>
-
-
-			<div class="text-center mt-3">
-				<a href="/" class="btn btn-primary">⬅️ Quay lại</a>
 			</div>
 		</div>
 	</section>

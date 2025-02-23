@@ -167,33 +167,22 @@ UPDATE Products
 SET Image = CONCAT(ProductID, '.png') 
 WHERE ProductID BETWEEN 1 AND 50;
 
-INSERT INTO Orders (order_date, total_amount, shipping_address)
+-- Thêm dữ liệu vào bảng Orders (bỏ cột UserID vì nó là NOT NULL)
+INSERT INTO Orders (UserID, Order_Date, Total_Amount, Shipping_Address, Status)
 VALUES
-    ('2024-02-01 10:15:00', 1299.97, '123 Main St, New York'),
-    ('2024-02-02 14:30:00', 799.99, '456 Elm St, California'),
-    ('2024-02-03 09:45:00', 459.98, '789 Pine St, Texas'),
-    ('2024-02-04 16:20:00', 199.99, '321 Oak St, Florida'),
-    ('2024-02-05 11:10:00', 1499.95, '654 Maple St, Washington'),
-    ('2024-02-06 18:05:00', 999.99, '987 Cedar St, Nevada'),
-    ('2024-02-07 12:40:00', 249.98, '159 Birch St, Colorado'),
-    ('2024-02-08 08:55:00', 549.99, '753 Willow St, Arizona'),
-    ('2024-02-09 17:25:00', 699.97, '852 Redwood St, Oregon'),
-    ('2024-02-10 13:35:00', 1999.99, '963 Palm St, Illinois');
+    (2, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York', 'DELIVERED'),
+    (3, '2024-02-02 14:30:00', 799.99, '456 Elm St, California', 'PENDING'),
+    (4, '2024-02-03 09:45:00', 459.98, '789 Pine St, Texas', 'SHIPPED'),
+    (5, '2024-02-04 16:20:00', 199.99, '321 Oak St, Florida', 'CANCELLED'),
+    (6, '2024-02-05 11:10:00', 1499.95, '654 Maple St, Washington', 'DELIVERED'),
+    (7, '2024-02-06 18:05:00', 999.99, '987 Cedar St, Nevada', 'PROCESSING'),
+    (8, '2024-02-07 12:40:00', 249.98, '159 Birch St, Colorado', 'PENDING'),
+    (9, '2024-02-08 08:55:00', 549.99, '753 Willow St, Arizona', 'SHIPPED'),
+    (10, '2024-02-09 17:25:00', 699.97, '852 Redwood St, Oregon', 'DELIVERED'),
+    (11, '2024-02-10 13:35:00', 1999.99, '963 Palm St, Illinois', 'PENDING');
 
-INSERT INTO user_orders (UserID, OrderID, Status)
-VALUES
-    (2, 1, 'DELIVERED'),
-    (3, 2, 'PENDING'),
-    (4, 3, 'SHIPPED'),
-    (5, 4, 'CANCELLED'),
-    (6, 5, 'DELIVERED'),
-    (7, 6, 'PENDING'),
-    (8, 7, 'PROCESSING'),
-    (9, 8, 'SHIPPED'),
-    (10, 9, 'DELIVERED'),
-    (11, 10, 'PENDING');
-
-INSERT INTO order_details (OrderID, ProductID, Quantity, Price, Discount)
+-- Thêm dữ liệu vào bảng Order_Details
+INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price, Discount)
 VALUES
     (1, 2, 2, 599.99, 10),
     (1, 5, 1, 129.99, 0),

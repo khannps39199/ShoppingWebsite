@@ -39,7 +39,6 @@ CREATE TABLE Products (
 
 -- 22/02 update fix lỗi duplicate đối với user khác thêm giửo hàng ngoài john
 -- step: drop table Cart -> recreate table Cart
-drop table Cart;
 CREATE TABLE Cart (
     CartID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
@@ -50,10 +49,6 @@ CREATE TABLE Cart (
     CONSTRAINT FK_Cart_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
-go
-drop table Order_Details ;
-go
-drop table Orders;
 CREATE TABLE Orders (
     OrderID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
@@ -65,9 +60,8 @@ CREATE TABLE Orders (
     CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-
 CREATE TABLE Order_Details (
-    OrderDetailID INT IDENTITY PRIMARY KEY,
+    order_detail_id INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL, -- FK tới Orders
     ProductID INT NOT NULL, -- FK tới Products
     Quantity INT NOT NULL,
@@ -76,33 +70,6 @@ CREATE TABLE Order_Details (
     CONSTRAINT FK_OrderDetails_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
     CONSTRAINT FK_OrderDetails_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
-/* =======
--- 
--- Bảng Orders
-CREATE TABLE Orders (
-    OrderID INT IDENTITY PRIMARY KEY,
-    order_date DATETIME DEFAULT GETDATE(),
-    total_amount DECIMAL(18, 2) NOT NULL,
-    shipping_address NVARCHAR(255)
-);
-
--- Bảng user_orders (Liên kết Users và Orders)
-CREATE TABLE user_orders (
-    user_order_id INT IDENTITY PRIMARY KEY,
-    UserID INT NOT NULL,
-    OrderID INT NOT NULL,
-    Status NVARCHAR(50) DEFAULT 'Pending',
-    Updated_At DATETIME DEFAULT GETDATE(),
-    CONSTRAINT FK_UserOrders_User FOREIGN KEY (UserID) REFERENCES Users(UserID),
-    CONSTRAINT FK_UserOrders_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
-);
-
--- Bảng order_details
-CREATE TABLE order_details (
-    order_detail_id INT IDENTITY PRIMARY KEY,
-    OrderID INT NOT NULL,
-    ProductID INT NOT NULL,
->>>>>>> de50cf07eb95142a927569753ebbde0780e6c7e1 */
 
 -- Bảng UserActivity
 CREATE TABLE UserActivity (
