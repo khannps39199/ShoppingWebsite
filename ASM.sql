@@ -59,7 +59,7 @@ CREATE TABLE Orders (
     Shipping_Address NVARCHAR(255),
     CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
+--drop table Order_Details;
 CREATE TABLE Order_Details (
     order_detail_id INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL, -- FK tới Orders

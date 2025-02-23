@@ -22,9 +22,9 @@ public class OrderDetail {
     @JoinColumn(name = "OrderID", nullable = false, referencedColumnName = "OrderID")
     private Order order;
 
-    @ManyToOne
-    @JoinColumn(name = "ProductID", insertable = false, updatable = false)
-    private Product product;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ProductID", nullable = false, unique = false)
+    private Product product; // Reference to Product entity
 
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
@@ -33,5 +33,12 @@ public class OrderDetail {
     private BigDecimal price;
 
     @Column(name = "Discount", nullable = false, columnDefinition = "decimal(5, 2) default 0")
-    private double discount;
+    private BigDecimal discount;
+    public OrderDetail(Order order, Product product, Integer quantity, BigDecimal price, BigDecimal discount) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+        this.discount = discount;
+    }
 }
