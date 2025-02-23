@@ -50,6 +50,31 @@ CREATE TABLE Cart (
     CONSTRAINT FK_Cart_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
+go
+drop table OrderDetails ;
+go
+drop table Orders;
+CREATE TABLE Orders (
+    OrderID INT IDENTITY PRIMARY KEY,
+    UserID INT NOT NULL, -- FK tới Users
+    Order_Date DATETIME DEFAULT GETDATE(),
+    Total_Amount DECIMAL(18, 2) NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Pending', -- Pending, Shipped, Delivered, Cancelled
+    Shipping_Address NVARCHAR(255),
+    CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+CREATE TABLE Order_Details (
+    OrderDetailID INT IDENTITY PRIMARY KEY,
+    OrderID INT NOT NULL, -- FK tới Orders
+    ProductID INT NOT NULL, -- FK tới Products
+    Quantity INT NOT NULL,
+    Price DECIMAL(18, 2) NOT NULL,
+    Discount DECIMAL(5, 2) DEFAULT 0,
+    CONSTRAINT FK_OrderDetails_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    CONSTRAINT FK_OrderDetails_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+/* =======
+-- 
 -- Bảng Orders
 CREATE TABLE Orders (
     OrderID INT IDENTITY PRIMARY KEY,
@@ -74,12 +99,7 @@ CREATE TABLE order_details (
     order_detail_id INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL,
     ProductID INT NOT NULL,
-    Quantity INT NOT NULL,
-    Price DECIMAL(18, 2) NOT NULL,
-    Discount DECIMAL(5, 2) DEFAULT 0,
-    CONSTRAINT FK_OrderDetails_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-    CONSTRAINT FK_OrderDetails_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
-);
+>>>>>>> de50cf07eb95142a927569753ebbde0780e6c7e1 */
 
 -- Bảng UserActivity
 CREATE TABLE UserActivity (
