@@ -72,9 +72,10 @@ public class OrderController {
         double grandTotal = order.getOrderDetails().stream()
         	    .mapToDouble(detail -> detail.getPrice().doubleValue() 
         	                        * detail.getQuantity() 
-        	                        * (1 - detail.getDiscount() / 100.0))
+        	                        * (1 - detail.getDiscount().doubleValue() / 100.0))
         	    .sum();
         	model.addAttribute("grandTotal", grandTotal);
+
 
 
         model.addAttribute("Component", "UserOrderDetail.html");
