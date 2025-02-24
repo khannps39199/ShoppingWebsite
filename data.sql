@@ -1,4 +1,5 @@
 ﻿use PS39199_Java5_ASMSQL;
+use master
 INSERT INTO Categories (Name, Description)
 VALUES 
     ('Electronics', 'Devices, gadgets, and other electronic products'),

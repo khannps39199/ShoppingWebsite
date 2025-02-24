@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import poly.edu.Entity.Order;
 import poly.edu.Entity.User;
+import poly.edu.Repository.OrderRepository;
 import poly.edu.Service.OrderService;
 import poly.edu.Service.SessionService;
 
@@ -20,8 +22,10 @@ public class OrderController {
 	@Autowired
     private SessionService sessionService;
 	
+	@Autowired
+	OrderService OrderService;
     @Autowired
-    private OrderService orderService;
+    OrderRepository orderRepo;
 
     // Trạng thái đơn hàng (Sử dụng đúng với 5 trạng thái của bạn)
     private static final String[] ORDER_STATUSES = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
@@ -41,7 +45,7 @@ public class OrderController {
         }
 
         // Lấy danh sách đơn hàng của User đang đăng nhập theo trạng thái
-        Map<String, List<Order>> ordersByStatus = orderService.getOrdersByStatus(user.getUserId());
+        Map<String, List<Order>> ordersByStatus = OrderService.getOrdersByStatus(user.getUserId());
 
         // Thêm dữ liệu vào Model để truyền sang View
         String[] orderStatuses = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
@@ -60,7 +64,7 @@ public class OrderController {
             return "redirect:/account/login";
         }
 
-        Order order = orderService.getOrderDetail(orderId, user.getUserId());
+        Order order = OrderService.getOrderDetail(orderId, user.getUserId());
         if (order == null) {
             return "redirect:/user/order";
         }
@@ -79,6 +83,11 @@ public class OrderController {
         return "UserLayout";
     }
 
-
-
+    
+    @GetMapping("/shipper/orders")
+    public String listOrders(Model model){
+        List<Order> orders = orderRepo.findByStatus("Đang giao");
+        model.addAttribute("orders", orders);
+        return "shipper_orders";
+    }
 }
