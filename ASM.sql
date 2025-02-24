@@ -54,8 +54,10 @@ CREATE TABLE Orders (
     ShippingAddress NVARCHAR(255),
     CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-CREATE TABLE OrderDetails (
-    OrderDetailID INT IDENTITY PRIMARY KEY,
+
+
+CREATE TABLE Order_Details (
+    Order_DetailID INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL, -- FK tới Orders
     ProductID INT NOT NULL, -- FK tới Products
     Quantity INT NOT NULL,
@@ -77,4 +79,3 @@ USE master;
 ALTER DATABASE msdb SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 DBCC CHECKDB (msdb, REPAIR_ALLOW_DATA_LOSS);
 ALTER DATABASE msdb SET MULTI_USER;
-	

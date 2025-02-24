@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html th:replace="~{Layout::view('Trang chủ', ~{::article})}"> 
+
+<head>
+    <title>Trang chủ</title>
+</head>
+<body>
+    <!-- Kiểm tra nếu biến Component có giá trị, nếu không sẽ dùng 'fragments/default-content' -->
+    <article th:replace="${Component} ?: 'fragments/default-content'"></article>
+</body>
+</html>

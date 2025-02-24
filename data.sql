@@ -134,12 +134,12 @@ VALUES
 VALUES 
 ('admin', '123', 'admin@example.com', 'Admin User', '0123456789', '123 Admin Street', 'Admin', 1),
 ('john_doe', '123', 'john@example.com', 'John Doe', '0987654321', '456 User Lane', 'Customer', 1),
-('jane_smith', 'xyz987hashed', 'jane@example.com', 'Jane Smith', '0912345678', '789 Customer Ave', 'Customer', 1),
+('jane_smith', '123', 'jane@example.com', 'Jane Smith', '0912345678', '789 Customer Ave', 'Customer', 1),
 ('michael_nguyen', 'mnp456hashed', 'michael@example.com', 'Michael Nguyen', '0934567890', '567 Market St', 'Customer', 1),
 ('susan_lee', 'susan123hashed', 'susan@example.com', 'Susan Lee', '0976543210', '321 Park Blvd', 'Customer', 1),
 ('william_johnson', 'william123hashed', 'william.johnson@example.com', 'William Johnson', '0967123456', '23 Maple Street', 'Customer', 1),
 ('olivia_martin', 'olivia456hashed', 'olivia.martin@example.com', 'Olivia Martin', '0908123456', '88 Rose Avenue', 'Customer', 1),
-('ethan_clark', 'ethan789hashed', 'ethan.clark@example.com', 'Ethan Clark', '0945236789', '12 Oak Road', 'Customer', 1),
+('ethan_clark', '123', 'Khoa@gmail.com', 'Ethan Clark', '0945236789', '12 Oak Road', 'Customer', 1),
 ('ava_robinson', 'ava111hashed', 'ava.robinson@example.com', 'Ava Robinson', '0987456321', '56 Sunflower St', 'Customer', 1),
 ('james_white', 'james222hashed', 'james.white@example.com', 'James White', '0923456789', '99 Lakeview Dr', 'Customer', 1),
 ('charlotte_adams', 'charlotte123hashed', 'charlotte.adams@example.com', 'Charlotte Adams', '0912345678', '14 Elm Street', 'Customer', 1),
@@ -167,35 +167,33 @@ UPDATE Products
 SET Image = CONCAT(ProductID, '.png') 
 WHERE ProductID BETWEEN 1 AND 50;
 
--- Chèn dữ liệu vào bảng Orders (UserID từ 2 đến 11)
-INSERT INTO Orders (UserID, OrderDate, TotalAmount, Status, ShippingAddress)
+-- Thêm dữ liệu vào bảng Orders
+INSERT INTO Orders (UserID, Order_Date, Total_Amount, Shipping_Address)
 VALUES
-    (2, '2024-02-01 10:15:00', 1299.97, 'Completed', '123 Main St, New York'),
-    (3, '2024-02-02 14:30:00', 799.99, 'Pending', '456 Elm St, California'),
-    (4, '2024-02-03 09:45:00', 459.98, 'Shipped', '789 Pine St, Texas'),
-    (5, '2024-02-04 16:20:00', 199.99, 'Cancelled', '321 Oak St, Florida'),
-    (6, '2024-02-05 11:10:00', 1499.95, 'Delivered', '654 Maple St, Washington'),
-    (7, '2024-02-06 18:05:00', 999.99, 'Pending', '987 Cedar St, Nevada'),
-    (8, '2024-02-07 12:40:00', 249.98, 'Completed', '159 Birch St, Colorado'),
-    (9, '2024-02-08 08:55:00', 549.99, 'Shipped', '753 Willow St, Arizona'),
-    (10, '2024-02-09 17:25:00', 699.97, 'Completed', '852 Redwood St, Oregon'),
-    (11, '2024-02-10 13:35:00', 1999.99, 'Pending', '963 Palm St, Illinois');
+    (1, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York'),
+    (2, '2024-02-02 14:30:00', 799.99, '456 Elm St, California'),
+    (3, '2024-02-03 09:45:00', 459.98, '789 Pine St, Texas'),
+    (4, '2024-02-04 16:20:00', 199.99, '321 Oak St, Florida'),
+    (5, '2024-02-05 11:10:00', 1499.95, '654 Maple St, Washington'),
+    (6, '2024-02-06 18:05:00', 999.99, '987 Cedar St, Nevada'),
+    (7, '2024-02-07 12:40:00', 249.98, '159 Birch St, Colorado'),
+    (8, '2024-02-08 08:55:00', 549.99, '753 Willow St, Arizona'),
+    (9, '2024-02-09 17:25:00', 699.97, '852 Redwood St, Oregon'),
+    (10, '2024-02-10 13:35:00', 1999.99, '963 Palm St, Illinois');
 
--- Chèn dữ liệu vào bảng OrderDetails
-INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price, Discount)
-VALUES
-    (1, 2, 2, 599.99, 10),
-    (1, 5, 1, 129.99, 0),
-    (2, 8, 1, 799.99, 5),
-    (3, 11, 2, 349.99, 0),
-    (3, 14, 1, 399.99, 10),
-    (4, 17, 1, 199.99, 0),
-    (5, 20, 3, 149.99, 5),
-    (5, 22, 2, 89.99, 5),
-    (6, 25, 1, 999.99, 10),
-    (7, 3, 1, 249.99, 0),
-    (8, 6, 1, 549.99, 15),
-    (9, 9, 1, 499.99, 5),
-    (9, 12, 2, 79.99, 0),
-    (10, 15, 3, 499.99, 10),
-    (10, 18, 2, 699.99, 5);
+
+INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price) VALUES
+(6, 1, 2, 50000),
+(6, 2, 1, 75000),
+(7, 3, 3, 60000),
+(8, 4, 2, 85000),
+(9, 5, 1, 50000),
+(9, 6, 5, 30000),
+(4, 7, 2, 90000),
+(4, 8, 4, 45000),
+(5, 9, 1, 100000),
+(5, 10, 2, 75000);
+
+
+
+SELECT ProductID FROM Products;

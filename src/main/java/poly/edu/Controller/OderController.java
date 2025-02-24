@@ -11,7 +11,6 @@ import poly.edu.Service.ParamService;
 import poly.edu.Service.SessionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -27,7 +26,7 @@ public class OderController {
 	@Autowired
 	UserRepository	userRepo;
 	@Autowired
-	OrderDetailsRepository odertDetailRepo;
+	OrderDetailRepository odertDetailRepo;
 	@GetMapping("/order")
 	public String getOrder(Model model) {
 		model.addAttribute("Component","UsersOrder.html");

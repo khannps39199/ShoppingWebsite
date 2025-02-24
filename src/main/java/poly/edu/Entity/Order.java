@@ -1,6 +1,8 @@
 package poly.edu.Entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -31,6 +33,10 @@ public class Order {
 
     @Column(name = "ShippingAddress", length = 255)
     private String shippingAddress;
+    
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails = new ArrayList<>();
+
 
 	public Integer getOrderId() {
 		return orderId;
@@ -79,5 +85,12 @@ public class Order {
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-    
+	public List<OrderDetail> getOrderDetails() {
+	    return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+	    this.orderDetails = orderDetails;
+	}
+
 }
