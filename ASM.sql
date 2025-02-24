@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+﻿﻿CREATE DATABASE PS39199_Java5_ASMSQL;
+=======
 ﻿CREATE DATABASE PS39199_Java5_ASMSQL;
 --drop database PS39199_Java5_ASMSQL
+>>>>>>> 22e185794943a0a1fca0d3148885fade87a42b5a
 USE PS39199_Java5_ASMSQL;
 USE master;
 -- Bảng Users
