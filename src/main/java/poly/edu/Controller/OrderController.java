@@ -47,7 +47,7 @@ public class OrderController {
 
         // Lấy danh sách đơn hàng của User đang đăng nhập theo trạng thái
         Map<String, List<Order>> ordersByStatus = OrderService.getOrdersByStatus(user.getUserId());
-
+        
         // Thêm dữ liệu vào Model để truyền sang View
         String[] orderStatuses = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
         model.addAttribute("orderStatuses", orderStatuses);
