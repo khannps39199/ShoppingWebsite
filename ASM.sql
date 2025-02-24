@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿﻿CREATE DATABASE PS39199_Java5_ASMSQL;
+=======
+﻿CREATE DATABASE PS39199_Java5_ASMSQL;
+--drop database PS39199_Java5_ASMSQL
+>>>>>>> 22e185794943a0a1fca0d3148885fade87a42b5a
 USE PS39199_Java5_ASMSQL;
 USE master;
 -- Bảng Users
@@ -37,8 +42,7 @@ CREATE TABLE Products (
     CONSTRAINT FK_Products_Category FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
 
--- 22/02 update fix lỗi duplicate đối với user khác thêm giửo hàng ngoài john
--- step: drop table Cart -> recreate table Cart
+
 CREATE TABLE Cart (
     CartID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
@@ -48,6 +52,7 @@ CREATE TABLE Cart (
     CONSTRAINT FK_Cart_User FOREIGN KEY (UserID) REFERENCES Users(UserID),
     CONSTRAINT FK_Cart_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
 
 CREATE TABLE Orders (
     OrderID INT IDENTITY PRIMARY KEY,
@@ -71,6 +76,7 @@ CREATE TABLE Order_Details (
     CONSTRAINT FK_OrderDetails_Order FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
     CONSTRAINT FK_OrderDetails_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
+
 
 -- Bảng UserActivity
 CREATE TABLE UserActivity (

@@ -62,4 +62,11 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public Order findById(Integer orderId) {
+        return orderRepository.findById(orderId).orElse(null);
+    }
+
+    public void save(Order order) {
+        orderRepository.save(order);
+    }
 }
