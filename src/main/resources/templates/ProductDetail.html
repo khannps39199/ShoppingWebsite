@@ -42,6 +42,7 @@
                 <p class="text-danger fw-bold" th:text="${product.price} + ' $'"></p>
                 <p th:text="${product.description}"></p>
 				<form method="post">
+					<input type="hidden" name="productId" th:value="${product.productID}" />
 				    <button type="submit" th:formaction="@{/addToCart}" class="btn btn-secondary">Add to Cart</button>
 				</form>
             </div>
