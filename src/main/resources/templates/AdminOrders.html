@@ -1,193 +1,157 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Đơn hàng đã mua</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style>
-body {
-	background: linear-gradient(135deg, #1a1a2e, #16213e);
-	color: #ffffff;
-}
+    <meta charset="UTF-8">
+    <title>Danh sách đơn hàng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-h2 {
-	color: #00bfff;
-	text-align: center;
-	margin-bottom: 20px;
-	text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
-}
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-.nav-tabs .nav-link {
-	color: #00bfff;
-}
+        h2 {
+            color: #00bfff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+        }
 
-.nav-tabs .nav-link.active {
-	background-color: #00bfff;
-	color: #121212;
-	border-radius: 5px;
-}
+        .filter-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
 
-.table {
-	background-color: #000000 !important;
-	color: #ffffff !important;
-	border-radius: 10px;
-	overflow: hidden;
-}
+        select {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #00bfff;
+        }
 
-.table thead {
-	background-color: #00bfff !important;
-	color: #000000 !important;
-}
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+        }
 
-.table td, .table th {
-	background-color: #000000 !important;
-	color: #ffffff !important;
-	border-color: #444444 !important;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #000000;
+            border-radius: 8px;
+            overflow: hidden;
+            color: #ffffff;
+        }
 
-.product-img {
-	width: 80px;
-	height: 80px;
-	border-radius: 6px;
-	box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
+        th, td {
+            padding: 12px;
+            border: 1px solid #444444;
+            text-align: center;
+        }
 
-.btn-detail {
-	background: linear-gradient(45deg, #00c6ff, #0072ff);
-	border: none;
-	color: white;
-	padding: 5px 10px;
-	border-radius: 5px;
-	text-decoration: none;
-	display: inline-block;
-	margin-top: 5px;
-	box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-}
+        th {
+            background: #00bfff;
+            color: #000000;
+        }
 
-.btn-detail:hover {
-	background: linear-gradient(45deg, #0072ff, #00c6ff);
-	transform: scale(1.05);
-	box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
-}
+        tr:nth-child(even) {
+            background: #222222;
+        }
 
-.btn-primary {
-	background: linear-gradient(45deg, #00c6ff, #0072ff);
-	border: none;
-	font-size: 16px;
-	padding: 10px;
-	transition: 0.3s;
-	box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-}
+        tr:hover {
+            background: #333333;
+        }
 
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	font-size: 14px;
-}
-</style>
+        a {
+            color: #00bfff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-detail {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        .btn-detail:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+    </style>
 </head>
 <body>
-	<section class="h-100 h-custom">
-		<div th:fragment="content" class="container mt-4">
-			<h2>🛒 Quản lý Đơn Hàng</h2>
 
-			<!-- 🟡 Tabs đơn hàng -->
-			<ul class="nav nav-tabs" id="orderTabs">
-				<li class="nav-item" th:each="status : ${orderStatuses}"><a
-					class="nav-link"
-					th:classappend="${currentTab == status} ? 'active' : ''"
-					data-bs-toggle="tab"
-					th:href="'#' + ${#strings.toLowerCase(status)}"> <span
-						th:switch="${#strings.toLowerCase(status)}"> <span
-							th:case="'pending'">🟡 Chờ xác nhận</span> <span
-							th:case="'processing'">📦 Chờ lấy hàng</span> <span
-							th:case="'shipped'">🚚 Chờ giao hàng</span> <span
-							th:case="'delivered'">✅ Đã giao</span> <span
-							th:case="'cancelled'">❌ Trả hàng / Hủy</span> <span th:case="*">📋
-								Khác</span>
-					</span>
-				</a></li>
+    <h2>🛒 Quản lý Đơn Hàng</h2>
 
-			</ul>
+    <!-- Bộ lọc theo trạng thái -->
+    <div class="filter-container">
+        <label for="statusFilter"><strong>Chọn trạng thái:</strong></label>
+        <select id="statusFilter" onchange="filterOrders()">
+            <option th:each="status : ${orderStatuses}" 
+                    th:value="${status}" 
+                    th:text="${status}" 
+                    th:selected="${status == currentTab}">
+            </option>
+        </select>
+    </div>
 
-			<!-- 🔹 Nội dung các tab -->
-			<div class="tab-content mt-3">
-				<div class="tab-pane fade" th:each="status : ${orderStatuses}"
-					th:id="${#strings.toLowerCase(status)}"
-					th:classappend="${currentTab == status} ? 'show active' : ''">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Người đặt</th>
+                <th>Ngày đặt</th>
+                <th>Trạng thái</th>
+                <th>Tổng tiền</th>
+                <th>Địa chỉ giao hàng</th>
+                <th>Phương thức thanh toán</th>
+                <th>Chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.orderId}"></td>
+                <td th:text="${order.user.fullName}"></td>
+                <td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+                <td th:text="${order.shippingAddress}"></td>
+                <td th:text="${order.paymentMethod}"></td>
+                <td>
+                    <a th:href="@{/admin/order/detail/{id}(id=${order.orderId})}" class="btn-detail">🔍 Xem</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-					<h5>
-						<span th:switch="${#strings.toLowerCase(status)}"> <span
-							th:case="'pending'">🟡 Đơn hàng chờ xác nhận</span> <span
-							th:case="'processing'">📦 Đơn hàng chờ lấy hàng</span> <span
-							th:case="'shipped'">🚚 Đơn hàng đang giao</span> <span
-							th:case="'delivered'">✅ Đơn hàng đã giao</span> <span
-							th:case="'cancelled'">❌ Đơn hàng đã hủy</span> <span th:case="*">📋
-								Danh sách đơn hàng</span>
-						</span>
-					</h5>
-
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Hình ảnh</th>
-								<th>Tên sản phẩm</th>
-								<th>Số lượng</th>
-								<th>Tổng tiền</th>
-								<th>Ngày đặt</th>
-								<th>Hành động</th>
-							</tr>
-						</thead>
-						<tbody>
-						    <tr th:if="${#lists.isEmpty(ordersByStatus[status])}">
-						        <td colspan="6" class="text-center text-muted">📭 Không có đơn hàng nào</td>
-						    </tr>
-						    <tr th:each="order : ${ordersByStatus[status]}">
-						        <td>
-						            <ul style="list-style: none; padding: 0; margin: 0;">
-						                <li th:each="detail : ${order.orderDetails}">
-						                    <img th:src="@{'/Hinh/' + ${detail.product.image}}" 
-						                         alt="Ảnh sản phẩm" class="product-img">
-						                </li>
-						            </ul>
-						        </td>
-						        <td>
-						            <ul style="list-style: none; padding: 0; margin: 0;">
-						                <li th:each="detail : ${order.orderDetails}" th:text="${detail.product.name}"></li>
-						            </ul>
-						        </td>
-						        <td>
-						            <ul style="list-style: none; padding: 0; margin: 0;">
-						                <li th:each="detail : ${order.orderDetails}" th:text="${detail.quantity}"></li>
-						            </ul>
-						        </td>
-						        <td th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)} + ' VND'"></td>
-						        <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
-						        <td><a th:href="@{/admin-order-detail(orderId=${order.orderId})}" class="btn-detail">🔍 Xem</a></td>
-						    </tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="text-center mt-3">
-				<a href="/" class="btn btn-primary">⬅️ Quay lại</a>
-			</div>
-		</div>
-	</section>
-
-
-
-	<footer class="footer bg-dark text-white text-center p-3 mt-4">
-		&copy; 2025 - Quản lý Giỏ Hàng </footer>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function filterOrders() {
+            let status = document.getElementById("statusFilter").value;
+            document.body.style.opacity = "0.5";
+            setTimeout(() => {
+                window.location.href = "/admin/order?status=" + status;
+            }, 300);
+        }
+    </script>
 
 </body>
 </html>

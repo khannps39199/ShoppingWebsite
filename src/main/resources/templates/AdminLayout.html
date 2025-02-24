@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html th:replace="~{Layout::view('Trang chủ', ~{::article})}"> 
+<html th:replace="~{Layout::view('Trang chủ', ~{::article})}">
+
 
 <head>
     <title>Trang chủ</title>
 </head>
 <body>
-    <!-- Kiểm tra nếu biến Component có giá trị, nếu không sẽ dùng 'fragments/default-content' -->
-    <article th:replace="${Component} ?: 'fragments/default-content'"></article>
+	<article th:replace="~{${Component}}"></article>
 </body>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+       &copy; 2025 Shop. All rights reserved.
+   </footer>
+
 </html>

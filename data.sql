@@ -194,5 +194,6 @@ INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price) VALUES
 (5, 9, 1, 100000),
 (5, 10, 2, 75000);
 
-
-
+INSERT INTO Order  (UserID, Order_Date, Total_Amount, Shipping_Address)VALUES
+(1, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York'),
+(1, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York');
