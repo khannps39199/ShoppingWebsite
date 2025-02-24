@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import poly.edu.Entity.Order;
 import poly.edu.Entity.User;
@@ -86,8 +87,35 @@ public class OrderController {
     
     @GetMapping("/shipper/orders")
     public String listOrders(Model model){
-        List<Order> orders = orderRepo.findByStatus("Đang giao");
+        List<Order> orders = orderRepo.findAll();
         model.addAttribute("orders", orders);
         return "shipper_orders";
+    }
+    @PostMapping("/shipper/update-status")
+    public String updateOrderStatus(@RequestParam("orderId") Integer orderId, RedirectAttributes redirectAttributes) {
+        // Kiểm tra xem đơn hàng có tồn tại không
+        Order order = OrderService.findById(orderId);
+        if (order == null) {
+            redirectAttributes.addFlashAttribute("error", "Đơn hàng không tồn tại!");
+            return "redirect:/shipper/orders"; // Điều hướng về trang danh sách đơn hàng
+        }
+
+        if(order.getStatus().equals("Pending")) {
+        	order.setStatus("Processing");
+            OrderService.save(order);
+        } else if(order.getStatus().equals("Processing")) {
+        	order.setStatus("Shipped");
+            OrderService.save(order);
+        } else if(order.getStatus().equals("Shipped")) {
+        	order.setStatus("Delivered");
+            OrderService.save(order);
+        } else{
+        	order.setStatus("Cancelled");
+            OrderService.save(order);
+        }
+
+
+        redirectAttributes.addFlashAttribute("success", "Cập nhật trạng thái thành công!");
+        return "redirect:/shipper/orders";
     }
 }

@@ -3,11 +3,53 @@
 <head>
     <title>Quản lý đơn hàng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Tùy chỉnh giao diện bảng */
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        thead {
+            background-color: #343a40;
+            color: white;
+        }
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Căn chỉnh nút bấm */
+        .btn-status {
+            width: 160px;
+        }
+
+        /* Màu sắc cho trạng thái */
+        .status-pending {
+            color: #ffc107; /* Vàng */
+            font-weight: bold;
+        }
+        .status-processing {
+            color: #17a2b8; /* Xanh dương */
+            font-weight: bold;
+        }
+        .status-shipped {
+            color: #28a745; /* Xanh lá */
+            font-weight: bold;
+        }
+        .status-delivered {
+            color: #6c757d; /* Xám */
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="mb-4">Danh sách đơn hàng đang giao</h2>
-        <table class="table table-bordered">
+        <h2 class="mb-4 text-center">🚚 Quản lý đơn hàng đang giao</h2>
+
+        <!-- Hiển thị thông báo -->
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+        <table class="table table-bordered text-center shadow">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -28,16 +70,28 @@
                     <td th:text="${order.shippingAddress}"></td>
                     <td th:text="${order.totalAmount} + ' VNĐ'"></td>
                     <td th:text="${order.paymentMethod}"></td>
-                    <td th:text="${order.status}"></td>
+                    <td>
+                        <span th:text="${order.status}"
+                              th:classappend="${order.status == 'Pending'} ? 'status-pending' :
+                                              (${order.status == 'Processing'} ? 'status-processing' :
+                                              (${order.status == 'Shipped'} ? 'status-shipped' :
+                                              'status-delivered'))">
+                        </span>
+                    </td>
                     <td>
                         <form th:action="@{/shipper/update-status}" method="post">
                             <input type="hidden" name="orderId" th:value="${order.orderId}">
-                            <button type="submit" class="btn btn-success">Đánh dấu đã giao</button>
+                            <button type="submit" class="btn btn-success btn-status">
+                                Đánh dấu đã giao
+                            </button>
                         </form>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <!-- Bootstrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
