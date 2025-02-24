@@ -67,7 +67,7 @@ public class UsersController {
             }
         }
         us.save(user);
-        return "redirect:/getUser?page=" + page + "&size=" + size;
+        return "redirect:/admin/getUser?page=" + page + "&size=" + size;
     }
 
     // Chỉnh sửa người dùng
@@ -81,7 +81,7 @@ public class UsersController {
 
         User user = us.findById(id).orElse(null);
         if (user == null) {
-            return "redirect:/getUser?page=" + page + "&size=" + size;
+            return "redirect:adUser?page=" + page + "&size=" + size;
         }
 
         model.addAttribute("users", userPage.getContent());

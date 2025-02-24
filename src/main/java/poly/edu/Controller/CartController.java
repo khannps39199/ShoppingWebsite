@@ -72,9 +72,8 @@ public class CartController {
 	        }
 	    }
 	   
-	    model.addAttribute("cartList",userId.getCarts());
-		model.addAttribute("Component","Cart.html");
-		return "UserLayout";
+	   
+		return "redirect:/cart";
 	}
 	
 	@GetMapping("/cart")

@@ -37,8 +37,10 @@ public class LoginController {
 	    	String un = paramService.getString("email", "");
 			String pw = paramService.getString("password", "");
 			 boolean rm = paramService.getBoolean("remember", false);
-			 User login=userRepo.searchByEmail(un).orElse(null);
+			 User login=userRepo.findByEmail(un).orElse(null);
+			 
 			 if(login !=null) {
+				 System.out.println(login.getUserId());
 				 if(login.getEmail().equals(un)&&login.getPasswordHash().equals(pw)) {
 			    		sessionService.set("login", login);
 				    	 if(rm==true) {

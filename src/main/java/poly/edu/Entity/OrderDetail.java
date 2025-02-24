@@ -1,38 +1,44 @@
 package poly.edu.Entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "Order_Details")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Table(name = "OrderDetails")
 public class OrderDetail {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OrderDetailID")
+    @Column(name = "Order_Detail_ID")
     private Integer orderDetailId;
 
     @ManyToOne
-    @JoinColumn(name = "OrderID", nullable = false, referencedColumnName = "OrderID") // FK to Orders
+    @JoinColumn(name = "OrderID", nullable = false, referencedColumnName = "OrderID")
     private Order order;
 
-    @ManyToOne
-    @JoinColumn(name = "ProductID", nullable = false, referencedColumnName = "ProductID") // FK to Products
-    private Product product;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ProductID", nullable = false, unique = false)
+    private Product product; // Reference to Product entity
 
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
     @Column(name = "Price", nullable = false)
-    private double price; // Price at the time of purchase
+    private BigDecimal price;
 
     @Column(name = "Discount", nullable = false, columnDefinition = "decimal(5, 2) default 0")
-    private double discount;
-
-	
-    
+    private BigDecimal discount;
+    public OrderDetail(Order order, Product product, Integer quantity, BigDecimal price, BigDecimal discount) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+        this.discount = discount;
+    }
 }
