@@ -14,26 +14,12 @@ import poly.edu.Repository.OrderRepository;
 
 @Service
 public class OrderService {
-
-    @Autowired
+	@Autowired
     private OrderRepository orderRepository;
 
-    // ✅ Lấy danh sách đơn hàng của User theo trạng thái (Tối ưu với JPA Query)
     public Map<String, List<Order>> getOrdersByStatus(Integer userId) {
-        List<Order> orders = orderRepository.findByUserUserId(userId);
+        List<Order> orders = orderRepository.findByUserUserID(userId);
         return orders.stream().collect(Collectors.groupingBy(Order::getStatus));
-    }
-
-    // ✅ Lấy chi tiết đơn hàng của user, throw exception nếu không tìm thấy
-    public Order getOrderDetail(Integer orderId, Integer userId) {
-        return orderRepository.findByOrderIdAndUserUserId(orderId, userId)
-            .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng ID: " + orderId));
-    }
-
-    // ✅ Lấy chi tiết đơn hàng cho Admin
-    public Order getAdminOrderDetail(Integer orderId) {
-        return orderRepository.findById(orderId)
-            .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng ID: " + orderId));
     }
 
     // ✅ Lấy tất cả đơn hàng và nhóm theo trạng thái (Tối ưu bằng JPA Query)
@@ -48,12 +34,24 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    // ✅ Lấy chi tiết đơn hàng của user, throw exception nếu không tìm thấy
+    public Order getOrderDetail(Integer orderId, Integer userId) {
+        return orderRepository.findByOrderIdAndUserUserId(orderId, userId)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng ID: " + orderId));
+    }
+
+    // ✅ Lấy chi tiết đơn hàng cho Admin
+    public Order getAdminOrderDetail(Integer orderId) {
+        return orderRepository.findById(orderId)
+            .orElseThrow(() -> new RuntimeException("Không tìm thấy đơn hàng ID: " + orderId));
+    }
+
     // ✅ Lấy đơn hàng theo ID (Dùng Optional tránh NullPointerException)
     public Optional<Order> getOrderById(Integer orderId) {
         return orderRepository.findById(orderId);
     }
 
-    // ✅ Cập nhật đơn hàng (Thêm @Transactional để đảm bảo tính nhất quán)
+    // ✅ Cập nhật trạng thái đơn hàng (Thêm @Transactional để đảm bảo tính nhất quán)
     @Transactional
     public void updateStatus(Integer orderId, String status) {
         Order order = orderRepository.findById(orderId)
@@ -62,10 +60,7 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public Order findById(Integer orderId) {
-        return orderRepository.findById(orderId).orElse(null);
-    }
-
+    // ✅ Lưu đơn hàng
     public void save(Order order) {
         orderRepository.save(order);
     }
