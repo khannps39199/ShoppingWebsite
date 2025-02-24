@@ -1,4 +1,3 @@
-
 package poly.edu.Controller;
 
 import java.math.BigDecimal;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class OrderDetailController {
+public class OrderDetailsController {
 	@Autowired
 	CookieService cookieService;
 	@Autowired
@@ -38,7 +37,7 @@ public class OrderDetailController {
 	@Autowired
 	CartRepository	cartRepo;
 	@Autowired
-	OrderDetailsRepository odertDetailRepo;
+	OrderDetailRepository odertDetailRepo;
 	@GetMapping("/order")
 	public String getOrder(Model model) {
 		model.addAttribute("Component","UsersOrder.html");
@@ -62,9 +61,9 @@ public class OrderDetailController {
 		Order order=new Order( user,Timestamp.from(Instant.now()),totalAmount,"Pending",user.getAddress(),paymentMethod);
 		orderRepo.save(order);
 		
-		List<OrderDetails> listOrderDetails = new ArrayList<>();
+		List<OrderDetail> listOrderDetails = new ArrayList<>();
 		for (Cart itemCart : cartToOrder) {
-		    OrderDetails tempOrderDetail = new OrderDetails(
+		    OrderDetail tempOrderDetail = new OrderDetail(
 		        order, 
 		        itemCart.getProduct(), 
 		        itemCart.getQuantity(), 
@@ -77,7 +76,6 @@ public class OrderDetailController {
 		
 		odertDetailRepo.saveAll(listOrderDetails);
 		model.addAttribute("Component","UsersOrder.html");
-		return "redirect:/order";
+		return "redirect:/user/order";
 	}
 }
-

@@ -1,9 +1,7 @@
 package poly.edu.Entity;
 
 import java.sql.Timestamp;
-
 import java.time.Instant;
-
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -12,78 +10,45 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "Orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OrderID")
     private Integer orderId;
-
 
     @ManyToOne
     @JoinColumn(name = "UserID", nullable = false, referencedColumnName = "UserID") // FK to Users
     private User user;
 
-    @Column(name = "OrderDate", nullable = false, columnDefinition = "datetime default GETDATE()")
-    private Timestamp orderDate=Timestamp.from(Instant.now());;
+    @Column(name = "Order_Date", nullable = false, columnDefinition = "datetime default GETDATE()")
+    private Timestamp orderDate = Timestamp.from(Instant.now());
 
-    @Column(name = "status", length = 50, nullable = false)
-    private String status = "Pending"; // Mặc định Pending
+    @Column(name = "Status", length = 50, nullable = false)
+    private String status = "Pending"; // Mặc định là Pending
 
-    
-    @Column(name = "total_amount", nullable = false)
+    @Column(name = "Total_Amount", nullable = false)
     private double totalAmount;
 
-    @Column(name = "shipping_address", length = 255)
+    @Column(name = "Shipping_Address", length = 255)
     private String shippingAddress;
-    
-    @Column(name = "Payment_method", length = 50, nullable = false)
-    private String paymentMethod = "WHEN_RECEIVE"; // Default: WHEN_RECEIVE
-    
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetails> orderDetails;
 
-	public Integer getOrderId() {
-		return orderId;
-	}
+    @Column(name = "Payment_Method", length = 50, nullable = false)
+    private String paymentMethod = "WHEN_RECEIVE"; // Mặc định là WHEN_RECEIVE
 
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails;
 
-	public Timestamp getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(Timestamp orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public double getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setTotalAmount(double totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
-	public String getShippingAddress() {
-		return shippingAddress;
-	}
-
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
-	}
-	public Order(User user, Timestamp orderDate, double totalAmount, String status, String shippingAddress,String paymentMethod) {
-	    this.user = user;
-	    this.orderDate = orderDate;
-	    this.totalAmount = totalAmount;
-	    this.status = status;
-	    this.shippingAddress = shippingAddress;
-	    this.paymentMethod = paymentMethod;
-	}
-    
+    // Constructor tùy chỉnh
+    public Order(User user, Timestamp orderDate, double totalAmount, String status, String shippingAddress, String paymentMethod) {
+        this.user = user;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.shippingAddress = shippingAddress;
+        this.paymentMethod = paymentMethod;
+    }
 }

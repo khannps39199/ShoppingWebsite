@@ -1,38 +1,37 @@
 package poly.edu.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import poly.edu.Entity.*;
-import poly.edu.Repository.*;
 
-import java.util.*;
+import poly.edu.Entity.Order;
+import poly.edu.Repository.OrderRepository;
 
 @Service
 public class OrderService {
-    @Autowired
-    private UserOrderRepository userOrderRepo;
 
     @Autowired
-    private OrderDetailsRepository orderDetailRepo;
+    private OrderRepository orderRepository;
 
-//    public Map<String, List<UserOrder>> getOrdersByStatus(Integer userId) {
-//        List<String> orderStatuses = Arrays.asList("pending", "processing", "shipped", "delivered", "cancelled");
-//        Map<String, List<UserOrder>> ordersByStatus = new HashMap<>();
-//
-//        for (String status : orderStatuses) {
-//            List<UserOrder> orders = userOrderRepo.findByUser_UserIdAndStatus(userId, status);
-//
-//            System.out.println("Debug: Orders for status [" + status + "] = " + orders.size()); // Kiểm tra số lượng đơn hàng
-//            
-//            for (UserOrder userOrder : orders) {
-//                List<OrderDetails> details = orderDetailRepo.findByOrder(userOrder.getOrder());
-//                userOrder.getOrder().setOrderDetails(details);
-//            }
-//
-//            ordersByStatus.put(status, orders);
-//        }
-//
-//        return ordersByStatus;
-//    }
+    // Lấy danh sách đơn hàng của User theo từng trạng thái
+    public Map<String, List<Order>> getOrdersByStatus(Integer userId) {
+        Map<String, List<Order>> ordersByStatus = new HashMap<>();
+        String[] orderStatuses = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
+
+        for (String status : orderStatuses) {
+            List<Order> orders = orderRepository.findByUserUserIdAndStatus(userId, status);
+            ordersByStatus.put(status.toLowerCase(), orders);
+        }
+
+        return ordersByStatus;
+    }
+    public Order getOrderDetail(Integer orderId, Integer userId) {
+        Optional<Order> optionalOrder = orderRepository.findByOrderIdAndUserUserId(orderId, userId);
+        return optionalOrder.orElse(null);
+    }
 
 }

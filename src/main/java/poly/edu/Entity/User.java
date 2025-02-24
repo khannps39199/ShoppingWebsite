@@ -50,8 +50,15 @@ public class User {
     
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cart> carts;
+<<<<<<< HEAD
 
 
+=======
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orders;
+    
+>>>>>>> dc9c39c55ec42b976126296b43b698cfa0e122a6
 	public Integer getUserId() {
 		return userId;
 	}

@@ -73,21 +73,21 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2>Chi tiết Đơn hàng #<span th:text="${order.orderId}"></span></h2>
+        <h2>🛒 Chi tiết Đơn hàng</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Hình ảnh</th>
                     <th>Sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Giá ($)</th>
+                    <th>Giá (VND)</th>
                     <th>Giảm giá (%)</th>
-                    <th>Tổng tiền ($)</th>
+                    <th>Tổng tiền (VND)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="detail : ${orderDetails}">
-                    <td><img th:src="@{'/Hinh/' + ${detail.product.image}}" class="product-img" width="80" height="80"></td>
+                <tr th:each="detail : ${order.orderDetails}">
+                    <td><img th:src="@{'/Hinh/' + ${detail.product.image}}" class="product-img"></td>
                     <td th:text="${detail.product.name}"></td>
                     <td th:text="${detail.quantity}"></td>
                     <td th:text="${#numbers.formatDecimal(detail.price, 1, 2)}"></td>
@@ -96,7 +96,7 @@
                 </tr>
             </tbody>
         </table>
-        <h3 class="text-end">Tổng cộng: <span th:text="${#numbers.formatDecimal(grandTotal, 1, 2)}"></span> $</h3>
+        <h3 class="text-end total-price">Tổng cộng: <span th:text="${#numbers.formatDecimal(grandTotal, 1, 2)}"></span> VND</h3>
         <div class="back-btn">
             <a href="/user/order" class="btn btn-primary">⬅️ Quay lại</a>
         </div>

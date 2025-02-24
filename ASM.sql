@@ -38,6 +38,7 @@ CREATE TABLE Products (
     CONSTRAINT FK_Products_Category FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
 
+
 CREATE TABLE Cart (
     CartID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
@@ -48,10 +49,7 @@ CREATE TABLE Cart (
     CONSTRAINT FK_Cart_Product FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
-go
---drop table Order_Details ;
-go
---drop table Orders;
+
 CREATE TABLE Orders (
     OrderID INT IDENTITY PRIMARY KEY,
     UserID INT NOT NULL, -- FK tới Users
@@ -62,10 +60,9 @@ CREATE TABLE Orders (
     Shipping_Address NVARCHAR(255),
     CONSTRAINT FK_Orders_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
-
-
+--drop table Order_Details;
 CREATE TABLE Order_Details (
-    OrderDetailID INT IDENTITY PRIMARY KEY,
+    order_detail_id INT IDENTITY PRIMARY KEY,
     OrderID INT NOT NULL, -- FK tới Orders
     ProductID INT NOT NULL, -- FK tới Products
     Quantity INT NOT NULL,
