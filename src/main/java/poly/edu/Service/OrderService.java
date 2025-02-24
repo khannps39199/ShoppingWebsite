@@ -15,9 +15,9 @@ import poly.edu.Repository.OrderRepository;
 
 @Service
 public class OrderService {
-
-    @Autowired
+	@Autowired
     private OrderRepository orderRepository;
+
 
     // ✅ Lấy danh sách đơn hàng của User theo trạng thái (Nhóm bằng JPA Query)
     public Map<String, List<Order>> getOrdersByStatusAdmin(Integer userId) {
@@ -64,6 +64,7 @@ public class OrderService {
     }
 
     // ✅ Lấy tất cả đơn hàng và nhóm theo trạng thái
+
     public Map<String, List<Order>> getAllOrdersGroupedByStatus() {
         return orderRepository.findAll()
                 .stream()
@@ -75,12 +76,17 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    // ✅ Lấy chi tiết đơn hàng của user, throw exception nếu không tìm thấy
+   
+
+    
+
     // ✅ Lấy đơn hàng theo ID (Dùng Optional tránh NullPointerException)
     public Optional<Order> getOrderById(Integer orderId) {
         return orderRepository.findById(orderId);
     }
 
-    // ✅ Cập nhật trạng thái đơn hàng với @Transactional để đảm bảo tính nhất quán
+
     @Transactional
     public void updateStatus(Integer orderId, String status) {
         Order order = orderRepository.findById(orderId)
@@ -90,6 +96,7 @@ public class OrderService {
     }
 
     // ✅ Lưu đơn hàng
+
     public void saveAdmin(Order order) {
         orderRepository.save(order);
     }
