@@ -47,9 +47,7 @@ public class OrderController {
 
         // Lấy danh sách đơn hàng của User đang đăng nhập theo trạng thái
         Map<String, List<Order>> ordersByStatus = OrderService.getOrdersByStatus(user.getUserId());
-        for(Map<String, List<Order>> tempordersByStatus :ordersByStatus) {
-        	
-        }
+       
 //        System.out.println("Orders: " + ordersByStatus);
 
         // Thêm dữ liệu vào Model để truyền sang View
