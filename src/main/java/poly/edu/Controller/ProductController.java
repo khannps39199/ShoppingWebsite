@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import poly.edu.Entity.Product;
 import poly.edu.Repository.ProductRepository;
+import poly.edu.Service.ParamService;
 import poly.edu.Service.ProductService;
 import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
@@ -21,8 +22,10 @@ import java.nio.file.*;
 
 @Controller
 public class ProductController {
-    @Autowired
-    private ProductRepository productRepo;
+	 @Autowired
+	    private ProductRepository productRepo; 
+	 @Autowired
+	    private ParamService paramService;
 
     @Autowired
     private CategoryRepository categoryRepo;
@@ -151,6 +154,18 @@ public class ProductController {
         return "CRUD"; 
     }
 
+    @GetMapping("/ProductDetail")
+    public String productDetail( Model model) {
+    	long id = (long ) paramService.getInt("id", 0);
+        Product product = productRepo.findById(id).orElse(null);
+        if (product == null) {
+            return "redirect:/error"; // Hoặc chuyển hướng đến trang khác nếu không tìm thấy sản phẩm
+        }
+        model.addAttribute("product", product); 
+        model.addAttribute("Component", "ProductDetail.html");
+
+        return "UserLayout";
+    }
 
 
     @GetMapping("/products/edit/{id}")
