@@ -1,4 +1,5 @@
 ﻿Use PS39199_Java5_ASMSQL;
+
 use master;
 go
 CREATE TRIGGER trg_CheckPendingOrder
@@ -28,6 +29,8 @@ BEGIN
     SELECT UserID, Order_Date, Total_Amount, Status, Shipping_Address, Payment_method
     FROM inserted;
 END;
+
+
 
 
 go
