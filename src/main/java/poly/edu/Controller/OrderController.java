@@ -47,6 +47,8 @@ public class OrderController {
 
         // Lấy danh sách đơn hàng của User đang đăng nhập theo trạng thái
         Map<String, List<Order>> ordersByStatus = OrderService.getOrdersByStatus(user.getUserId());
+       
+//        System.out.println("Orders: " + ordersByStatus);
 
         // Thêm dữ liệu vào Model để truyền sang View
         String[] orderStatuses = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
@@ -94,7 +96,7 @@ public class OrderController {
     @PostMapping("/shipper/update-status")
     public String updateOrderStatus(@RequestParam("orderId") Integer orderId, RedirectAttributes redirectAttributes) {
         // Kiểm tra xem đơn hàng có tồn tại không
-        Order order = OrderService.findById(orderId);
+        Order order = orderRepo.findById(orderId).orElse(null);
         if (order == null) {
             redirectAttributes.addFlashAttribute("error", "Đơn hàng không tồn tại!");
             return "redirect:/shipper/orders"; // Điều hướng về trang danh sách đơn hàng
