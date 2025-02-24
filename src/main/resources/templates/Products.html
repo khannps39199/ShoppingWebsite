@@ -95,7 +95,6 @@
                         <form method="post">
                             <input type="hidden" name="productId" th:value="${product.productID}" />
 							<a th:href="@{/ProductDetail(id=${product.productID})}" class="btn btn-primary">chi tiết</a>
-                            <button type="submit" th:formaction="@{/Order}" class="btn btn-primary">Buy Now</button>
                             <button type="submit" th:formaction="@{/addToCart}" class="btn btn-secondary">Add to Cart</button>
                         </form>
                     </div>
