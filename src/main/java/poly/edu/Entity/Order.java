@@ -1,96 +1,55 @@
 package poly.edu.Entity;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.time.Instant;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "Orders")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Order {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OrderID")
     private Integer orderId;
+    
 
     @ManyToOne
     @JoinColumn(name = "UserID", nullable = false, referencedColumnName = "UserID") // FK to Users
     private User user;
 
-    @Column(name = "OrderDate", nullable = false, columnDefinition = "datetime default GETDATE()")
-    private Timestamp orderDate;
+    @Column(name = "Order_Date", nullable = false, columnDefinition = "datetime default GETDATE()")
+    private Timestamp orderDate = Timestamp.from(Instant.now());
 
-    @Column(name = "TotalAmount", nullable = false)
+    @Column(name = "Status", length = 50, nullable = false)
+    private String status = "Pending"; // Mặc định là Pending
+
+    @Column(name = "Total_Amount", nullable = false)
     private double totalAmount;
 
-    @Column(name = "Status", length = 50, nullable = false, columnDefinition = "nvarchar(50) default 'Pending'")
-    private String status;
-
-    @Column(name = "ShippingAddress", length = 255)
+    @Column(name = "Shipping_Address", length = 255)
     private String shippingAddress;
-    
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderDetail> orderDetails = new ArrayList<>();
 
+    @Column(name = "Payment_Method", length = 50, nullable = false)
+    private String paymentMethod = "WHEN_RECEIVE"; // Mặc định là WHEN_RECEIVE
 
-	public Integer getOrderId() {
-		return orderId;
-	}
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails;
 
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Timestamp getOrderDate() {
-		return orderDate;
-	}
-
-	public void setOrderDate(Timestamp orderDate) {
-		this.orderDate = orderDate;
-	}
-
-	public double getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setTotalAmount(double totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getShippingAddress() {
-		return shippingAddress;
-	}
-
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
-	}
-	public List<OrderDetail> getOrderDetails() {
-	    return orderDetails;
-	}
-
-	public void setOrderDetails(List<OrderDetail> orderDetails) {
-	    this.orderDetails = orderDetails;
-	}
-
+    // Constructor tùy chỉnh
+    public Order(User user, Timestamp orderDate, double totalAmount, String status, String shippingAddress, String paymentMethod) {
+        this.user = user;
+        this.orderDate = orderDate;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.shippingAddress = shippingAddress;
+        this.paymentMethod = paymentMethod;
+    }
 }

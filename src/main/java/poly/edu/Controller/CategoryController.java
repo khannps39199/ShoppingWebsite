@@ -11,7 +11,7 @@ import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
 
 @Controller
-@RequestMapping("/categories") // Định tuyến chung cho danh mục
+@RequestMapping("/admin/getcategories") // Định tuyến chung cho danh mục
 public class CategoryController {
     
     @Autowired
@@ -22,8 +22,11 @@ public class CategoryController {
     public String getAllCategories(Model model) {
         List<Category> allCate = categoryRepo.findAll();
         model.addAttribute("categories", allCate);
-        model.addAttribute("category", new Category()); // Form trống khi load trang
-        return "CategoriesCRUD.html";
+        model.addAttribute("category", new Category()); 
+        // Form trống khi load trang
+        
+        model.addAttribute("CRUD", "CategoriesCRUD.html");
+        return "CRUD";
     }
 
 

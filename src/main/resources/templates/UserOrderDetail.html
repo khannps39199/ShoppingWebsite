@@ -10,39 +10,46 @@
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: #ffffff;
         }
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
             color: #00bfff;
             text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
         }
+
         .table {
             background-color: #000000 !important;
             color: #ffffff !important;
             border-radius: 10px;
             overflow: hidden;
         }
+
         .table thead {
             background-color: #00bfff !important;
             color: #000000 !important;
         }
+
         .table td, .table th {
             background-color: #000000 !important;
             color: #ffffff !important;
             border-color: #444444 !important;
         }
+
         .product-img {
             width: 80px;
             height: 80px;
             border-radius: 6px;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
+
         .total-price {
             font-size: 1.2em;
             font-weight: bold;
             color: #ffcc00;
             text-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
         }
+
         .btn-primary {
             background: linear-gradient(45deg, #00c6ff, #0072ff);
             border: none;
@@ -51,11 +58,13 @@
             transition: 0.3s;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
         }
+
         .btn-primary:hover {
             background: linear-gradient(45deg, #0072ff, #00c6ff);
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
         }
+
         .back-btn {
             text-align: center;
             margin-top: 20px;
@@ -64,32 +73,32 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2>Chi tiết Đơn hàng #<span th:text="${orderId}"></span></h2>
+        <h2>🛒 Chi tiết Đơn hàng</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Hình ảnh</th>
                     <th>Sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Giá ($)</th>
+                    <th>Giá (VND)</th>
                     <th>Giảm giá (%)</th>
-                    <th>Tổng tiền ($)</th>
+                    <th>Tổng tiền (VND)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="item : ${orderDetails}">
-                    <td><img th:src="${item.product.imageUrl}" class="product-img"></td>
-                    <td th:text="${item.product.name}"></td>
-                    <td th:text="${item.quantity}"></td>
-                    <td th:text="${#numbers.formatDecimal(item.price, 1, 2)}"></td>
-                    <td th:text="${item.discount + '%'}"></td>
-                    <td th:text="${#numbers.formatDecimal((item.price * (1 - item.discount / 100) * item.quantity), 1, 2)}"></td>
+                <tr th:each="detail : ${order.orderDetails}">
+                    <td><img th:src="@{'/Hinh/' + ${detail.product.image}}" class="product-img"></td>
+                    <td th:text="${detail.product.name}"></td>
+                    <td th:text="${detail.quantity}"></td>
+                    <td th:text="${#numbers.formatDecimal(detail.price, 1, 2)}"></td>
+                    <td th:text="${detail.discount} + '%'"></td>
+                    <td th:text="${#numbers.formatDecimal(detail.price * detail.quantity * (1 - detail.discount / 100.0), 1, 2)}"></td>
                 </tr>
             </tbody>
         </table>
-        <h3 class="text-end total-price">Tổng cộng: <span th:text="${#numbers.formatDecimal(grandTotal, 1, 2)}"></span> $</h3>
+        <h3 class="text-end total-price">Tổng cộng: <span th:text="${#numbers.formatDecimal(grandTotal, 1, 2)}"></span> VND</h3>
         <div class="back-btn">
-            <a href="/orders" class="btn btn-primary">⬅️ Quay lại</a>
+            <a href="/user/order" class="btn btn-primary">⬅️ Quay lại</a>
         </div>
     </div>
 </body>

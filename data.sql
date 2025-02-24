@@ -196,4 +196,3 @@ INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price) VALUES
 
 
 
-SELECT ProductID FROM Products;

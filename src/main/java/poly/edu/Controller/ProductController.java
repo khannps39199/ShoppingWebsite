@@ -123,6 +123,34 @@ public class ProductController {
         return "redirect:/admin/getproducts";
 
     }
+    @GetMapping("/admin/product/sort")
+    public String sortProducts(
+            @RequestParam(defaultValue = "id") String field,
+            @RequestParam(defaultValue = "asc") String direction,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            Model model) {
+        
+        // Xác định hướng sắp xếp (ASC hoặc DESC)
+        Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(field).descending() : Sort.by(field).ascending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<Product> productPage = productRepo.findAll(pageable);
+
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("currentPage", productPage.getNumber());
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+        model.addAttribute("totalItems", productPage.getTotalElements());
+        model.addAttribute("hasNext", productPage.hasNext());
+        model.addAttribute("hasPrevious", productPage.hasPrevious());
+        model.addAttribute("sortField", field);
+        model.addAttribute("sortDirection", direction);
+        model.addAttribute("CRUD","ProductsCRUD.html");
+        model.addAttribute("product", new Product());
+        return "CRUD"; 
+    }
+
 
 
     @GetMapping("/products/edit/{id}")
