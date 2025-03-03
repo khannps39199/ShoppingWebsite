@@ -87,14 +87,14 @@
             <!-- Lặp qua danh sách sản phẩm -->
             <div class="col-md-3 my-4" th:each="product : ${products}">
                 <div class="card product-card text-center p-3">
-                    <img th:src="@{'/hinh/' + ${product.image}}" alt="Hình ảnh sản phẩm" class="card-img-top">
+                    	<img th:src="@{'/hinh/' + ${product.image}}" alt="Hình ảnh sản phẩm" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${product.name}"></h5>
                         <p class="card-text" th:text="${product.price} + ' $'"></p>
                         <p class="card-text">A stylish and comfortable outfit perfect for any occasion.</p>
                         <form method="post">
                             <input type="hidden" name="productId" th:value="${product.productID}" />
-                            <button type="submit" th:formaction="@{/Order}" class="btn btn-primary">Buy Now</button>
+							<a th:href="@{/ProductDetail(id=${product.productID})}" class="btn btn-primary">chi tiết</a>
                             <button type="submit" th:formaction="@{/addToCart}" class="btn btn-secondary">Add to Cart</button>
                         </form>
                     </div>

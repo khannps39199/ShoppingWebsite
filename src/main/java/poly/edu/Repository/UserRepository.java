@@ -1,4 +1,5 @@
 package poly.edu.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,10 +11,15 @@ import org.springframework.data.repository.query.Param;
 
 import poly.edu.Entity.User;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
-	Page<User> findAll(Pageable pageable);
-	 @Query("SELECT u FROM User u WHERE u.username = :name")
-	   Optional<User> findByUsername(@Param("name") String name);
-	 @Query("SELECT u FROM User u WHERE u.email = :email")
-	   Optional<User> findByEmail(@Param("email") String email);
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Page<User> findAll(Pageable pageable);
+
+    @Query("SELECT u FROM User u WHERE u.username = :name")
+    Optional<User> findByUsername(@Param("name") String name);
+
+    @Query("SELECT u FROM User u WHERE u.email = :email")
+    Optional<User> findByEmail(@Param("email") String email);
+
+    @Query("SELECT DISTINCT o.user FROM Order o")
+    List<User> findUsersWithOrders();
 }

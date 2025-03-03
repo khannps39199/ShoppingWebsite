@@ -1,4 +1,5 @@
 ﻿use PS39199_Java5_ASMSQL;
+use master
 INSERT INTO Categories (Name, Description)
 VALUES 
     ('Electronics', 'Devices, gadgets, and other electronic products'),
@@ -167,35 +168,33 @@ UPDATE Products
 SET Image = CONCAT(ProductID, '.png') 
 WHERE ProductID BETWEEN 1 AND 50;
 
--- Thêm dữ liệu vào bảng Orders (bỏ cột UserID vì nó là NOT NULL)
-INSERT INTO Orders (UserID, Order_Date, Total_Amount, Shipping_Address, Status)
+-- Thêm dữ liệu vào bảng Orders
+INSERT INTO Orders (UserID, Order_Date, Total_Amount, Shipping_Address)
 VALUES
-    (2, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York', 'DELIVERED'),
-    (3, '2024-02-02 14:30:00', 799.99, '456 Elm St, California', 'PENDING'),
-    (4, '2024-02-03 09:45:00', 459.98, '789 Pine St, Texas', 'SHIPPED'),
-    (5, '2024-02-04 16:20:00', 199.99, '321 Oak St, Florida', 'CANCELLED'),
-    (6, '2024-02-05 11:10:00', 1499.95, '654 Maple St, Washington', 'DELIVERED'),
-    (7, '2024-02-06 18:05:00', 999.99, '987 Cedar St, Nevada', 'PROCESSING'),
-    (8, '2024-02-07 12:40:00', 249.98, '159 Birch St, Colorado', 'PENDING'),
-    (9, '2024-02-08 08:55:00', 549.99, '753 Willow St, Arizona', 'SHIPPED'),
-    (10, '2024-02-09 17:25:00', 699.97, '852 Redwood St, Oregon', 'DELIVERED'),
-    (11, '2024-02-10 13:35:00', 1999.99, '963 Palm St, Illinois', 'PENDING');
+    (1, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York'),
+    (2, '2024-02-02 14:30:00', 799.99, '456 Elm St, California'),
+    (3, '2024-02-03 09:45:00', 459.98, '789 Pine St, Texas'),
+    (4, '2024-02-04 16:20:00', 199.99, '321 Oak St, Florida'),
+    (5, '2024-02-05 11:10:00', 1499.95, '654 Maple St, Washington'),
+    (6, '2024-02-06 18:05:00', 999.99, '987 Cedar St, Nevada'),
+    (7, '2024-02-07 12:40:00', 249.98, '159 Birch St, Colorado'),
+    (8, '2024-02-08 08:55:00', 549.99, '753 Willow St, Arizona'),
+    (9, '2024-02-09 17:25:00', 699.97, '852 Redwood St, Oregon'),
+    (10, '2024-02-10 13:35:00', 1999.99, '963 Palm St, Illinois');
 
--- Thêm dữ liệu vào bảng Order_Details
-INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price, Discount)
-VALUES
-    (1, 2, 2, 599.99, 10),
-    (1, 5, 1, 129.99, 0),
-    (2, 8, 1, 799.99, 5),
-    (3, 11, 2, 349.99, 0),
-    (3, 14, 1, 399.99, 10),
-    (4, 17, 1, 199.99, 0),
-    (5, 20, 3, 149.99, 5),
-    (5, 22, 2, 89.99, 5),
-    (6, 25, 1, 999.99, 10),
-    (7, 3, 1, 249.99, 0),
-    (8, 6, 1, 549.99, 15),
-    (9, 9, 1, 499.99, 5),
-    (9, 12, 2, 79.99, 0),
-    (10, 15, 3, 499.99, 10),
-    (10, 18, 2, 699.99, 5);
+
+INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price) VALUES
+(6, 1, 2, 50000),
+(6, 2, 1, 75000),
+(7, 3, 3, 60000),
+(8, 4, 2, 85000),
+(9, 5, 1, 50000),
+(9, 6, 5, 30000),
+(4, 7, 2, 90000),
+(4, 8, 4, 45000),
+(5, 9, 1, 100000),
+(5, 10, 2, 75000);
+
+INSERT INTO Order  (UserID, Order_Date, Total_Amount, Shipping_Address)VALUES
+(1, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York'),
+(1, '2024-02-01 10:15:00', 1299.97, '123 Main St, New York');
