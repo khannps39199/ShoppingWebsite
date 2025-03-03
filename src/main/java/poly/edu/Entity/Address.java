@@ -11,15 +11,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "address")
+@Table(name = "Address")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Address {
-	 	@Id
+	 	public Address(User byId, String address2) {
+	 		this.user=byId;
+	 		this.address=address2;
+	 				
+	 	}
+		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "AddressID")
 	    private Long addressId;

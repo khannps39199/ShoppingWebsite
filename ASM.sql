@@ -78,10 +78,10 @@ CREATE TABLE Order_Details (
 );
 
 
-
+drop table Address;
 
 create table Address(
-	Address_Id int identity primary key ,
+	AddressId int identity primary key ,
 	UserID INT NOT NULl,
 	Address nvarchar(250),
     CONSTRAINT FK_Address_User FOREIGN KEY (UserID) REFERENCES Users(UserID)

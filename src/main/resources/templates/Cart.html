@@ -29,34 +29,44 @@
                     </div>
                   </div>
                   
-                  <div class="card mb-3 item"   th:each="cartItem : ${cartList}">
-					<div class="card-body" th:attr="data-unitprice=${cartItem.product.price}">
+                  <!-- Dùng #numbers để format về dạng "xxx.xx" nếu cần -->
+                  <div class="card mb-3 item"
+                       th:each="cartItem : ${cartList}"
+                       th:attr="data-unitprice=${#numbers.formatDecimal(cartItem.product.price, 2, 2)}">
+                    <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="form-check">
-                          <input class="form-check-input item-checkbox" type="checkbox" id="item1">
+                          <input class="form-check-input item-checkbox" type="checkbox">
                         </div>
                         <div class="d-flex flex-row align-items-center">
                           <div>
-                            <img th:src="@{'/hinh/' + ${cartItem.product.image}}" class="img-fluid rounded-3" alt="Sản phẩm" style="width: 65px;">
+                            <img th:src="@{'/hinh/' + ${cartItem.product.image}}"
+                                 class="img-fluid rounded-3"
+                                 alt="Sản phẩm"
+                                 style="width: 65px;">
                           </div>
                           <div class="ms-3">
                             <h5 th:text="${cartItem.product.name}">Tên sản phẩm</h5>
                             <p class="small mb-0">
-                              Giá: <span id="Gia-samPham"  th:text="${cartItem.product.price}"></span><br>
+                              Giá: <span class="unit-price" th:text="${#numbers.formatDecimal(cartItem.product.price, 2, 2)}"></span> $<br>
                               Số lượng: 
-                              <input type="number" class="item-quantity" min="1" th:value="${cartItem.quantity}" style="width: 60px;">
-                              = <span class="item-total-price" th:text="${cartItem.product.price}"></span>
+                              <input type="number" class="item-quantity"
+                                     min="1"
+                                     th:value="${cartItem.quantity != null ? cartItem.quantity : 1}"
+                                     style="width: 60px;">
+                              = <span class="item-total-price"></span> $
                             </p>
                           </div>
                         </div>
                         <div>
-                          <a href="#" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                          <a href="#" style="color: #cecece;">
+                            <i class="fas fa-trash-alt"></i>
+                          </a>
                         </div>
                       </div>
                     </div>
                   </div>
-				  
-				  
+                  
                 </div>
                 
                 <div class="col-lg-5">
@@ -75,30 +85,24 @@
                       </div>
                       <div class="d-flex justify-content-between" id="voucher-discount-section" style="display: none;">
                         <p class="mb-2">Giảm giá</p>
-                        <p class="mb-2" id="voucher-discount">0 VND</p>
+                        <p class="mb-2" id="voucher-discount">0$</p>
                       </div>
                       <div class="d-flex justify-content-between">
                         <p class="mb-2">Tạm tính</p>
-                        <p class="mb-2" id="sub-total">0 VND</p>
+                        <p class="mb-2" id="sub-total">0$</p>
                       </div>
                       <div class="d-flex justify-content-between mb-4">
                         <p class="mb-2">Tổng (Bao gồm thuế)</p>
-                        <p class="mb-2" id="total-amount">0 VND</p>
+                        <p class="mb-2" id="total-amount">0$</p>
                       </div>
-					  <form th:action="@{/order}" method="post">
-						<div class="input-group">
-						    <select id="Payment_method" name="Payment_method" class="form-control">
-						        <option value="QR_CODE">QR Code</option>
-						        <option value="WHEN_RECEIVE">Pay When Receive</option>
-						    </select>
-						</div>
-						<button type="submit" class="btn btn-info btn-block btn-lg" id="checkout-btn">
-						     <div class="d-flex justify-content-between">
-								<span id="btn-total">0 VND</span>
-						       	<span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-						      </div>
-						 </button>						
-					  </form>
+                      <form th:action="@{/order}" method="post">
+                        <button type="submit" class="btn btn-info btn-block btn-lg" id="checkout-btn">
+                          <div class="d-flex justify-content-between">
+                            <span id="btn-total">0$</span>
+                            <span>Thanh toán <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                          </div>
+                        </button>            
+                      </form>
                       
                     </div>
                   </div>
@@ -111,7 +115,9 @@
     </div>
   </section>
   
-  
+  <footer class="bg-dark text-white text-center p-3 mt-4">
+    &copy; 2025 - Quản lý Giỏ Hàng
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -122,118 +128,106 @@
       const totalAmountEl  = document.getElementById('total-amount');
       const btnTotalEl     = document.getElementById('btn-total');
       const itemCountEl    = document.getElementById('item-count');
-      const shippingFee    = 20000;
+      // Phí vận chuyển (đơn vị $)
+      const shippingFee    = 20;
       const voucherInput   = document.getElementById('voucher');
       const applyVoucherBtn= document.getElementById('apply-voucher');
       const voucherMessage = document.getElementById('voucher-message');
       const voucherDiscountSection = document.getElementById('voucher-discount-section');
       const voucherDiscountEl = document.getElementById('voucher-discount');
 
-      // Biến lưu giá trị giảm giá từ voucher (đơn vị VND)
+      // Biến lưu giá trị giảm giá từ voucher (đơn vị $)
       let discountAmount = 0;
 
       // Hàm cập nhật tổng tiền của 1 sản phẩm theo số lượng
-	  document.addEventListener("DOMContentLoaded", function () {
-	      // Lấy danh sách input số lượng và checkbox
-	      const checkboxes = document.querySelectorAll('.item-checkbox');
-	      const quantityInputs = document.querySelectorAll('.item-quantity');
+      function updateItemTotalPrice(item) {
+        // Lấy giá gốc từ data-unitprice
+        const unitPrice = parseFloat(item.getAttribute('data-unitprice'));
+        const quantityInput = item.querySelector('.item-quantity');
+        const quantity = parseFloat(quantityInput.value) || 0;
 
-	      // Cập nhật tổng giá từng sản phẩm khi thay đổi số lượng
-	      quantityInputs.forEach(input => {
-	          input.addEventListener('input', function () {
-	              const item = input.closest('.item');
-	              updateItemTotalPrice(item);
-	              updateTotals();
-	          });
-	      });
+        // Tính tổng tiền cho sản phẩm
+        const totalPrice = unitPrice * quantity;
+        // Hiển thị
+        item.querySelector('.item-total-price').textContent = totalPrice.toLocaleString();
+      }
 
-	      // Cập nhật tổng tiền khi chọn/bỏ chọn sản phẩm
-	      checkboxes.forEach(checkbox => {
-	          checkbox.addEventListener('change', updateTotals);
-	      });
+      // Hàm cập nhật tổng tiền giỏ hàng
+      function updateTotals() {
+        let subTotal = 0;
+        let count = 0;
 
-	      // Hàm cập nhật tổng giá của sản phẩm
-	      function updateItemTotalPrice(item) {
-	          const cardBody = item.querySelector('.card-body');
-	          if (!cardBody) {
-	              console.error("❌ Không tìm thấy phần tử .card-body trong item", item);
-	              return;
-	          }
+        document.querySelectorAll('.item').forEach(item => {
+          const checkbox = item.querySelector('.item-checkbox');
+          if (checkbox.checked) {
+            const unitPrice = parseFloat(item.getAttribute('data-unitprice'));
+            const quantity = parseFloat(item.querySelector('.item-quantity').value) || 0;
+            subTotal += unitPrice * quantity;
+            count++;
+          }
+        });
 
-	          // Lấy giá đơn vị từ thuộc tính data-unitprice
-	          const unitPriceStr = cardBody.getAttribute('data-unitprice');
-	          const unitPrice = parseFloat(unitPriceStr);
-	          if (isNaN(unitPrice)) {
-	              console.error("❌ Lỗi: Giá sản phẩm không hợp lệ!", unitPriceStr);
-	              return;
-	          }
+        subTotalEl.textContent = subTotal.toLocaleString() + '$';
+        // Tính tổng = tạm tính + phí vận chuyển - giảm giá
+        let total = subTotal + shippingFee - discountAmount;
+        if (total < 0) total = 0;
 
-	          // Lấy số lượng sản phẩm
-	          const quantityInput = item.querySelector('.item-quantity');
-	          const quantity = parseFloat(quantityInput.value) || 0;
+        totalAmountEl.textContent = total.toLocaleString() + '$';
+        btnTotalEl.textContent    = total.toLocaleString() + '$';
+        itemCountEl.textContent   = 'Bạn có ' + count + ' sản phẩm được chọn';
+      }
 
-	          // Tính tổng giá của sản phẩm
-	          const totalPrice = unitPrice * quantity;
+      // Khi số lượng thay đổi => cập nhật
+      quantityInputs.forEach(input => {
+        input.addEventListener('change', () => {
+          const item = input.closest('.item');
+          updateItemTotalPrice(item);
+          updateTotals();
+        });
+      });
 
-	          // Hiển thị tổng giá
-	          item.querySelector('.item-total-price').textContent = totalPrice.toLocaleString() + " VND";
-	      }
+      // Khi checkbox thay đổi => cập nhật
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateTotals);
+      });
 
-	      // Hàm cập nhật tổng tiền giỏ hàng
-	      function updateTotals() {
-	          let subTotal = 0;
-	          let count = 0;
-	          const shippingFee = 20000;
-	          let discountAmount = 0;
+      // Áp dụng voucher
+      applyVoucherBtn.addEventListener('click', () => {
+        const code = voucherInput.value.trim();
+        if (code === "DISCOUNT10") {
+          discountAmount = 10;
+          voucherMessage.textContent = "Voucher hợp lệ: Giảm 10$";
+          voucherDiscountEl.textContent = discountAmount.toLocaleString() + "$";
+          voucherDiscountSection.style.display = "flex";
+        } else if (code === "DISCOUNT20") {
+          discountAmount = 20;
+          voucherMessage.textContent = "Voucher hợp lệ: Giảm 20$";
+          voucherDiscountEl.textContent = discountAmount.toLocaleString() + "$";
+          voucherDiscountSection.style.display = "flex";
+        } else {
+          discountAmount = 0;
+          voucherMessage.textContent = "Mã voucher không hợp lệ";
+          voucherDiscountSection.style.display = "none";
+        }
+        updateTotals();
+      });
 
-	          document.querySelectorAll('.item').forEach(item => {
-	              const checkbox = item.querySelector('.item-checkbox');
-	              if (checkbox.checked) {
-	                  const unitPrice = parseFloat(item.querySelector('.card-body').getAttribute('data-unitprice')) || 0;
-	                  const quantity = parseFloat(item.querySelector('.item-quantity').value) || 0;
-	                  subTotal += unitPrice * quantity;
-	                  count++;
-	              }
-	          });
+      // Thêm sự kiện xóa sản phẩm khi ấn vào nút thùng rác
+      const deleteButtons = document.querySelectorAll('.fa-trash-alt');
+      deleteButtons.forEach(button => {
+          button.addEventListener('click', function(event) {
+              event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+              const item = this.closest('.item'); // Tìm phần tử chứa sản phẩm
+              if (item) {
+                  item.remove(); // Xóa phần tử khỏi DOM
+              }
+              updateTotals(); // Cập nhật lại tổng tiền và số lượng sản phẩm
+          });
+      });
 
-	          // Cập nhật UI tổng tiền
-	          document.getElementById('sub-total').textContent = subTotal.toLocaleString() + ' VND';
-	          let total = subTotal + shippingFee - discountAmount;
-	          if (total < 0) total = 0;
-	          document.getElementById('total-amount').textContent = total.toLocaleString() + ' VND';
-	          document.getElementById('btn-total').textContent = total.toLocaleString() + ' VND';
-	          document.getElementById('item-count').textContent = 'Bạn có ' + count + ' sản phẩm được chọn';
-	      }
-
-	      // Áp dụng voucher
-	      document.getElementById('apply-voucher').addEventListener('click', function () {
-	          const voucherInput = document.getElementById('voucher').value.trim();
-	          const voucherMessage = document.getElementById('voucher-message');
-	          const voucherDiscountEl = document.getElementById('voucher-discount');
-	          const voucherDiscountSection = document.getElementById('voucher-discount-section');
-
-	          if (voucherInput === "DISCOUNT10") {
-	              discountAmount = 10000;
-	              voucherMessage.textContent = "Voucher hợp lệ: Giảm 10,000 VND";
-	              voucherDiscountEl.textContent = discountAmount.toLocaleString() + " VND";
-	              voucherDiscountSection.style.display = "flex";
-	          } else if (voucherInput === "DISCOUNT20") {
-	              discountAmount = 20000;
-	              voucherMessage.textContent = "Voucher hợp lệ: Giảm 20,000 VND";
-	              voucherDiscountEl.textContent = discountAmount.toLocaleString() + " VND";
-	              voucherDiscountSection.style.display = "flex";
-	          } else {
-	              discountAmount = 0;
-	              voucherMessage.textContent = "Mã voucher không hợp lệ";
-	              voucherDiscountSection.style.display = "none";
-	          }
-	          updateTotals();
-	      });
-
-	      // Khởi tạo
-	      document.querySelectorAll('.item').forEach(item => updateItemTotalPrice(item));
-	      updateTotals();
-	  });
+      // Lần đầu load trang: cập nhật giá tiền cho từng sản phẩm và tổng giỏ hàng
+      document.querySelectorAll('.item').forEach(item => updateItemTotalPrice(item));
+      updateTotals();
     </script>
 </body>
 </html>
