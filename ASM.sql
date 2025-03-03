@@ -78,16 +78,14 @@ CREATE TABLE Order_Details (
 );
 
 
--- Bảng UserActivity
-CREATE TABLE UserActivity (
-    ActivityID INT IDENTITY PRIMARY KEY,
-    UserID INT NOT NULL,
-    ActivityType NVARCHAR(50),
-    ActivityDate DATETIME DEFAULT GETDATE(),
-    Token NVARCHAR(255),
-    IsCompleted BIT DEFAULT 0,
-    CONSTRAINT FK_UserActivity_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
-);
+
+
+create table Address(
+	Address_Id int identity primary key ,
+	UserID INT NOT NULl,
+	Address nvarchar(250),
+    CONSTRAINT FK_Address_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
+)
 
 USE master;
 ALTER DATABASE msdb SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
