@@ -36,4 +36,13 @@ public class CalculatorTest {
     public void testDivideByZero() {
         assertThrows(ArithmeticException.class, () -> calculator.divide(6, 0));
     }
+    @Test
+    public void testParseNumberInvalid() {
+        assertThrows(NumberFormatException.class, () -> calculator.parseNumber("abc"));
+    }
+
+    @Test
+    public void testParseNumberNull() {
+        assertThrows(NullPointerException.class, () -> calculator.parseNumber(null));
+    }
 }

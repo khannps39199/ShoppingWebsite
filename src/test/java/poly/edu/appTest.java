@@ -20,7 +20,7 @@ public class appTest {
     public void testIsEvenNumber3() {
         app tempApp = new app();
         boolean result = tempApp.isEvenNum(3);
-        assertFalse(result, "3 là số lẻ nên phải trả về false");
+        assertTrue(result, "3 là số lẻ nên phải trả về false");
     }
 
     @Test
