@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class ParameterizedTestDemo {
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5,-1})
+    @ValueSource(ints = {1, 2, 3, 4, 5, -1})
     void testIsPositive(int number) {
         assertTrue(number > 0, "Number should be positive");
     }
@@ -18,9 +18,9 @@ public class ParameterizedTestDemo {
     @Test
     void testWithAssertAll() {
         assertAll("Group of assertions",
-            () -> assertTrue(5 > 0, "5 should be positive"),
-            () -> assertTrue(10 > 0, "10 should be positive"),
-            () -> assertTrue(-1 < 0, "-1 should be negative") // Kiểm tra số âm
+                () -> assertTrue(5 > 0, "5 should be positive"),
+                () -> assertTrue(10 > 0, "10 should be positive"),
+                () -> assertTrue(-1 < 0, "-1 should be negative") // Kiểm tra số âm
         );
     }
 }

@@ -21,18 +21,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Discount {
-	 	
-		public Discount(Product ByID, Float discountValue2) {
-			this.product=ByID;
-			this.discountValue=discountValue2;
-		}
-		@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "DiscountID")
-	    private Long discountId;
-	 	@ManyToOne(fetch = FetchType.EAGER)
-	    @JoinColumn(name = "ProductID", nullable = false)
-	    private Product product; 
-	 	 @Column(name = "Discount_Value")
-	     private Float discountValue;
+
+    public Discount(Product ByID, Float discountValue2) {
+        this.product = ByID;
+        this.discountValue = discountValue2;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DiscountID")
+    private Long discountId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ProductID", nullable = false)
+    private Product product;
+    @Column(name = "Discount_Value")
+    private Float discountValue;
 }

@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class User {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserID")
     private Integer userId;
 
@@ -47,92 +47,92 @@ public class User {
 
     @Column(name = "CreatedAt", nullable = false, columnDefinition = "datetime default GETDATE()")
     private Timestamp createdAt;
-    
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Cart> carts;
 
-    
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
-    
 
-	public Integer getUserId() {
-		return userId;
-	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPasswordHash() {
-		return passwordHash;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getFullName() {
-		return fullName;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public Boolean getIsActivated() {
-		return isActivated;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public void setIsActivated(Boolean isActivated) {
-		this.isActivated = isActivated;
-	}
+    public Boolean getIsActivated() {
+        return isActivated;
+    }
 
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
+    public void setIsActivated(Boolean isActivated) {
+        this.isActivated = isActivated;
+    }
 
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
 }

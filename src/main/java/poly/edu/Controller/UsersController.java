@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import poly.edu.DTO.UserDTO;
 import poly.edu.Entity.User;
 import poly.edu.Repository.UserRepository;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UsersController {
@@ -41,16 +42,16 @@ public class UsersController {
 //    @GetMapping("/admin/getUser")
 
     @GetMapping("/getUser")
-    public List<UserDTO>  getUsers(Model model, 
-                           @RequestParam(defaultValue = "0") int page, 
-                           @RequestParam(defaultValue = "5") int size) {
+    public List<UserDTO> getUsers(Model model,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = us.findAll(pageable);
-        List<UserDTO> listUserDT0=new ArrayList<>();
-        userPage.forEach(tempUser->{
-        	UserDTO toJSON=new UserDTO(tempUser.getUserId(),tempUser.getUsername(),tempUser.getPasswordHash(),tempUser.getEmail(),
-        			tempUser.getFullName(),tempUser.getPhone(),tempUser.getAddress(),tempUser.getRole(),tempUser.getIsActivated(),tempUser.getCreatedAt());
-        	listUserDT0.add(toJSON);
+        List<UserDTO> listUserDT0 = new ArrayList<>();
+        userPage.forEach(tempUser -> {
+            UserDTO toJSON = new UserDTO(tempUser.getUserId(), tempUser.getUsername(), tempUser.getPasswordHash(), tempUser.getEmail(),
+                    tempUser.getFullName(), tempUser.getPhone(), tempUser.getAddress(), tempUser.getRole(), tempUser.getIsActivated(), tempUser.getCreatedAt());
+            listUserDT0.add(toJSON);
         });
 //        model.addAttribute("users", userPage.getContent());
 //        model.addAttribute("currentPage", page);
@@ -63,8 +64,8 @@ public class UsersController {
 
     // Tạo người dùng mới
     @GetMapping("/users/new")
-    public String createNewUser(Model model, 
-                                @RequestParam(defaultValue = "0") int page, 
+    public String createNewUser(Model model,
+                                @RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "5") int size) {
         User newUser = new User();
         newUser.setCreatedAt(new Timestamp(System.currentTimeMillis()));
@@ -98,7 +99,7 @@ public class UsersController {
 
     // Chỉnh sửa người dùng
     @GetMapping("/users/edit/{id}")
-    public String editUser(Model model, 
+    public String editUser(Model model,
                            @PathVariable("id") int id,
                            @RequestParam(defaultValue = "0") int page,
                            @RequestParam(defaultValue = "5") int size) {
@@ -121,8 +122,8 @@ public class UsersController {
 
     // Xóa người dùng
     @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id, 
-                             @RequestParam(defaultValue = "0") int page, 
+    public String deleteUser(@PathVariable("id") int id,
+                             @RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "5") int size) {
         if (us.existsById(id)) {
             us.deleteById(id);

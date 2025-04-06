@@ -19,7 +19,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OrderID")
     private Integer orderId;
-    
+
 
     @ManyToOne
     @JoinColumn(name = "UserID", nullable = false, referencedColumnName = "UserID") // FK to Users
@@ -52,4 +52,6 @@ public class Order {
         this.shippingAddress = shippingAddress;
         this.paymentMethod = paymentMethod;
     }
+
+
 }

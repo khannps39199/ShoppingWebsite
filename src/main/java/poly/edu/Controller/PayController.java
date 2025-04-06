@@ -9,7 +9,7 @@ public class PayController {
 
     @GetMapping("/pay")
     public String showPayPage(Model model) {
-    	model.addAttribute("Component","pay.html");
-        return "UserLayout"; 
+        model.addAttribute("Component", "pay.html");
+        return "UserLayout";
     }
 }

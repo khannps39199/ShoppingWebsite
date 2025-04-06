@@ -25,13 +25,13 @@ import poly.edu.Repository.CategoryRepository;
 
 @Controller
 public class tempcontroller {
-	
-	@GetMapping("/Layout")
-	  public String getMethodName() {
-      // Fetch all categories from the database
-     
-      return "CRUD.html"; // Spring Boot automatically converts this to JSON
-  }
-	
-	
+
+    @GetMapping("/Layout")
+    public String getMethodName() {
+        // Fetch all categories from the database
+
+        return "CRUD.html"; // Spring Boot automatically converts this to JSON
+    }
+
+
 }

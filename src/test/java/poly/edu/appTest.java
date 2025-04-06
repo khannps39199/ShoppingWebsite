@@ -1,32 +1,40 @@
 package poly.edu;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertTrue;
+
+import org.testng.annotations.Test;
+
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertFalse;
+//
+//import org.junit.jupiter.api.Test;
 
 import poly.edu.Entity.app;
 
 public class appTest {
 
-    @Test
+    @Test(groups = "regression")
     public void testIsEvenNumber2() {
         app tempApp = new app();
         boolean result = tempApp.isEvenNum(2);
-        assertTrue(result, "2 phải là số chẵn");
+        assertTrue(result);
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void testIsEvenNumber3() {
         app tempApp = new app();
         boolean result = tempApp.isEvenNum(3);
-        assertTrue(result, "3 là số lẻ nên phải trả về false");
+        assertTrue(result);
     }
 
-    @Test
+    @Test(groups = "regression")
     public void testIsEvenNumber4() {
         app tempApp = new app();
         boolean result = tempApp.isEvenNum(4);
-        assertTrue(result, "4 phải là số chẵn");
+        assertTrue(result);
     }
 }

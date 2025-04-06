@@ -13,6 +13,7 @@ import poly.edu.Entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     Page<User> findAll(Pageable pageable);
+
     User findByUserId(long id);
 
     @Query("SELECT u FROM User u WHERE u.username = :name")

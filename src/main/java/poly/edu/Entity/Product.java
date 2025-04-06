@@ -1,6 +1,7 @@
 package poly.edu.Entity;
 
 import java.sql.Timestamp;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Product {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ProductID")
@@ -63,5 +64,5 @@ public class Product {
         this.createdAt = Timestamp.from(Instant.now());
     }
 
-	
+
 }

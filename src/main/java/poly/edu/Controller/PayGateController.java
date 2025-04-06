@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PayGateController {
-	@GetMapping("path")
-	public String getMethodName(@RequestParam String param) {
-		return new String();
-	}
-	
+    @GetMapping("path")
+    public String getMethodName(@RequestParam String param) {
+        return new String();
+    }
+
 }

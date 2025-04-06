@@ -20,16 +20,16 @@ import poly.edu.Service.SessionService;
 
 @Controller
 public class OrderController {
-	@Autowired
+    @Autowired
     private SessionService sessionService;
-	
-	@Autowired
-	OrderService OrderService;
+
+    @Autowired
+    OrderService OrderService;
     @Autowired
     OrderRepository orderRepo;
 
     // Trạng thái đơn hàng (Sử dụng đúng với 5 trạng thái của bạn)
-    private static final String[] ORDER_STATUSES = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
+    private static final String[] ORDER_STATUSES = {"Pending", "Processing", "Shipped", "Delivered", "Cancelled"};
 
     @GetMapping("/user/order")
     public String getOrder(@RequestParam(defaultValue = "Pending") String status, Model model) {
@@ -47,11 +47,11 @@ public class OrderController {
 
         // Lấy danh sách đơn hàng của User đang đăng nhập theo trạng thái
         Map<String, List<Order>> ordersByStatus = OrderService.getOrdersByStatus(user.getUserId());
-       
+
 //        System.out.println("Orders: " + ordersByStatus);
 
         // Thêm dữ liệu vào Model để truyền sang View
-        String[] orderStatuses = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
+        String[] orderStatuses = {"Pending", "Processing", "Shipped", "Delivered", "Cancelled"};
         model.addAttribute("orderStatuses", orderStatuses);
         model.addAttribute("currentTab", status);
         model.addAttribute("ordersByStatus", ordersByStatus);
@@ -59,7 +59,7 @@ public class OrderController {
 
         return "UserLayout";
     }
-    
+
     @GetMapping("/user/order-detail")
     public String getOrderDetail(@RequestParam("orderId") Integer orderId, Model model) {
         User user = (User) sessionService.get("login");
@@ -77,22 +77,23 @@ public class OrderController {
 
         // Tính tổng tiền
         double grandTotal = order.getOrderDetails().stream()
-        	    .mapToDouble(detail -> detail.getPrice().doubleValue() 
-        	                        * detail.getQuantity() 
-        	                        * (1 - detail.getDiscount().doubleValue() / 100.0))
-        	    .sum();
-        	model.addAttribute("grandTotal", grandTotal);
-        	model.addAttribute("Component", "UserOrderDetail.html");
+                .mapToDouble(detail -> detail.getPrice().doubleValue()
+                        * detail.getQuantity()
+                        * (1 - detail.getDiscount().doubleValue() / 100.0))
+                .sum();
+        model.addAttribute("grandTotal", grandTotal);
+        model.addAttribute("Component", "UserOrderDetail.html");
         return "UserLayout";
     }
 
-    
+
     @GetMapping("/shipper/orders")
-    public String listOrders(Model model){
+    public String listOrders(Model model) {
         List<Order> orders = orderRepo.findAll();
         model.addAttribute("orders", orders);
         return "shipper_orders";
     }
+
     @PostMapping("/shipper/update-status")
     public String updateOrderStatus(@RequestParam("orderId") Integer orderId, RedirectAttributes redirectAttributes) {
         // Kiểm tra xem đơn hàng có tồn tại không
@@ -102,17 +103,17 @@ public class OrderController {
             return "redirect:/shipper/orders"; // Điều hướng về trang danh sách đơn hàng
         }
 
-        if(order.getStatus().equals("Pending")) {
-        	order.setStatus("Processing");
+        if (order.getStatus().equals("Pending")) {
+            order.setStatus("Processing");
             OrderService.save(order);
-        } else if(order.getStatus().equals("Processing")) {
-        	order.setStatus("Shipped");
+        } else if (order.getStatus().equals("Processing")) {
+            order.setStatus("Shipped");
             OrderService.save(order);
-        } else if(order.getStatus().equals("Shipped")) {
-        	order.setStatus("Delivered");
+        } else if (order.getStatus().equals("Shipped")) {
+            order.setStatus("Delivered");
             OrderService.save(order);
-        } else{
-        	order.setStatus("Cancelled");
+        } else {
+            order.setStatus("Cancelled");
             OrderService.save(order);
         }
 

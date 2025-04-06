@@ -123,28 +123,32 @@
 <div class="circle"></div>
 <div class="circle"></div>
 <div class="toCenter mt-5">
-<div class="glass-container">
-    <h2 class="text-center text-light">Đăng Nhập</h2>
-    <form th:action="@{|/account/login|}" method="POST">
-        <div class="mb-4">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Nhập email"  required>
+    <div class="glass-container">
+        <h2 class="text-center text-light">Đăng Nhập</h2>
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
         </div>
-        <div class="mb-4">
-            <label class="form-label">Mật khẩu</label>
-            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu"  required>
+        <form th:action="@{|/account/login|}" method="POST">
+            <div class="mb-4">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Nhập email">
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe" name="rememberMe">Ghi nhớ đăng nhập</label>
+            </div>
+            <button type="submit" id="btn-login" class="btn btn-primary w-100">Đăng Nhập</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="#" class="text-warning">Quên mật khẩu?</a> | <a href="/account/register" class="text-info">Đăng
+            ký</a>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe">
-            <label class="form-check-label" for="rememberMe"  name="rememberMe" >Ghi nhớ đăng nhập</label>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
-    </form>
-    <div class="text-center mt-3">
-        <a href="#" class="text-warning">Quên mật khẩu?</a> | <a href="/account/register" class="text-info">Đăng ký</a>
     </div>
-</div>
-	
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

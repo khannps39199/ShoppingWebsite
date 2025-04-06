@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class Lifecycle_Junit5 {
 
-   
+
     @BeforeAll
     static void initAll() {
         System.out.println("Before All - Run before all methods once");
     }
 
-   
+
     @BeforeEach
     void init() {
         System.out.println("Before Each - Run before each test method");

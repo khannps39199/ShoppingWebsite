@@ -19,7 +19,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     // ✅ Tìm đơn hàng theo OrderID và UserID
 
-	List<Order> findByStatus(String status);
+    List<Order> findByStatus(String status);
 
     List<Order> findByUserUserIdAndStatus(Integer userId, String status);
 

@@ -15,7 +15,7 @@ public class ProductService {
     public Page<Product> getProductsByPriceRange(Double minPrice, Double maxPrice, Pageable pageable) {
         return productRepository.findProductsByPriceRangeNative(minPrice, maxPrice, pageable);
     }
-    
+
     public Page<Product> getProductsByCategoryAndPriceRange(Long categoryID, Double minPrice, Double maxPrice, Pageable pageable) {
         return productRepository.findByCategory_IdAndPriceBetween(categoryID, minPrice, maxPrice, pageable);
     }

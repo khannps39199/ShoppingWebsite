@@ -1,6 +1,7 @@
 package poly.edu;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import poly.edu.Entity.Calculator;
@@ -12,6 +13,7 @@ public class CalculatorTest {
     public void testAdd() {
         assertEquals(5, calculator.add(2, 3));
     }
+
     @Test
     public void testAddFalse() {
         assertEquals(5, calculator.add(2, 3));
@@ -36,6 +38,7 @@ public class CalculatorTest {
     public void testDivideByZero() {
         assertThrows(ArithmeticException.class, () -> calculator.divide(6, 0));
     }
+
     @Test
     public void testParseNumberInvalid() {
         assertThrows(NumberFormatException.class, () -> calculator.parseNumber("abc"));

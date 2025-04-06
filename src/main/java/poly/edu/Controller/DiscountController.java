@@ -28,12 +28,13 @@ public class DiscountController {
     private UserRepository userRepo;
     @Autowired
     private ProductRepository productRepo;
+
     @GetMapping
     public String getAllAddress(Model model) {
         List<Discount> allCate = discountRepo.findAll();
         model.addAttribute("DiscountList", allCate);
-        model.addAttribute("Discount", new Discount()); 
-       
+        model.addAttribute("Discount", new Discount());
+
         model.addAttribute("CRUD", "DiscountCRUD.html");
         return "CRUD";
     }
@@ -42,11 +43,11 @@ public class DiscountController {
     // Thêm mới danh mục (Form sẽ được làm trống sau khi thêm)
     @PostMapping("/save")
     public String saveCategory(@ModelAttribute("Discount") Discount discount, Model model) {
-    	
-        if(discount.getDiscountId()==null) {
-        	Discount discountToSave=new Discount( (productRepo.findByProductID(discount.getProduct().getProductID())) ,discount.getDiscountValue());
-        	System.out.println(discountToSave);
-        	discountRepo.save(discountToSave);
+
+        if (discount.getDiscountId() == null) {
+            Discount discountToSave = new Discount((productRepo.findByProductID(discount.getProduct().getProductID())), discount.getDiscountValue());
+            System.out.println(discountToSave);
+            discountRepo.save(discountToSave);
         }
         return "redirect:/discount"; // Redirect để form trống sau khi thêm
     }
@@ -68,7 +69,7 @@ public class DiscountController {
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id") Long id) {
         discountRepo.deleteById(id);
-    	
+
         return "redirect:/discount"; // Quay lại danh sách sau khi xóa
     }
 }

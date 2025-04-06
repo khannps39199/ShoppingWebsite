@@ -19,27 +19,28 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-@WebFilter({"/admin/*","/pay","/cart","/addToCart"})
-public class AdminFilter implements Filter{
-	@Override
+
+@WebFilter({"/admin/*", "/pay", "/cart", "/addToCart"})
+public class AdminFilter implements Filter {
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        
+
         User user = (User) req.getSession().getAttribute("login");
         String path = req.getRequestURI();
-      
-            if (user == null) {
-                res.sendRedirect("/account/login"); 
-                return;
-            }
 
-            if (path.startsWith("/admin/") && !"Admin".equals(user.getRole())) {
-                res.sendRedirect("/account/login");
-                return;
-            }
-        
+        if (user == null) {
+            res.sendRedirect("/account/login");
+            return;
+        }
+
+        if (path.startsWith("/admin/") && !"Admin".equals(user.getRole())) {
+            res.sendRedirect("/account/login");
+            return;
+        }
+
         chain.doFilter(request, response);
     }
 

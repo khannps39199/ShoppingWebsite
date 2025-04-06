@@ -100,58 +100,58 @@
 </head>
 <body>
 
-    <h2>🛒 Quản lý Đơn Hàng</h2>
+<h2>🛒 Quản lý Đơn Hàng</h2>
 
-    <!-- Bộ lọc theo trạng thái -->
-    <div class="filter-container">
-        <label for="statusFilter"><strong>Chọn trạng thái:</strong></label>
-        <select id="statusFilter" onchange="filterOrders()">
-            <option th:each="status : ${orderStatuses}" 
-                    th:value="${status}" 
-                    th:text="${status}" 
-                    th:selected="${status == currentTab}">
-            </option>
-        </select>
-    </div>
+<!-- Bộ lọc theo trạng thái -->
+<div class="filter-container">
+    <label for="statusFilter"><strong>Chọn trạng thái:</strong></label>
+    <select id="statusFilter" onchange="filterOrders()">
+        <option th:each="status : ${orderStatuses}"
+                th:value="${status}"
+                th:text="${status}"
+                th:selected="${status == currentTab}">
+        </option>
+    </select>
+</div>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Người đặt</th>
-                <th>Ngày đặt</th>
-                <th>Trạng thái</th>
-                <th>Tổng tiền</th>
-                <th>Địa chỉ giao hàng</th>
-                <th>Phương thức thanh toán</th>
-                <th>Chi tiết</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="order : ${orders}">
-                <td th:text="${order.orderId}"></td>
-                <td th:text="${order.user.fullName}"></td>
-                <td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
-                <td th:text="${order.status}"></td>
-                <td th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
-                <td th:text="${order.shippingAddress}"></td>
-                <td th:text="${order.paymentMethod}"></td>
-                <td>
-                    <a th:href="@{/admin/order/detail/{id}(id=${order.orderId})}" class="btn-detail">🔍 Xem</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Người đặt</th>
+        <th>Ngày đặt</th>
+        <th>Trạng thái</th>
+        <th>Tổng tiền</th>
+        <th>Địa chỉ giao hàng</th>
+        <th>Phương thức thanh toán</th>
+        <th>Chi tiết</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.orderId}"></td>
+        <td th:text="${order.user.fullName}"></td>
+        <td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
+        <td th:text="${order.status}"></td>
+        <td th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+        <td th:text="${order.shippingAddress}"></td>
+        <td th:text="${order.paymentMethod}"></td>
+        <td>
+            <a th:href="@{/admin/order/detail/{id}(id=${order.orderId})}" class="btn-detail">🔍 Xem</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-    <script>
-        function filterOrders() {
-            let status = document.getElementById("statusFilter").value;
-            document.body.style.opacity = "0.5";
-            setTimeout(() => {
-                window.location.href = "/admin/order?status=" + status;
-            }, 300);
-        }
-    </script>
+<script>
+    function filterOrders() {
+        let status = document.getElementById("statusFilter").value;
+        document.body.style.opacity = "0.5";
+        setTimeout(() => {
+            window.location.href = "/admin/order?status=" + status;
+        }, 300);
+    }
+</script>
 
 </body>
 </html>

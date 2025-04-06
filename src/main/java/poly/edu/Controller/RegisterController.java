@@ -19,27 +19,27 @@ import java.util.Optional;
 public class RegisterController {
     @Autowired
     UserRepository userRepo;
-    
+
     @Autowired
     ParamService paramService;
-    
+
     @Autowired
     SessionService sessionService;
 
     @GetMapping("/account/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
-        return "register"; 
+        return "register";
     }
 
     @PostMapping("/account/register")
-    public String register(@RequestParam String username, 
-                           @RequestParam String email, 
-                           @RequestParam String password, 
-                           @RequestParam String confirmPassword, 
-                           @RequestParam String fullName, 
-                           @RequestParam String phone, 
-                           @RequestParam String address, 
+    public String register(@RequestParam String username,
+                           @RequestParam String email,
+                           @RequestParam String password,
+                           @RequestParam String confirmPassword,
+                           @RequestParam String fullName,
+                           @RequestParam String phone,
+                           @RequestParam String address,
                            Model model) {
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Mật khẩu nhập lại không khớp");
