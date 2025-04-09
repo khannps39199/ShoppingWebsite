@@ -114,7 +114,7 @@ public class ASM_LOGIN_TESTCASE {
     // Đăng xuất nếu đang đăng nhập
     private void logout() throws InterruptedException {
         try {
-            WebElement logoutButton = driver.findElement(By.xpath("//a[contains(text(), 'Đăng xuất')]"));
+            WebElement logoutButton = driver.findElement(By.linkText("Đăng xuất"));
             logoutButton.click();
             System.out.println("Đã đăng xuất thành công!");
         } catch (Exception e) {
