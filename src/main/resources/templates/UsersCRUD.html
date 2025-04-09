@@ -100,14 +100,14 @@
                 <nav>
                     <ul class="pagination justify-content-center">
                         <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                            <a class="page-link" th:href="@{/getUser(page=${currentPage - 1}, size=${size})}">Trước</a>
+                            <a class="page-link" th:href="@{/admin/getUser(page=${currentPage - 1}, size=${size})}">Trước</a>
                         </li>
                         <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
                             th:classappend="${i == currentPage} ? 'active'">
-                            <a class="page-link" th:href="@{/getUser(page=${i}, size=${size})}" th:text="${i + 1}"></a>
+                            <a class="page-link" th:href="@{/admin/getUser(page=${i}, size=${size})}" th:text="${i + 1}"></a>
                         </li>
                         <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
-                            <a class="page-link" th:href="@{/getUser(page=${currentPage + 1}, size=${size})}">Sau</a>
+                            <a class="page-link" th:href="@{/admin/getUser(page=${currentPage + 1}, size=${size})}">Sau</a>
                         </li>
                     </ul>
                 </nav>
