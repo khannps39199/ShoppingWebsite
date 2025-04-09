@@ -44,23 +44,23 @@
 
                 <div class="mb-2">
                     <label class="form-label">Tên sản phẩm</label>
-                    <input type="text" class="form-control" th:field="*{name}" required>
+                    <input type="text" class="form-control" th:field="*{name}" required name="name">
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Mô tả</label>
-                    <textarea class="form-control" th:field="*{description}" required></textarea>
+                    <textarea class="form-control" th:field="*{description}" required name="description"></textarea>
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Giá</label>
-                    <input type="number" class="form-control" th:field="*{price}" required>
+                    <input type="number" class="form-control" th:field="*{price}" required name="price">
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Giảm giá (%)</label>
-                    <input type="number" class="form-control" th:field="*{discount}">
+                    <input type="number" class="form-control" th:field="*{discount}" name="discount";>
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Số lượng</label>
-                    <input type="number" class="form-control" th:field="*{stock}" required>
+                    <input type="number" class="form-control" th:field="*{stock}" required name="stock">
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Hình ảnh</label>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Danh mục</label>
-                    <select class="form-control" th:field="*{category.categoryID}" required>
+                    <select class="form-control" th:field="*{category.categoryID}" required name="cart">
                         <option th:each="category : ${categories}" th:value="${category.categoryID}"
                                 th:text="${category.name}"></option>
                     </select>

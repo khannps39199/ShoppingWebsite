@@ -16,33 +16,32 @@ import poly.edu.DTO.UserDTO;
 import poly.edu.Entity.User;
 import poly.edu.Repository.UserRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
-@RestController
+@Controller
 public class UsersController {
     @Autowired
     private UserRepository us;
 
     // Lấy danh sách người dùng với phân trang
-//    @GetMapping("/admin/getUser")
-//    public String getUsers(Model model, 
-//                           @RequestParam(defaultValue = "0") int page, 
-//                           @RequestParam(defaultValue = "5") int size) {
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<User> userPage = us.findAll(pageable);
-//
-//        model.addAttribute("users", userPage.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", userPage.getTotalPages());
-//        model.addAttribute("newUser", new User());
-//        model.addAttribute("size", size);
-//        model.addAttribute("CRUD","UsersCRUD.html");
-//        return "CRUD";
-//    }
+    @GetMapping("/admin/getUser")
+    public String getUsers(Model model, 
+                           @RequestParam(defaultValue = "0") int page, 
+                           @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> userPage = us.findAll(pageable);
+
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", userPage.getTotalPages());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("size", size);
+        model.addAttribute("CRUD","UsersCRUD.html");
+        return "CRUD";
+    }
 //    
 //    @GetMapping("/admin/getUser")
 
     @GetMapping("/getUser")
-    public List<UserDTO> getUsers(Model model,
+    public List<UserDTO> getUser(Model model,
                                   @RequestParam(defaultValue = "0") int page,
                                   @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);

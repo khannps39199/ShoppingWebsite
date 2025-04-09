@@ -1,324 +1,311 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset='utf-8'>
-    <title>TestNG reports</title>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
 
-    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra"/>
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
     <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
     <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="testng-reports.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type='text/javascript'>
-        google.load('visualization', '1', {packages:['table']});
-        google.setOnLoadCallback(drawTable);
-        var suiteTableInitFunctions = new Array();
-        var suiteTableData = new Array();
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
     </script>
     <!--
       <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
      -->
-</head>
+  </head>
 
-<body>
-<div class="top-banner-root">
-    <span class="top-banner-title-font">Test results</span>
-    <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
-    <br/>
-    <span class="top-banner-font-1">1 suite</span>
-</div> <!-- top-banner-root -->
-<div class="navigator-root">
-    <div class="navigator-suite-header">
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
         <span>All suites</span>
         <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
-            <img src="collapseall.gif" class="collapse-all-icon">
-            </img> <!-- collapse-all-icon -->
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
         </a> <!-- collapse-all-link -->
-    </div> <!-- navigator-suite-header -->
-    <div class="suite">
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
         <div class="rounded-window">
-            <div class="suite-header light-rounded-window-top">
-                <a href="#" panel-name="suite-TestSuite" class="navigator-link">
-                    <span class="suite-name border-passed">TestSuite</span>
-                </a> <!-- navigator-link -->
-            </div> <!-- suite-header light-rounded-window-top -->
-            <div class="navigator-suite-content">
-                <div class="suite-section-title">
-                    <span>Info</span>
-                </div> <!-- suite-section-title -->
-                <div class="suite-section-content">
-                    <ul>
-                        <li>
-                            <a href="#" panel-name="test-xml-TestSuite" class="navigator-link ">
-                                <span>C:\Users\nkha7\Documents\workspace-spring-tool-suite-4-4.27.0.RELEASE\PS39199_NguyenNhutKha_Assignment\src\test\resources\testNG.xml</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="testlist-TestSuite" class="navigator-link ">
-                                <span class="test-stats">1 test</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="group-TestSuite" class="navigator-link ">
-                                <span>1 group</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="times-TestSuite" class="navigator-link ">
-                                <span>Times</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="reporter-TestSuite" class="navigator-link ">
-                                <span>Reporter output</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="ignored-methods-TestSuite" class="navigator-link ">
-                                <span>Ignored methods</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="chronological-TestSuite" class="navigator-link ">
-                                <span>Chronological view</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                    </ul>
-                </div> <!-- suite-section-content -->
-                <div class="result-section">
-                    <div class="suite-section-title">
-                        <span>Results</span>
-                    </div> <!-- suite-section-title -->
-                    <div class="suite-section-content">
-                        <ul>
-                            <li>
-                                <span class="method-stats">2 methods,   2 passed</span>
-                            </li>
-                            <li>
-                                <span class="method-list-title passed">Passed methods</span>
-                                <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-TestSuite" class="hide-methods passed suite-TestSuite"> (hide)</a>
-                                    <!-- hide-methods passed suite-TestSuite -->
-                      <a href="#" panel-name="suite-TestSuite" class="show-methods passed suite-TestSuite"> (show)</a>
-                                    <!-- show-methods passed suite-TestSuite -->
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Default_suite" class="navigator-link">
+              <span class="suite-name border-failed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
+                    <span>C:\Users\Mr Loc\AppData\Local\Temp\testng-eclipse--2097285911\testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Default_suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Default_suite" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Default_suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Default_suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Default_suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Default_suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">1 method, 1 failed,   </span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
                     </span>
-                                <div class="method-list-content passed suite-TestSuite">
+                    <div class="method-list-content failed suite-Default_suite">
                       <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-TestSuite" title="poly.edu.appTest" class="method navigator-link"
-                           hash-for-method="testIsEvenNumber2">testIsEvenNumber2</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Y4" class="method navigator-link" hash-for-method="testCRUD">testCRUD</a> <!-- method navigator-link -->
                       </span>
-                                    <br/>
-                                    <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-TestSuite" title="poly.edu.appTest" class="method navigator-link"
-                           hash-for-method="testIsEvenNumber4">testIsEvenNumber4</a> <!-- method navigator-link -->
-                      </span>
-                                    <br/>
-                                </div> <!-- method-list-content passed suite-TestSuite -->
-                            </li>
-                        </ul>
-                    </div> <!-- suite-section-content -->
-                </div> <!-- result-section -->
-            </div> <!-- navigator-suite-content -->
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
         </div> <!-- rounded-window -->
-    </div> <!-- suite -->
-</div> <!-- navigator-root -->
-<div class="wrapper">
-    <div class="main-panel-root">
-        <div panel-name="suite-TestSuite" class="panel TestSuite">
-            <div class="suite-TestSuite-class-passed">
-                <div class="main-panel-header rounded-window-top">
-                    <img src="passed.png"/>
-                    <span class="class-name">poly.edu.appTest</span>
-                </div> <!-- main-panel-header rounded-window-top -->
-                <div class="main-panel-content rounded-window-bottom">
-                    <div class="method">
-                        <div class="method-content">
-                            <a name="testIsEvenNumber2">
-                            </a> <!-- testIsEvenNumber2 -->
-                            <span class="method-name">testIsEvenNumber2</span>
-                        </div> <!-- method-content -->
-                    </div> <!-- method -->
-                    <div class="method">
-                        <div class="method-content">
-                            <a name="testIsEvenNumber4">
-                            </a> <!-- testIsEvenNumber4 -->
-                            <span class="method-name">testIsEvenNumber4</span>
-                        </div> <!-- method-content -->
-                    </div> <!-- method -->
-                </div> <!-- main-panel-content rounded-window-bottom -->
-            </div> <!-- suite-TestSuite-class-passed -->
-        </div> <!-- panel TestSuite -->
-        <div panel-name="test-xml-TestSuite" class="panel">
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-                <span class="header-content">C:\Users\nkha7\Documents\workspace-spring-tool-suite-4-4.27.0.RELEASE\PS39199_NguyenNhutKha_Assignment\src\test\resources\testNG.xml</span>
+              <img src="failed.png"/>
+              <span class="class-name">poly.edu.ASM_Y4</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCRUD">
+                  </a> <!-- testCRUD -->
+                  <span class="method-name">testCRUD</span>
+                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;type[submit]&quot;}
+  (Session info: chrome=135.0.7049.84)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.25.0&apos;, revision: &apos;8a8aea2337&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [e00cb62a22c34a453d20327b4e5b24d8, findElement {value=type[submit], using=css selector}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 135.0.7049.84, chrome: {chromedriverVersion: 135.0.7049.84 (6c019e560019..., userDataDir: C:\Users\MRLOC~1\AppData\Lo...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:64265}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64265/devtoo..., se:cdpVersion: 135.0.7049.84, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e00cb62a22c34a453d20327b4e5b24d8
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:362)
+	at poly.edu.ASM_Y4.testCRUD(ASM_Y4.java:82)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\Mr Loc\AppData\Local\Temp\testng-eclipse--2097285911\testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite name=&quot;TestSuite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
-  &lt;test thread-count=&quot;5&quot; name=&quot;TestNGTests&quot;&gt;
-    &lt;groups&gt;
-      &lt;run&gt;
-        &lt;include name=&quot;regression&quot;/&gt;
-      &lt;/run&gt;
-    &lt;/groups&gt;
-    &lt;packages&gt;
-      &lt;package name=&quot;poly.edu&quot;/&gt;
-    &lt;/packages&gt;
+&lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;poly.edu.appTest&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ASM_CART_TESTCASE&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ASM_LOGIN_TESTCASE&quot;/&gt;
-      &lt;class name=&quot;poly.edu.CalculatorTest&quot;/&gt;
-      &lt;class name=&quot;poly.edu.GoogleTest&quot;/&gt;
-      &lt;class name=&quot;poly.edu.Lifecycle_Junit5&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ParameterizedTestDemo&quot;/&gt;
-      &lt;class name=&quot;poly.edu.Ps39199NguyenNhutKhaAssignmentApplicationTests&quot;/&gt;
-      &lt;class name=&quot;poly.edu.Ps39199NguyenNhutKhaAssignmentApplication&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ServletInitializer&quot;/&gt;
+      &lt;class name=&quot;poly.edu.ASM_Y4&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;testCRUD&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- poly.edu.ASM_Y4 --&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- TestNGTests --&gt;
-&lt;/suite&gt; &lt;!-- TestSuite --&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
             </pre>
-            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="testlist-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Tests for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <ul>
-                    <li>
-                        <span class="test-name">TestNGTests (10 classes)</span>
-                    </li>
-                </ul>
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="group-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Groups for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="test-group">
-                    <span class="test-group-name">regression</span>
-                    <br/>
-                    <div class="method-in-group">
-                        <span class="method-in-group-name">testIsEvenNumber2</span>
-                        <br/>
-                    </div> <!-- method-in-group -->
-                    <div class="method-in-group">
-                        <span class="method-in-group-name">testIsEvenNumber4</span>
-                        <br/>
-                    </div> <!-- method-in-group -->
-                </div> <!-- test-group -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="times-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Times for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="times-div">
-                    <script type="text/javascript">
-                        suiteTableInitFunctions.push('tableData_TestSuite');
-                        function tableData_TestSuite() {
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('number', 'Number');
-                        data.addColumn('string', 'Method');
-                        data.addColumn('string', 'Class');
-                        data.addColumn('number', 'Time (ms)');
-                        data.addRows(2);
-                        data.setCell(0, 0, 0)
-                        data.setCell(0, 1, 'testIsEvenNumber2')
-                        data.setCell(0, 2, 'poly.edu.appTest')
-                        data.setCell(0, 3, 10);
-                        data.setCell(1, 0, 1)
-                        data.setCell(1, 1, 'testIsEvenNumber4')
-                        data.setCell(1, 2, 'poly.edu.appTest')
-                        data.setCell(1, 3, 1);
-                        window.suiteTableData['TestSuite']= { tableData: data, tableDiv: 'times-div-TestSuite'}
-                        return data;
-                        }
-                    </script>
-                    <span class="suite-total-time">Total running time: 11 ms</span>
-                    <div id="times-div-TestSuite">
-                    </div> <!-- times-div-TestSuite -->
-                </div> <!-- times-div -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(1);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'testCRUD')
+data.setCell(0, 2, 'poly.edu.ASM_Y4')
+data.setCell(0, 3, 3316);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 3 seconds</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="reporter-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Reporter output for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="ignored-methods-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">8 ignored methods</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.appTest</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testIsEvenNumber3</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.GoogleTest</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testFindElement</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.ASM_LOGIN_TESTCASE</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testLogin</span>
-                        <br/>
-                        <span class="ignored-method-name">testRememberMe</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.ASM_CART_TESTCASE</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testRemoveFromCart</span>
-                        <br/>
-                        <span class="ignored-method-name">testUpdateCartQuantity</span>
-                        <br/>
-                        <span class="ignored-method-name">testApplyDiscount</span>
-                        <br/>
-                        <span class="ignored-method-name">testAddToCart</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">1 ignored method</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">poly.edu.ASM_Y4</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">testRegister</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="chronological-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Methods in chronological order</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="chronological-class">
-                    <div class="chronological-class-name">poly.edu.appTest</div> <!-- chronological-class-name -->
-                    <div class="test-method">
-                        <span class="method-name">testIsEvenNumber2</span>
-                        <span class="method-start">0 ms</span>
-                    </div> <!-- test-method -->
-                    <div class="test-method">
-                        <span class="method-name">testIsEvenNumber4</span>
-                        <span class="method-start">16 ms</span>
-                    </div> <!-- test-method -->
-                </div> <!-- main-panel-content rounded-window-bottom -->
-            </div> <!-- panel -->
-        </div> <!-- main-panel-root -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">poly.edu.ASM_Y4</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setup</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testCRUD</span>
+                <span class="method-start">1730 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">5053 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
     </div> <!-- wrapper -->
-</body>
+  </body>
 <script type="text/javascript" src="testng-reports2.js"></script>
 </html>
