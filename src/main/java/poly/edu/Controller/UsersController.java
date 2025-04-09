@@ -17,50 +17,76 @@ import poly.edu.Entity.User;
 import poly.edu.Repository.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RestController
+//@RestController
+@Controller
 public class UsersController {
     @Autowired
     private UserRepository us;
 
     // Lấy danh sách người dùng với phân trang
+    @GetMapping("/admin/getUser")
+    public String getUsers(Model model, 
+                           @RequestParam(defaultValue = "0") int page, 
+                           @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> userPage = us.findAll(pageable);
+
+        model.addAttribute("users", userPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", userPage.getTotalPages());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("size", size);
+        model.addAttribute("CRUD","UsersCRUD.html");
+        return "CRUD";
+    }
+//    
 //    @GetMapping("/admin/getUser")
-//    public String getUsers(Model model, 
+
+//    @GetMapping("/getUser")
+//    public List<UserDTO>  getUsers(Model model, 
 //                           @RequestParam(defaultValue = "0") int page, 
 //                           @RequestParam(defaultValue = "5") int size) {
 //        Pageable pageable = PageRequest.of(page, size);
 //        Page<User> userPage = us.findAll(pageable);
-//
+//        List<UserDTO> listUserDT0=new ArrayList<>();
+//        userPage.forEach(tempUser->{
+//        	UserDTO toJSON=new UserDTO(tempUser.getUserId(),tempUser.getUsername(),tempUser.getPasswordHash(),tempUser.getEmail(),
+//        			tempUser.getFullName(),tempUser.getPhone(),tempUser.getAddress(),tempUser.getRole(),tempUser.getIsActivated(),tempUser.getCreatedAt());
+//        	listUserDT0.add(toJSON);
+//        });
 //        model.addAttribute("users", userPage.getContent());
 //        model.addAttribute("currentPage", page);
 //        model.addAttribute("totalPages", userPage.getTotalPages());
 //        model.addAttribute("newUser", new User());
 //        model.addAttribute("size", size);
 //        model.addAttribute("CRUD","UsersCRUD.html");
-//        return "CRUD";
+//        return listUserDT0;
 //    }
+
 //    
 //    @GetMapping("/admin/getUser")
 
-    @GetMapping("/getUser")
-    public List<UserDTO> getUsers(Model model,
-                                  @RequestParam(defaultValue = "0") int page,
-                                  @RequestParam(defaultValue = "5") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<User> userPage = us.findAll(pageable);
-        List<UserDTO> listUserDT0 = new ArrayList<>();
-        userPage.forEach(tempUser -> {
-            UserDTO toJSON = new UserDTO(tempUser.getUserId(), tempUser.getUsername(), tempUser.getPasswordHash(), tempUser.getEmail(),
-                    tempUser.getFullName(), tempUser.getPhone(), tempUser.getAddress(), tempUser.getRole(), tempUser.getIsActivated(), tempUser.getCreatedAt());
-            listUserDT0.add(toJSON);
-        });
-//        model.addAttribute("users", userPage.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", userPage.getTotalPages());
-//        model.addAttribute("newUser", new User());
-//        model.addAttribute("size", size);
-//        model.addAttribute("CRUD","UsersCRUD.html");
-        return listUserDT0;
-    }
+//     @GetMapping("/getUser")
+//     public List<UserDTO> getUsers(Model model,
+//                                   @RequestParam(defaultValue = "0") int page,
+//                                   @RequestParam(defaultValue = "5") int size) {
+//         Pageable pageable = PageRequest.of(page, size);
+//         Page<User> userPage = us.findAll(pageable);
+//         List<UserDTO> listUserDT0 = new ArrayList<>();
+//         userPage.forEach(tempUser -> {
+//             UserDTO toJSON = new UserDTO(tempUser.getUserId(), tempUser.getUsername(), tempUser.getPasswordHash(), tempUser.getEmail(),
+//                     tempUser.getFullName(), tempUser.getPhone(), tempUser.getAddress(), tempUser.getRole(), tempUser.getIsActivated(), tempUser.getCreatedAt());
+//             listUserDT0.add(toJSON);
+//         });
+// //        model.addAttribute("users", userPage.getContent());
+// //        model.addAttribute("currentPage", page);
+// //        model.addAttribute("totalPages", userPage.getTotalPages());
+// //        model.addAttribute("newUser", new User());
+// //        model.addAttribute("size", size);
+// //        model.addAttribute("CRUD","UsersCRUD.html");
+//         return listUserDT0;
+//     }
+
 
     // Tạo người dùng mới
     @GetMapping("/users/new")
