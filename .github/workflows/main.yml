@@ -25,6 +25,9 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
+      - name: Run tests with Maven
+         run: mvn test
+         
       - name: Deploy to Railway
         run: |
           railway login --token ${{ secrets.RAILWAY_API_KEY }}
