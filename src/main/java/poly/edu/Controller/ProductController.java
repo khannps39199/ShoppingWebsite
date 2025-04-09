@@ -1,6 +1,7 @@
 package poly.edu.Controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,54 +19,56 @@ import poly.edu.Entity.Category;
 import poly.edu.Repository.CategoryRepository;
 
 import org.springframework.web.multipart.MultipartFile;
+
 import java.nio.file.*;
 
 @Controller
 public class ProductController {
-	 @Autowired
-	    private ProductRepository productRepo; 
-	 @Autowired
-	    private ParamService paramService;
+    @Autowired
+    private ProductRepository productRepo;
+    @Autowired
+    private ParamService paramService;
 
     @Autowired
     private CategoryRepository categoryRepo;
+
     @GetMapping("/admin/getproducts")
     public String getAllProducts(
-            @RequestParam(defaultValue = "0") int page, 
-            @RequestParam(defaultValue = "10") int size, 
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
             Model model) {
-        
-    	Pageable pageable = PageRequest.of(page, size, Sort.by("productID").ascending());
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("productID").ascending());
         Page<Product> productPage = productRepo.findAll(pageable);
 
-        model.addAttribute("products", productPage.getContent());  
+        model.addAttribute("products", productPage.getContent());
         model.addAttribute("currentPage", productPage.getNumber());
-        model.addAttribute("totalPages", productPage.getTotalPages()); 
+        model.addAttribute("totalPages", productPage.getTotalPages());
         model.addAttribute("pageSize", size);
         model.addAttribute("totalItems", productPage.getTotalElements());
         model.addAttribute("hasNext", productPage.hasNext());
         model.addAttribute("hasPrevious", productPage.hasPrevious());
-        model.addAttribute("product", new Product()); 
+        model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryRepo.findAll());
 
-        model.addAttribute("CRUD","ProductsCRUD.html");
+        model.addAttribute("CRUD", "ProductsCRUD.html");
         return "CRUD";
     }
 
- // load trang san pham nguoi dung
+    // load trang san pham nguoi dung
     @GetMapping("/user/products")
     public String loadProduct(Model model,
-            @RequestParam(defaultValue = "0") Integer page,  // Đổi từ `int` sang `Integer`
-            @RequestParam(defaultValue = "8") Integer size) {
+                              @RequestParam(defaultValue = "0") Integer page,  // Đổi từ `int` sang `Integer`
+                              @RequestParam(defaultValue = "8") Integer size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> productPage = productRepo.findAll(pageable);
 
-        model.addAttribute("products", productPage.getContent());  
+        model.addAttribute("products", productPage.getContent());
         model.addAttribute("currentPage", (page != null) ? page : 0);  // Tránh `null`
-        model.addAttribute("totalPages", productPage.getTotalPages()); 
+        model.addAttribute("totalPages", productPage.getTotalPages());
         model.addAttribute("pageSize", size);
-        model.addAttribute("product", new Product()); 
+        model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryRepo.findAll());
         model.addAttribute("Component", "Products.html");
 
@@ -73,12 +76,11 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/products/new")
     public String newProduct(Model model) {
-        model.addAttribute("product", new Product());  
-        model.addAttribute("categories", categoryRepo.findAll());  
-        model.addAttribute("products", productRepo.findAll()); 
+        model.addAttribute("product", new Product());
+        model.addAttribute("categories", categoryRepo.findAll());
+        model.addAttribute("products", productRepo.findAll());
         return "ProductsCRUD.html";
     }
 
@@ -108,12 +110,12 @@ public class ProductController {
             } else {
                 // Nếu không có file mới, giữ nguyên ảnh cũ (tránh bị NULL)
 
-            	if (product.getProductID() != null) {
-            	    Product existingProduct = productRepo.findById(product.getProductID()).orElse(null);
-            	    if (existingProduct != null) {
-            	        product.setImage(existingProduct.getImage());
-            	    }
-            	}
+                if (product.getProductID() != null) {
+                    Product existingProduct = productRepo.findById(product.getProductID()).orElse(null);
+                    if (existingProduct != null) {
+                        product.setImage(existingProduct.getImage());
+                    }
+                }
 
             }
 
@@ -126,6 +128,7 @@ public class ProductController {
         return "redirect:/admin/getproducts";
 
     }
+
     @GetMapping("/admin/product/sort")
     public String sortProducts(
             @RequestParam(defaultValue = "id") String field,
@@ -133,7 +136,7 @@ public class ProductController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             Model model) {
-        
+
         // Xác định hướng sắp xếp (ASC hoặc DESC)
         Sort sort = direction.equalsIgnoreCase("desc") ? Sort.by(field).descending() : Sort.by(field).ascending();
         Pageable pageable = PageRequest.of(page, size, sort);
@@ -149,19 +152,19 @@ public class ProductController {
         model.addAttribute("hasPrevious", productPage.hasPrevious());
         model.addAttribute("sortField", field);
         model.addAttribute("sortDirection", direction);
-        model.addAttribute("CRUD","ProductsCRUD.html");
+        model.addAttribute("CRUD", "ProductsCRUD.html");
         model.addAttribute("product", new Product());
-        return "CRUD"; 
+        return "CRUD";
     }
 
     @GetMapping("/ProductDetail")
-    public String productDetail( Model model) {
-    	long id = (long ) paramService.getInt("id", 0);
+    public String productDetail(Model model) {
+        long id = (long) paramService.getInt("id", 0);
         Product product = productRepo.findById(id).orElse(null);
         if (product == null) {
             return "redirect:/error"; // Hoặc chuyển hướng đến trang khác nếu không tìm thấy sản phẩm
         }
-        model.addAttribute("product", product); 
+        model.addAttribute("product", product);
         model.addAttribute("Component", "ProductDetail.html");
 
         return "UserLayout";
@@ -174,7 +177,7 @@ public class ProductController {
                               @RequestParam(defaultValue = "10") int size) {
         Product product = productRepo.findById(id).orElse(null);
         if (product == null) {
-        	return "redirect:/admin/getproducts?page=" + page + "&size=" + size;
+            return "redirect:/admin/getproducts?page=" + page + "&size=" + size;
 
         }
 
@@ -187,10 +190,9 @@ public class ProductController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
         model.addAttribute("pageSize", size);
-        model.addAttribute("CRUD","ProductsCRUD.html");
+        model.addAttribute("CRUD", "ProductsCRUD.html");
         return "CRUD";
     }
-
 
 
     // Xóa sản phẩm
@@ -226,7 +228,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    
+
     @GetMapping("/products/filter")
     public String filterProducts(
             @RequestParam(required = false) Long categoryID,
@@ -255,7 +257,7 @@ public class ProductController {
         model.addAttribute("pageSize", size);
         model.addAttribute("categories", categoryRepo.findAll());
         model.addAttribute("Component", "Products.html");
-        
+
         // Thêm các giá trị lọc vào model để giữ lại trong các liên kết phân trang
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);

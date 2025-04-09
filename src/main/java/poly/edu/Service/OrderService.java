@@ -15,7 +15,7 @@ import poly.edu.Repository.OrderRepository;
 
 @Service
 public class OrderService {
-	@Autowired
+    @Autowired
     private OrderRepository orderRepository;
 
 
@@ -25,10 +25,11 @@ public class OrderService {
                 .stream()
                 .collect(Collectors.groupingBy(Order::getStatus));
     }
+
     // Lấy danh sách đơn hàng của User theo từng trạng thái
     public Map<String, List<Order>> getOrdersByStatus(Integer userId) {
         Map<String, List<Order>> ordersByStatus = new HashMap<>();
-        String[] orderStatuses = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
+        String[] orderStatuses = {"Pending", "Processing", "Shipped", "Delivered", "Cancelled"};
 
         for (String status : orderStatuses) {
             List<Order> orders = orderRepository.findByUserUserIdAndStatus(userId, status);
@@ -37,6 +38,7 @@ public class OrderService {
 
         return ordersByStatus;
     }
+
     public Order getOrderDetail(Integer orderId, Integer userId) {
         Optional<Order> optionalOrder = orderRepository.findByOrderIdAndUserUserId(orderId, userId);
         return optionalOrder.orElse(null);
@@ -77,9 +79,7 @@ public class OrderService {
     }
 
     // ✅ Lấy chi tiết đơn hàng của user, throw exception nếu không tìm thấy
-   
 
-    
 
     // ✅ Lấy đơn hàng theo ID (Dùng Optional tránh NullPointerException)
     public Optional<Order> getOrderById(Integer orderId) {
@@ -100,5 +100,5 @@ public class OrderService {
     public void saveAdmin(Order order) {
         orderRepository.save(order);
     }
-    
+
 }

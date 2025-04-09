@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "UserActivity")
 public class LogUserActivities {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ActivityID")
     private Integer activityId;

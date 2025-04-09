@@ -7,12 +7,12 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ServletComponentScan 
+//@ServletComponentScan
 @EntityScan(basePackages = "poly.edu.Entity")
 public class Ps39199NguyenNhutKhaAssignmentApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Ps39199NguyenNhutKhaAssignmentApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Ps39199NguyenNhutKhaAssignmentApplication.class, args);
+    }
 
 }

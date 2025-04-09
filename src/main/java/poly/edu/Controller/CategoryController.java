@@ -2,6 +2,7 @@ package poly.edu.Controller;
 
 import java.sql.Timestamp;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import poly.edu.Repository.CategoryRepository;
 @Controller
 @RequestMapping("/admin/getcategories") // Định tuyến chung cho danh mục
 public class CategoryController {
-    
+
     @Autowired
     private CategoryRepository categoryRepo;
 
@@ -22,9 +23,9 @@ public class CategoryController {
     public String getAllCategories(Model model) {
         List<Category> allCate = categoryRepo.findAll();
         model.addAttribute("categories", allCate);
-        model.addAttribute("category", new Category()); 
+        model.addAttribute("category", new Category());
         // Form trống khi load trang
-        
+
         model.addAttribute("CRUD", "CategoriesCRUD.html");
         return "CRUD";
     }

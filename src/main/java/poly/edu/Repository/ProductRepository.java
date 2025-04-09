@@ -11,15 +11,19 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "SELECT * FROM Products WHERE price BETWEEN :minPrice AND :maxPrice", nativeQuery = true)
     Page<Product> findProductsByPriceRangeNative(
-        @Param("minPrice") Double minPrice, 
-        @Param("maxPrice") Double maxPrice, 
-        Pageable pageable
+            @Param("minPrice") Double minPrice,
+            @Param("maxPrice") Double maxPrice,
+            Pageable pageable
     );
+
     Page<Product> findByCategory_IdAndPriceBetween(Long id, Double minPrice, Double maxPrice, Pageable pageable);
+
     Page<Product> findByCategory_Id(Long id, Pageable pageable);
+
     @Query(value = "SELECT * FROM Products WHERE name LIKE %:keyword%", nativeQuery = true)
     Page<Product> findByKeywords(@Param("keyword") String name, Pageable pageable);
-	Product findByProductID(Long productID);
+
+    Product findByProductID(Long productID);
 
 }
 

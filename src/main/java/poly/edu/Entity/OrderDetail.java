@@ -34,6 +34,7 @@ public class OrderDetail {
 
     @Column(name = "Discount", nullable = false, columnDefinition = "decimal(5, 2) default 0")
     private BigDecimal discount;
+
     public OrderDetail(Order order, Product product, Integer quantity, BigDecimal price, BigDecimal discount) {
         this.order = order;
         this.product = product;

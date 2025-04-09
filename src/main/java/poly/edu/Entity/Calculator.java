@@ -19,5 +19,15 @@ public class Calculator {
         }
         return (double) a / b;
     }
-}
 
+    public int parseNumber(String string) {
+        if (string == null) {
+            throw new NullPointerException("Giá trị nhập vào không được null");
+        }
+        try {
+            return Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Giá trị nhập vào không hợp lệ, phải là số");
+        }
+    }
+}

@@ -18,23 +18,26 @@ import poly.edu.Repository.OrderDetailRepository;
 @Controller
 @RequestMapping("/report")
 public class ReportController {
-	@Autowired
-	OrderDetailRepository orderDetailRepo;
-	@Autowired
-	CategoryRepository categoryRepo;
-	@GetMapping
-	public String getMethodName(Model model) {
-		List<ReportSoldProduct> reportResults=orderDetailRepo.reportSoldProduct();
-			System.out.println(reportResults.size());
-		model.addAttribute("ReportList",reportResults);
-		return "Report.html";
-	}@GetMapping("/getLoai")
-	public String getMe(@PathVariable("id") Integer id,Model model) {
-		List<ReportSoldProduct> reportResults=orderDetailRepo.reportSoldProduct();
-			System.out.println(reportResults.size());
-		model.addAttribute("ReportList",reportResults);
-		model.addAttribute("productList",categoryRepo.findById(id));
-		return "Report.html";
-	}
-	
+    @Autowired
+    OrderDetailRepository orderDetailRepo;
+    @Autowired
+    CategoryRepository categoryRepo;
+
+    @GetMapping
+    public String getMethodName(Model model) {
+        List<ReportSoldProduct> reportResults = orderDetailRepo.reportSoldProduct();
+        System.out.println(reportResults.size());
+        model.addAttribute("ReportList", reportResults);
+        return "Report.html";
+    }
+
+    @GetMapping("/getLoai")
+    public String getMe(@PathVariable("id") Integer id, Model model) {
+        List<ReportSoldProduct> reportResults = orderDetailRepo.reportSoldProduct();
+        System.out.println(reportResults.size());
+        model.addAttribute("ReportList", reportResults);
+        model.addAttribute("productList", categoryRepo.findById(id));
+        return "Report.html";
+    }
+
 }

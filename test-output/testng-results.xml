@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="8" total="10" passed="2" failed="0" skipped="0">
+    <reporter-output>
+    </reporter-output>
+    <suite started-at="2025-04-02T12:24:23 ICT" name="TestSuite" finished-at="2025-04-02T12:24:23 ICT" duration-ms="62">
+        <groups>
+            <group name="regression">
+                <method signature="appTest.testIsEvenNumber2()[pri:0, instance:poly.edu.appTest@3ba987b8]"
+                        name="testIsEvenNumber2" class="poly.edu.appTest"/>
+                <method signature="appTest.testIsEvenNumber4()[pri:0, instance:poly.edu.appTest@3ba987b8]"
+                        name="testIsEvenNumber4" class="poly.edu.appTest"/>
+            </group> <!-- regression -->
+        </groups>
+        <test started-at="2025-04-02T12:24:23 ICT" name="TestNGTests" finished-at="2025-04-02T12:24:23 ICT"
+              duration-ms="62">
+            <class name="poly.edu.appTest">
+                <test-method signature="testIsEvenNumber2()[pri:0, instance:poly.edu.appTest@3ba987b8]"
+                             started-at="2025-04-02T12:24:23 ICT" name="testIsEvenNumber2"
+                             finished-at="2025-04-02T12:24:23 ICT" duration-ms="10" status="PASS">
+                    <reporter-output>
+                    </reporter-output>
+                </test-method> <!-- testIsEvenNumber2 -->
+                <test-method signature="testIsEvenNumber4()[pri:0, instance:poly.edu.appTest@3ba987b8]"
+                             started-at="2025-04-02T12:24:23 ICT" name="testIsEvenNumber4"
+                             finished-at="2025-04-02T12:24:23 ICT" duration-ms="1" status="PASS">
+                    <reporter-output>
+                    </reporter-output>
+                </test-method> <!-- testIsEvenNumber4 -->
+            </class> <!-- poly.edu.appTest -->
+        </test> <!-- TestNGTests -->
+    </suite> <!-- TestSuite -->
+</testng-results>

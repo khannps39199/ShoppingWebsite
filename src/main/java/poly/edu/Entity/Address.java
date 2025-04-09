@@ -21,18 +21,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {
-	 	public Address(User byId, String address2) {
-	 		this.user=byId;
-	 		this.address=address2;
-	 				
-	 	}
-		@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "AddressID")
-	    private Long addressId;
-	 	@ManyToOne(fetch = FetchType.EAGER)
-	    @JoinColumn(name = "UserID", nullable = false)
-	    private User user; // Reference to User entity
-	 	 @Column(name = "Address", length = 255)
-	     private String address;
+    public Address(User byId, String address2) {
+        this.user = byId;
+        this.address = address2;
+
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "AddressID")
+    private Long addressId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "UserID", nullable = false)
+    private User user; // Reference to User entity
+    @Column(name = "Address", length = 255)
+    private String address;
 }

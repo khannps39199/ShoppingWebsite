@@ -13,39 +13,39 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Cart {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "CartID")
-	    private Long cartId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CartID")
+    private Long cartId;
 
-	    @ManyToOne(fetch = FetchType.EAGER)
-	    @JoinColumn(name = "UserID", nullable = false)
-	    private User user; // Reference to User entity
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "UserID", nullable = false)
+    private User user; // Reference to User entity
 
-	    @ManyToOne(fetch = FetchType.EAGER)
-	    @JoinColumn(name = "ProductID", nullable = false, unique = false)
-	    private Product product; // Reference to Product entity
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ProductID", nullable = false, unique = false)
+    private Product product; // Reference to Product entity
 
-	    @Column(name = "Quantity", nullable = false, columnDefinition = "int default 1")
-	    private Integer quantity = 1;
+    @Column(name = "Quantity", nullable = false, columnDefinition = "int default 1")
+    private Integer quantity = 1;
 
-	    @Column(name = "Added_At", nullable = false)
-	    private Timestamp addedAt;
+    @Column(name = "Added_At", nullable = false)
+    private Timestamp addedAt;
 
-	    @PrePersist
-	    protected void onCreate() {
-	        if (addedAt == null) {
-	            addedAt = Timestamp.from(Instant.now());
-	        }
-	    }
+    @PrePersist
+    protected void onCreate() {
+        if (addedAt == null) {
+            addedAt = Timestamp.from(Instant.now());
+        }
+    }
 
-	    // Custom constructor
-	    public Cart(User user, Product product, Integer quantity) {
-	        this.user = user;
-	        this.product = product;
-	        this.quantity = quantity;
-	        this.addedAt = Timestamp.from(Instant.now()); // Automatically set AddedAt to now
-	    }
+    // Custom constructor
+    public Cart(User user, Product product, Integer quantity) {
+        this.user = user;
+        this.product = product;
+        this.quantity = quantity;
+        this.addedAt = Timestamp.from(Instant.now()); // Automatically set AddedAt to now
+    }
 
-	    
+
 }

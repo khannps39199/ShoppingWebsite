@@ -8,5 +8,5 @@ import poly.edu.Entity.Address;
 import poly.edu.Entity.Discount;
 
 public interface DiscountRepository extends JpaRepository<Discount, Long> {
-	Discount findByDiscountId(Long discountId);
+    Discount findByDiscountId(Long discountId);
 }

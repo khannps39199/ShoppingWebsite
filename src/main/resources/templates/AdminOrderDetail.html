@@ -66,53 +66,55 @@
     </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>📦 Chi tiết Đơn hàng (Admin)</h2>
+<div class="container mt-4">
+    <h2>📦 Chi tiết Đơn hàng (Admin)</h2>
 
-        <div class="mb-3">
-            <p><strong>ID:</strong> <span th:text="${order.orderId}"></span></p>
-            <p><strong>Người đặt:</strong> <span th:text="${order.user.fullName}"></span></p>
-            <p><strong>Ngày đặt:</strong> <span th:text="${order.orderDate}"></span></p>
-            <p><strong>Tổng tiền:</strong> <span class="total-price" th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)} + ' VND'"></span></p>
-            <p><strong>Địa chỉ giao hàng:</strong> <span th:text="${order.shippingAddress}"></span></p>
-            <p><strong>Phương thức thanh toán:</strong> <span th:text="${order.paymentMethod}"></span></p>
-        </div>
-
-        <!-- Form cập nhật trạng thái -->
-        <form th:action="@{'/admin/order/update-status/' + ${order.orderId}}" method="post">
-            <label for="status"><strong>Trạng thái đơn hàng:</strong></label>
-            <select name="status" id="status" class="form-select w-25 d-inline-block ms-2">
-                <option value="Pending" th:selected="${order.status == 'Pending'}">Pending</option>
-                <option value="Processing" th:selected="${order.status == 'Processing'}">Processing</option>
-                <option value="Shipped" th:selected="${order.status == 'Shipped'}">Shipped</option>
-                <option value="Delivered" th:selected="${order.status == 'Delivered'}">Delivered</option>
-                <option value="Cancelled" th:selected="${order.status == 'Cancelled'}">Cancelled</option>
-            </select>
-            <button type="submit" class="btn btn-primary ms-2">Cập nhật</button>
-        </form>
-
-        <!-- Bảng sản phẩm -->
-        <h3 class="mt-4">🛍️ Chi tiết sản phẩm</h3>
-        <table class="table table-hover mt-3">
-            <thead>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá (VND)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="detail : ${order.orderDetails}">
-                    <td th:text="${detail.product.name}"></td>
-                    <td th:text="${detail.quantity}"></td>
-                    <td th:text="${#numbers.formatDecimal(detail.price, 1, 2)}"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="back-btn">
-            <a href="/admin/order" class="btn btn-primary">⬅️ Quay lại danh sách</a>
-        </div>
+    <div class="mb-3">
+        <p><strong>ID:</strong> <span th:text="${order.orderId}"></span></p>
+        <p><strong>Người đặt:</strong> <span th:text="${order.user.fullName}"></span></p>
+        <p><strong>Ngày đặt:</strong> <span th:text="${order.orderDate}"></span></p>
+        <p><strong>Tổng tiền:</strong> <span class="total-price"
+                                             th:text="${#numbers.formatDecimal(order.totalAmount, 1, 2)} + ' VND'"></span>
+        </p>
+        <p><strong>Địa chỉ giao hàng:</strong> <span th:text="${order.shippingAddress}"></span></p>
+        <p><strong>Phương thức thanh toán:</strong> <span th:text="${order.paymentMethod}"></span></p>
     </div>
+
+    <!-- Form cập nhật trạng thái -->
+    <form th:action="@{'/admin/order/update-status/' + ${order.orderId}}" method="post">
+        <label for="status"><strong>Trạng thái đơn hàng:</strong></label>
+        <select name="status" id="status" class="form-select w-25 d-inline-block ms-2">
+            <option value="Pending" th:selected="${order.status == 'Pending'}">Pending</option>
+            <option value="Processing" th:selected="${order.status == 'Processing'}">Processing</option>
+            <option value="Shipped" th:selected="${order.status == 'Shipped'}">Shipped</option>
+            <option value="Delivered" th:selected="${order.status == 'Delivered'}">Delivered</option>
+            <option value="Cancelled" th:selected="${order.status == 'Cancelled'}">Cancelled</option>
+        </select>
+        <button type="submit" class="btn btn-primary ms-2">Cập nhật</button>
+    </form>
+
+    <!-- Bảng sản phẩm -->
+    <h3 class="mt-4">🛍️ Chi tiết sản phẩm</h3>
+    <table class="table table-hover mt-3">
+        <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá (VND)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="detail : ${order.orderDetails}">
+            <td th:text="${detail.product.name}"></td>
+            <td th:text="${detail.quantity}"></td>
+            <td th:text="${#numbers.formatDecimal(detail.price, 1, 2)}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="back-btn">
+        <a href="/admin/order" class="btn btn-primary">⬅️ Quay lại danh sách</a>
+    </div>
+</div>
 </body>
 </html>

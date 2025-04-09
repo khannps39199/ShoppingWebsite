@@ -10,9 +10,9 @@ import poly.edu.Entity.app;
 @SpringBootTest
 class Ps39199NguyenNhutKhaAssignmentApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 //	@Test
 //	public void testIsEvenNumber2() {
 //		app tempApp=new app();

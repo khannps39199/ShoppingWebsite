@@ -31,17 +31,18 @@ public class CookieService {
         return (cookie != null) ? cookie.getValue() : "";
     }
 
-   
+
     public Cookie add(String name, String value, int hours) {
         Cookie cookie = new Cookie(name, value);
-        cookie.setPath("/"); 
-        cookie.setMaxAge(hours * 60 * 60*24);
+        cookie.setPath("/");
+        cookie.setMaxAge(hours * 60 * 60 * 24);
         response.addCookie(cookie);
         return cookie;
     }
 
     /**
      * Xóa cookie khỏi client
+     *
      * @param name tên cookie cần xóa
      */
     public void remove(String name) {

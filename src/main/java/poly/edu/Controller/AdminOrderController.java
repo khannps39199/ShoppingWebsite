@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import poly.edu.Repository.OrderRepository;
 import poly.edu.Service.OrderService;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +19,12 @@ public class AdminOrderController {
 
     @Autowired
     private OrderService orderService;
-    
+
     @Autowired
     private OrderRepository orderRepo;
 
     // Danh sách trạng thái đơn hàng
-    private static final String[] ORDER_STATUSES = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled" };
+    private static final String[] ORDER_STATUSES = {"Pending", "Processing", "Shipped", "Delivered", "Cancelled"};
 
     @GetMapping("/admin/order")
     public String showAllOrders(@RequestParam(defaultValue = "Pending") String status, Model model) {
@@ -47,11 +48,12 @@ public class AdminOrderController {
 
     @GetMapping("/admin/order/detail/{id}")
     public String viewOrderDetail(@PathVariable Integer id, Model model) {
-    	model.addAttribute("order", orderRepo.findById(id).orElse(null));
+        model.addAttribute("order", orderRepo.findById(id).orElse(null));
         return "AdminOrderDetail";
     }
+
     @PostMapping("/admin/order/update-status/{id}")
-    public String updateOrderStatus(@PathVariable("id") Integer id, 
+    public String updateOrderStatus(@PathVariable("id") Integer id,
                                     @RequestParam("status") String status) {
         orderService.updateStatus(id, status);
         return "redirect:/admin/order?status=" + status;

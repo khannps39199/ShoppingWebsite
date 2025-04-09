@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
-   @GetMapping("/asm")
-   public String getMethodName(Model model) {
-	   
-       return "redirect:/user/products";
-   }
-   
+    @GetMapping("/asm")
+    public String getMethodName(Model model) {
+
+        return "redirect:/user/products";
+    }
+
 }
