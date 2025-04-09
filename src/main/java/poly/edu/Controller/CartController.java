@@ -78,9 +78,15 @@ public class CartController {
 
     @GetMapping("/cart")
     public String getCart(Model model) {
-        User user = userRepo.findById(
-                ((User) sessionService.get("login")).getUserId()
-        ).orElse(null);
+    	User user=null;
+    	try {
+    		 user = userRepo.findById(
+    	                ((User) sessionService.get("login")).getUserId()
+    	        ).orElse(null);
+    	}catch(Exception ex){
+    		
+    	}
+       
 
         if (user == null) {
             return "redirect:/login";
