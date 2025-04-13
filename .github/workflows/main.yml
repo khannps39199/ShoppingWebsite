@@ -26,7 +26,8 @@ jobs:
       run: mvn clean install
 
     - name: Run tests with Maven
-      run: mvn test -Dsurefire.suiteXmlFiles=testNG.xml
+      run: mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testNG.xml
+
          
 
 
