@@ -1,13 +1,8 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.1.dtd" >
-
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.1.dtd">
 <suite name="TestSuite">
     <test name="TestNGTests">
         <classes>
-             <class name="poly.edu.ASM_LOGIN_TESTCASE"/>
+            <class name="poly.edu.ASM_LOGIN_TESTCASE"/>
         </classes>
-<!--        <packages>-->
-<!--            <package name="poly.edu"></package>-->
-<!--        </packages>-->
-
     </test>
 </suite>
