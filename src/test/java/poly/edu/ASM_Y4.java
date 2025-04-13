@@ -35,11 +35,11 @@ public class ASM_Y4 {
 	public void testRegister() throws InterruptedException {
 		webDriver.findElement(By.name("register")).click();
 		Thread.sleep(300);
-		webDriver.findElement(By.name("username")).sendKeys("BuiHuuLoc@gmail.com");
+		webDriver.findElement(By.name("username")).sendKeys("BuiHuuLoc1@gmail.com");
 		Thread.sleep(300);
 		webDriver.findElement(By.name("fullName")).sendKeys("Bùi Hữu Lộc");
 		Thread.sleep(300);
-		webDriver.findElement(By.name("email")).sendKeys("BuiHuuLoc@gmail.com");
+		webDriver.findElement(By.name("email")).sendKeys("BuiHuuLoc1@gmail.com");
 		Thread.sleep(300);
 		webDriver.findElement(By.name("phone")).sendKeys("0763288770");
 		Thread.sleep(300);
@@ -53,7 +53,7 @@ public class ASM_Y4 {
 		Thread.sleep(300);
 		webDriver.findElement(By.name("login")).click();
 		Thread.sleep(300);
-		webDriver.findElement(By.name("email")).sendKeys("BuiHuuLoc@gmail.com");
+		webDriver.findElement(By.name("email")).sendKeys("BuiHuuLoc1@gmail.com");
 		Thread.sleep(300);
 		webDriver.findElement(By.name("password")).sendKeys("123");
 		Thread.sleep(300);
@@ -61,15 +61,14 @@ public class ASM_Y4 {
 		
 	}
 	@Test(priority=2)
-	public void testCRUD() throws InterruptedException{
+	public void testCRUDUsers() throws InterruptedException{
 		webDriver.findElement(By.name("email")).sendKeys("admin@example.com");
 		Thread.sleep(300);
 		webDriver.findElement(By.name("password")).sendKeys("123");
 		Thread.sleep(300);
 		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
 		Thread.sleep(300);
-		webDriver.findElement(By.name("products")).click();
-		Thread.sleep(300);
+		webDriver.get("");
 		webDriver.findElement(By.name("name")).sendKeys("Điện thoại thông minh");
 		Thread.sleep(300);
 		webDriver.findElement(By.name("description")).sendKeys("Điện thoại siêu thông minh dẫn đầu xu hướng");

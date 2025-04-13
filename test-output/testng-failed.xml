@@ -6,7 +6,6 @@
       <class name="poly.edu.ASM_LOGIN_TESTCASE">
         <methods>
           <include name="tearDown"/>
-          <include name="testLogin" invocation-numbers="1 2 3 4"/>
           <include name="testRememberMe"/>
           <include name="setup"/>
         </methods>
