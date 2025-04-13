@@ -3,13 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="poly.edu.ASM_Y4">
+      <class name="poly.edu.ASM_LOGIN_TESTCASE">
         <methods>
-          <include name="testCRUD"/>
-          <include name="setup"/>
           <include name="tearDown"/>
+          <include name="testLogin" invocation-numbers="1 2 3 4"/>
+          <include name="testRememberMe"/>
+          <include name="setup"/>
         </methods>
-      </class> <!-- poly.edu.ASM_Y4 -->
+      </class> <!-- poly.edu.ASM_LOGIN_TESTCASE -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
