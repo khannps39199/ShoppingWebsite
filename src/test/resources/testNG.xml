@@ -2,16 +2,12 @@
 
 <suite name="TestSuite">
     <test name="TestNGTests">
-        <!-- <classes>
-             <class name="poly.edu.CalculatorTest"/>
-         </classes>-->
-        <packages>
-            <package name="poly.edu"></package>
-        </packages>
-        <groups>
-            <run>
-                <include name="regression"></include>
-            </run>
-        </groups>
+        <classes>
+             <class name="poly.edu.ASM_LOGIN_TESTCASE"/>
+        </classes>
+<!--        <packages>-->
+<!--            <package name="poly.edu"></package>-->
+<!--        </packages>-->
+
     </test>
 </suite>
