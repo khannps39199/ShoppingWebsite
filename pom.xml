@@ -125,12 +125,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -140,7 +135,21 @@
                         <suiteXmlFile>src/test/resources/testNG.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
-            </plugin>
+            </plugin>-->
+            
+	    <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-surefire-plugin</artifactId>
+	      <version>3.0.0</version>
+	      <configuration>
+	        <includes>
+	          <include>**/*TestNG*.java</include> <!-- Include only TestNG tests -->
+	        </includes>
+	        <excludes>
+	          <exclude>**/*JUnit*.java</exclude> <!-- Ignore JUnit -->
+	        </excludes>
+	      </configuration>
+	    </plugin>
         </plugins>
     </build>
 </project>

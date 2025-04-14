@@ -27,32 +27,18 @@ import poly.edu.Entity.UserDetail;
 
 @Configuration
 public class WebSpringSecurity {
-//	@Bean
-//	public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-//	    AuthenticationManagerBuilder authenticationManagerBuilder = 
-//	        http.getSharedObject(AuthenticationManagerBuilder.class);
-//	    authenticationManagerBuilder.userDetailsService(userDetailsService());
-//	    return authenticationManagerBuilder.build();
-//	}
-//	@Bean
-//	public UserDetailsService userDetailsService() {
-//	    return new InMemoryUserDetailsManager(
-//	        new User("admin", "password", Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"))),
-//	        new User("customer", "password", Collections.singleton(new SimpleGrantedAuthority("ROLE_CUSTOMER")))
-//	    );
-//	}
 
-//	@Autowired
-//    private MyUserDetailsService myUserDetailsService;
+	@Autowired
+    private MyUserDetailsService myUserDetailsService;
 	@Autowired
 	private RoleDebugFilter roleDebugFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.addFilterBefore( roleDebugFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+        http.addFilterBefore(roleDebugFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
         .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").permitAll()
-                        .requestMatchers("/pay", "/cart", "/addToCart").hasRole("CUSTOMER")
+                        .requestMatchers("/pay", "/cart", "/addToCart").permitAll()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
@@ -70,16 +56,16 @@ public class WebSpringSecurity {
 
         return http.build();
     }
-//    @Bean
-//    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-//        return http.getSharedObject(AuthenticationManagerBuilder.class)
-//                   .userDetailsService(myUserDetailsService) // Custom UserDetailsService
-//                   .passwordEncoder(passwordEncoder())
-//                   .and()
-//                   .build();
-//    }
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                   .userDetailsService(myUserDetailsService) // Custom UserDetailsService
+                   .passwordEncoder(passwordEncoder())
+                   .and()
+                   .build();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
