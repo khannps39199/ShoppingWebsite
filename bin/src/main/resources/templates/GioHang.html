@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+   
+</head>
+<body>
+    <div class="tong">
+            <h1>Giỏ hàng của bạn</h1>
+            <table id="giohang">                    
+            </table>
+            <div id="tongtien">
+				<table id="giohang" class="table table-bordered table-hover table-striped text-center">
+				    <thead class="table-dark">
+				        <tr>
+				            <th>ID</th>
+				            <th>Hình ảnh</th>
+				            <th>Loại</th>
+				            <th>Tên sản phẩm</th>
+				            <th>Giá (VND)</th>
+				            <th>Số lượng</th>
+				            <th>Hành động</th>
+				        </tr>
+				    </thead>
+					<tbody>
+					    <tr th:each="cartItem : ${cartList}">
+					        <td th:text="${cartItem.cartId}"></td>
+					        <td><img class="img-thumbnail" th:src="@{/hinhanh/} + ${cartItem.product.image}" width="80"></td>
+					        <td th:text="${cartItem.product.category.name}"></td>
+					        <td th:text="${cartItem.product.name}"></td>
+					        <td th:text="${cartItem.product.price}"></td>
+					        <td th:text="${cartItem.quantity}"></td>
+					        <td>
+					            <button class="btn btn-danger btn-sm" th:attr="onclick='Delete(' + ${cartItem.cartId} + ')'" >Xóa</button>
+					        </td>
+					    </tr>
+					</tbody>
+				    <tfoot class="table-light">
+				        <tr>
+				            <th colspan="5" class="text-end">Thành tiền</th>
+				            <th id="TongThanhTien">?</th>
+				            <th></th>
+				        </tr>
+				    </tfoot>
+				</table>
+
+				<div class="text-center mt-3">
+				    <a th:href="@{/pay}" class="btn btn-success btn-lg">Thanh toán</a>
+				</div>
+
+            </div>   
+        </div>
+       
+    </div>
+</body>
+
+
+</html>

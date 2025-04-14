@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách đơn hàng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #00bfff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+        }
+
+        .filter-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #00bfff;
+        }
+
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 191, 255, 0.8);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #000000;
+            border-radius: 8px;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #444444;
+            text-align: center;
+        }
+
+        th {
+            background: #00bfff;
+            color: #000000;
+        }
+
+        tr:nth-child(even) {
+            background: #222222;
+        }
+
+        tr:hover {
+            background: #333333;
+        }
+
+        a {
+            color: #00bfff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-detail {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        .btn-detail:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🛒 Quản lý Đơn Hàng</h2>
+
+    <!-- Bộ lọc theo trạng thái -->
+    <div class="filter-container">
+        <label for="statusFilter"><strong>Chọn trạng thái:</strong></label>
+        <select id="statusFilter" onchange="filterOrders()">
+            <option th:each="status : ${orderStatuses}" 
+                    th:value="${status}" 
+                    th:text="${status}" 
+                    th:selected="${status == currentTab}">
+            </option>
+        </select>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Người đặt</th>
+                <th>Ngày đặt</th>
+                <th>Trạng thái</th>
+                <th>Tổng tiền</th>
+                <th>Địa chỉ giao hàng</th>
+                <th>Phương thức thanh toán</th>
+                <th>Chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.orderId}"></td>
+                <td th:text="${order.user.fullName}"></td>
+                <td th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+                <td th:text="${order.shippingAddress}"></td>
+                <td th:text="${order.paymentMethod}"></td>
+                <td>
+                    <a th:href="@{/admin/order/detail/{id}(id=${order.orderId})}" class="btn-detail">🔍 Xem</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function filterOrders() {
+            let status = document.getElementById("statusFilter").value;
+            document.body.style.opacity = "0.5";
+            setTimeout(() => {
+                window.location.href = "/admin/order?status=" + status;
+            }, 300);
+        }
+    </script>
+
+</body>
+</html>

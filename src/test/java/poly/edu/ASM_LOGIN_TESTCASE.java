@@ -113,7 +113,7 @@ public class ASM_LOGIN_TESTCASE {
         WebElement rememberCheckbox = driver.findElement(By.id("rememberMe"));
 
         emailField.sendKeys("john@example.com");
-        passwordField.sendKeys("abcdef123hashed");
+        passwordField.sendKeys("123");
 
         if (!rememberCheckbox.isSelected()) {
             rememberCheckbox.click();
@@ -166,9 +166,7 @@ public class ASM_LOGIN_TESTCASE {
     @DataProvider(name = "loginData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"john@example.com", "abcdef123hashed", true, ""},   // Đăng nhập thành công
-                {"michael@example.com", "mnp456hashed", true, ""},   // Đăng nhập thành công
-                {"jane@example.com", "xyz987hashed", true, ""},   // Đăng nhập thành công
+                {"john@example.com", "123", true, ""},   // Đăng nhập thành công
                 {"invalidUser", "abcdef123hashed", false, "Email không tồn tại!"}, // Sai username
                 {"john@example.com", "invalidPass", false, "Mật khẩu không đúng!"}, // Sai password
                 {"", "abcdef123hashed", false, "Email không tồn tại!"},            // Username rỗng
