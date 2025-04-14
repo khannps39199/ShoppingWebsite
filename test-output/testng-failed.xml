@@ -3,6 +3,7 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
+
       <class name="poly.edu.ASM_Y4">
         <methods>
           <include name="setup"/>
@@ -10,6 +11,7 @@
           <include name="testCRUDUsers"/>
         </methods>
       </class> <!-- poly.edu.ASM_Y4 -->
+
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

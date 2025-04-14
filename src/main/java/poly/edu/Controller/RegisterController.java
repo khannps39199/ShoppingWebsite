@@ -19,36 +19,53 @@ import java.util.Optional;
 public class RegisterController {
     @Autowired
     UserRepository userRepo;
-
+    
     @Autowired
     ParamService paramService;
-
+    
     @Autowired
     SessionService sessionService;
 
     @GetMapping("/account/register")
     public String showRegisterForm(Model model) {
+        // Nếu người dùng đã đăng nhập, chuyển hướng về trang chính
+        if (sessionService.get("login") != null) {
+            return "redirect:/asm";
+        }
         model.addAttribute("user", new User());
-        return "register";
+        return "register"; 
     }
 
+
     @PostMapping("/account/register")
-    public String register(@RequestParam String username,
-                           @RequestParam String email,
-                           @RequestParam String password,
-                           @RequestParam String confirmPassword,
-                           @RequestParam String fullName,
-                           @RequestParam String phone,
-                           @RequestParam String address,
+    public String register(@RequestParam String username, 
+                           @RequestParam String email, 
+                           @RequestParam String password, 
+                           @RequestParam String confirmPassword, 
+                           @RequestParam String fullName, 
+                           @RequestParam String phone, 
+                           @RequestParam String address, 
                            Model model) {
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Mật khẩu nhập lại không khớp");
             return "register";
         }
 
-        Optional<User> existingUser = userRepo.findByEmail(email);
-        if (existingUser.isPresent()) {
+        Optional<User> existingUserByEmail = userRepo.findByEmail(email);
+        if (existingUserByEmail.isPresent()) {
             model.addAttribute("error", "Email đã tồn tại");
+            return "register";
+        }
+
+        Optional<User> existingUserByUsername = userRepo.findByUsername(username);
+        if (existingUserByUsername.isPresent()) {
+            model.addAttribute("error", "Tên đăng nhập đã tồn tại");
+            return "register";
+        }
+
+        // Kiểm tra số điện thoại chỉ được nhập số và có độ dài hợp lệ (10-11 số)
+        if (!phone.matches("\\d{10,11}")) {
+            model.addAttribute("error", "Số điện thoại không hợp lệ. Vui lòng nhập 10-11 chữ số.");
             return "register";
         }
 
@@ -63,7 +80,6 @@ public class RegisterController {
                 .isActivated(true)
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();
-
         userRepo.save(newUser);
         sessionService.set("login", newUser);
         return "redirect:/asm";

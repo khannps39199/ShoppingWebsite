@@ -25,7 +25,8 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +40,9 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
+
               <span class="suite-name border-passed">Default suite</span>
+
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +53,9 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
+
                     <span>C:\Users\Mr Loc\AppData\Local\Temp\testng-eclipse--823113137\testng-customsuite.xml</span>
+
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -61,7 +66,7 @@
                 <li>
                   <a href="#" panel-name="group-Default_suite" class="navigator-link ">
                     <span>0 groups</span>
-                  </a> <!-- navigator-link  -->
+                 </a> <!-- navigator-link  -->
                 </li>
                 <li>
                   <a href="#" panel-name="times-Default_suite" class="navigator-link ">
@@ -92,7 +97,23 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+
+                    <span class="method-stats">4 methods, 1 failed,   3 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Resgter_TESTCASE" class="method navigator-link" hash-for-method="testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)">testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -103,9 +124,11 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img src="passed.png" width="3%"/>
+
                         <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Y4" class="method navigator-link" hash-for-method="testCRUDUsers">testCRUDUsers</a> <!-- method navigator-link -->
                       </span>
                       <br/>
+
                     </div> <!-- method-list-content passed suite-Default_suite -->
                   </li>
                 </ul>
@@ -118,17 +141,89 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
+
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
               <span class="class-name">poly.edu.ASM_Y4</span>
+
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testCRUDUsers">
-                  </a> <!-- testCRUDUsers -->
-                  <span class="method-name">testCRUDUsers</span>
+
+                  <a name="testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)">
+                  </a> <!-- testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser1,newuser1@gmail.com,password123,password123,Nguyen Van A,0123456789,Hanoi,true,,TC_REGISTER_001)</span>
+                  <div class="stack-trace">java.lang.AssertionError: [FAILED] Test Case TC_REGISTER_001: Không chuyển đến trang /user/products expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at poly.edu.ASM_Resgter_TESTCASE.testRegister(ASM_Resgter_TESTCASE.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">poly.edu.ASM_Resgter_TESTCASE</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...)">
+                  </a> <!-- testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser1,newuser2@gmail.com,password123,password123,Nguyen Van B,0123456789,HCMC,false,Tên đăng nhập đã tồn tại,TC_REGISTER_002)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...)">
+                  </a> <!-- testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser3,newuser1@gmail.com,password123,password123,Nguyen Van E,0123456789,Can Tho,false,Email đã tồn tại,TC_REGISTER_003)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...)">
+                  </a> <!-- testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser4,newuser12@gmail.com,password123,password456,Nguyen Van L,0123456789,Hue,false,Mật khẩu nhập lại không khớp,TC_REGISTER_004)</span>
+
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -136,7 +231,9 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
+
             <span class="header-content">C:\Users\Mr Loc\AppData\Local\Temp\testng-eclipse--823113137\testng-customsuite.xml</span>
+
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -145,11 +242,13 @@
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
+
       &lt;class name=&quot;poly.edu.ASM_Y4&quot;&gt;
         &lt;methods&gt;
           &lt;include name=&quot;testCRUDUsers&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- poly.edu.ASM_Y4 --&gt;
+
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -189,16 +288,32 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+
+data.addRows(4);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testCRUDUsers')
-data.setCell(0, 2, 'poly.edu.ASM_Y4')
-data.setCell(0, 3, 8395);
+data.setCell(0, 1, 'testRegister')
+data.setCell(0, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(0, 3, 8811);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testRegister')
+data.setCell(1, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(1, 3, 8699);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testRegister')
+data.setCell(2, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(2, 3, 8677);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'testRegister')
+data.setCell(3, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(3, 3, 6818);
+
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 8 seconds</span>
+
+              <span class="suite-total-time">Total running time: 33 seconds</span>
+
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -213,16 +328,11 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+
+            <span class="header-content">0 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
-            <div class="ignored-class-div">
-              <span class="ignored-class-name">poly.edu.ASM_Y4</span>
-              <div class="ignored-methods-div">
-                <span class="ignored-method-name">testRegister</span>
-                <br/>
-              </div> <!-- ignored-methods-div -->
-            </div> <!-- ignored-class-div -->
+
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-Default_suite" class="panel">
@@ -231,18 +341,36 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">poly.edu.ASM_Y4</div> <!-- chronological-class-name -->
+
+              <div class="chronological-class-name">poly.edu.ASM_Resgter_TESTCASE</div> <!-- chronological-class-name -->
+
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">testCRUDUsers</span>
-                <span class="method-start">1941 ms</span>
+
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)</span>
+                <span class="method-start">3466 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...)</span>
+                <span class="method-start">10289 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...)</span>
+                <span class="method-start">19102 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...)</span>
+                <span class="method-start">27805 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">10341 ms</span>
+                <span class="method-start">36485 ms</span>
+
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
