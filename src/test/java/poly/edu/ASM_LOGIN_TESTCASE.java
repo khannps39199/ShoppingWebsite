@@ -114,26 +114,19 @@ public class ASM_LOGIN_TESTCASE {
 
         emailField.sendKeys("john@example.com");
         passwordField.sendKeys("abcdef123hashed");
-
         if (!rememberCheckbox.isSelected()) {
             rememberCheckbox.click();
         }
-
         driver.findElement(By.xpath("//button[contains(text(), 'Đăng Nhập')]")).click();
         Thread.sleep(1000);
-
         boolean isLoggedIn = isLoggedIn();
         Assert.assertTrue(isLoggedIn, "Đăng nhập không thành công!");
-
         driver.quit();
         Thread.sleep(2000);
-
         driver = new ChromeDriver();
         driver.get("http://localhost:8080/user/order");
-
         boolean stillLoggedIn = !driver.getCurrentUrl().contains("/user/order");
         Assert.assertTrue(stillLoggedIn, "Remember Me không hoạt động!");
-
         logout();
     }
     // Kiểm tra xem người dùng có đang đăng nhập hay không
