@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,8 @@ public class UsersController {
     private UserRepository us;
 
     // Lấy danh sách người dùng với phân trang
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/getUser")
     public String getUsers(Model model, 
                            @RequestParam(defaultValue = "0") int page, 
