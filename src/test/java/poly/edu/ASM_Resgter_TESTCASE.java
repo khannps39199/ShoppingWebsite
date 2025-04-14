@@ -57,8 +57,8 @@ public class ASM_Resgter_TESTCASE {
                 "[FAILED] Test Case " + testCaseId + ": Lỗi không đúng! Nhận được: " + actualMessage);
             System.out.println("[PASSED] Test Case " + testCaseId + ": Đăng ký thất bại đúng như mong đợi.");
         }
-
-        Thread.sleep(2000);
+        logout();
+        Thread.sleep(1000);
     }
 
     private String getErrorMessage() {
