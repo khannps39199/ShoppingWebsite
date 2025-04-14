@@ -1,324 +1,360 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset='utf-8'>
-    <title>TestNG reports</title>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
 
-    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra"/>
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
     <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
     <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="testng-reports.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type='text/javascript'>
-        google.load('visualization', '1', {packages:['table']});
-        google.setOnLoadCallback(drawTable);
-        var suiteTableInitFunctions = new Array();
-        var suiteTableData = new Array();
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
     </script>
     <!--
       <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
      -->
-</head>
+  </head>
 
-<body>
-<div class="top-banner-root">
-    <span class="top-banner-title-font">Test results</span>
-    <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
-    <br/>
-    <span class="top-banner-font-1">1 suite</span>
-</div> <!-- top-banner-root -->
-<div class="navigator-root">
-    <div class="navigator-suite-header">
+  <body>    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
+      <br/>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
         <span>All suites</span>
         <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
-            <img src="collapseall.gif" class="collapse-all-icon">
-            </img> <!-- collapse-all-icon -->
+          <img src="collapseall.gif" class="collapse-all-icon">
+          </img> <!-- collapse-all-icon -->
         </a> <!-- collapse-all-link -->
-    </div> <!-- navigator-suite-header -->
-    <div class="suite">
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
         <div class="rounded-window">
-            <div class="suite-header light-rounded-window-top">
-                <a href="#" panel-name="suite-TestSuite" class="navigator-link">
-                    <span class="suite-name border-passed">TestSuite</span>
-                </a> <!-- navigator-link -->
-            </div> <!-- suite-header light-rounded-window-top -->
-            <div class="navigator-suite-content">
-                <div class="suite-section-title">
-                    <span>Info</span>
-                </div> <!-- suite-section-title -->
-                <div class="suite-section-content">
-                    <ul>
-                        <li>
-                            <a href="#" panel-name="test-xml-TestSuite" class="navigator-link ">
-                                <span>C:\Users\nkha7\Documents\workspace-spring-tool-suite-4-4.27.0.RELEASE\PS39199_NguyenNhutKha_Assignment\src\test\resources\testNG.xml</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="testlist-TestSuite" class="navigator-link ">
-                                <span class="test-stats">1 test</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="group-TestSuite" class="navigator-link ">
-                                <span>1 group</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="times-TestSuite" class="navigator-link ">
-                                <span>Times</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="reporter-TestSuite" class="navigator-link ">
-                                <span>Reporter output</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="ignored-methods-TestSuite" class="navigator-link ">
-                                <span>Ignored methods</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                        <li>
-                            <a href="#" panel-name="chronological-TestSuite" class="navigator-link ">
-                                <span>Chronological view</span>
-                            </a> <!-- navigator-link  -->
-                        </li>
-                    </ul>
-                </div> <!-- suite-section-content -->
-                <div class="result-section">
-                    <div class="suite-section-title">
-                        <span>Results</span>
-                    </div> <!-- suite-section-title -->
-                    <div class="suite-section-content">
-                        <ul>
-                            <li>
-                                <span class="method-stats">2 methods,   2 passed</span>
-                            </li>
-                            <li>
-                                <span class="method-list-title passed">Passed methods</span>
-                                <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-TestSuite" class="hide-methods passed suite-TestSuite"> (hide)</a>
-                                    <!-- hide-methods passed suite-TestSuite -->
-                      <a href="#" panel-name="suite-TestSuite" class="show-methods passed suite-TestSuite"> (show)</a>
-                                    <!-- show-methods passed suite-TestSuite -->
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" panel-name="suite-Default_suite" class="navigator-link">
+              <span class="suite-name border-failed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
+                    <span>C:\Users\nkha7\AppData\Local\Temp\testng-eclipse-425943257\testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="testlist-Default_suite" class="navigator-link ">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="group-Default_suite" class="navigator-link ">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="times-Default_suite" class="navigator-link ">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="reporter-Default_suite" class="navigator-link ">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="ignored-methods-Default_suite" class="navigator-link ">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" panel-name="chronological-Default_suite" class="navigator-link ">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">4 methods, 1 failed,   3 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
                     </span>
-                                <div class="method-list-content passed suite-TestSuite">
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Resgter_TESTCASE" class="method navigator-link" hash-for-method="testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)">testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-TestSuite" title="poly.edu.appTest" class="method navigator-link"
-                           hash-for-method="testIsEvenNumber2">testIsEvenNumber2</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Resgter_TESTCASE" class="method navigator-link" hash-for-method="testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...)">testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...)</a> <!-- method navigator-link -->
                       </span>
-                                    <br/>
-                                    <span>
+                      <br/>
+                      <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-TestSuite" title="poly.edu.appTest" class="method navigator-link"
-                           hash-for-method="testIsEvenNumber4">testIsEvenNumber4</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Resgter_TESTCASE" class="method navigator-link" hash-for-method="testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...)">testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...)</a> <!-- method navigator-link -->
                       </span>
-                                    <br/>
-                                </div> <!-- method-list-content passed suite-TestSuite -->
-                            </li>
-                        </ul>
-                    </div> <!-- suite-section-content -->
-                </div> <!-- result-section -->
-            </div> <!-- navigator-suite-content -->
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="poly.edu.ASM_Resgter_TESTCASE" class="method navigator-link" hash-for-method="testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...)">testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
         </div> <!-- rounded-window -->
-    </div> <!-- suite -->
-</div> <!-- navigator-root -->
-<div class="wrapper">
-    <div class="main-panel-root">
-        <div panel-name="suite-TestSuite" class="panel TestSuite">
-            <div class="suite-TestSuite-class-passed">
-                <div class="main-panel-header rounded-window-top">
-                    <img src="passed.png"/>
-                    <span class="class-name">poly.edu.appTest</span>
-                </div> <!-- main-panel-header rounded-window-top -->
-                <div class="main-panel-content rounded-window-bottom">
-                    <div class="method">
-                        <div class="method-content">
-                            <a name="testIsEvenNumber2">
-                            </a> <!-- testIsEvenNumber2 -->
-                            <span class="method-name">testIsEvenNumber2</span>
-                        </div> <!-- method-content -->
-                    </div> <!-- method -->
-                    <div class="method">
-                        <div class="method-content">
-                            <a name="testIsEvenNumber4">
-                            </a> <!-- testIsEvenNumber4 -->
-                            <span class="method-name">testIsEvenNumber4</span>
-                        </div> <!-- method-content -->
-                    </div> <!-- method -->
-                </div> <!-- main-panel-content rounded-window-bottom -->
-            </div> <!-- suite-TestSuite-class-passed -->
-        </div> <!-- panel TestSuite -->
-        <div panel-name="test-xml-TestSuite" class="panel">
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-                <span class="header-content">C:\Users\nkha7\Documents\workspace-spring-tool-suite-4-4.27.0.RELEASE\PS39199_NguyenNhutKha_Assignment\src\test\resources\testNG.xml</span>
+              <img src="failed.png"/>
+              <span class="class-name">poly.edu.ASM_Resgter_TESTCASE</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)">
+                  </a> <!-- testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser1,newuser1@gmail.com,password123,password123,Nguyen Van A,0123456789,Hanoi,true,,TC_REGISTER_001)</span>
+                  <div class="stack-trace">java.lang.AssertionError: [FAILED] Test Case TC_REGISTER_001: Không chuyển đến trang /user/products expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at poly.edu.ASM_Resgter_TESTCASE.testRegister(ASM_Resgter_TESTCASE.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:741)
+	at org.testng.TestRunner.run(TestRunner.java:616)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">poly.edu.ASM_Resgter_TESTCASE</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...)">
+                  </a> <!-- testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser1,newuser2@gmail.com,password123,password123,Nguyen Van B,0123456789,HCMC,false,Tên đăng nhập đã tồn tại,TC_REGISTER_002)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...)">
+                  </a> <!-- testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser3,newuser1@gmail.com,password123,password123,Nguyen Van E,0123456789,Can Tho,false,Email đã tồn tại,TC_REGISTER_003)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...)">
+                  </a> <!-- testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...) -->
+                  <span class="method-name">testRegister</span>
+                  <span class="parameters">(newuser4,newuser12@gmail.com,password123,password456,Nguyen Van L,0123456789,Hue,false,Mật khẩu nhập lại không khớp,TC_REGISTER_004)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-passed -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\nkha7\AppData\Local\Temp\testng-eclipse-425943257\testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite name=&quot;TestSuite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
-  &lt;test thread-count=&quot;5&quot; name=&quot;TestNGTests&quot;&gt;
-    &lt;groups&gt;
-      &lt;run&gt;
-        &lt;include name=&quot;regression&quot;/&gt;
-      &lt;/run&gt;
-    &lt;/groups&gt;
-    &lt;packages&gt;
-      &lt;package name=&quot;poly.edu&quot;/&gt;
-    &lt;/packages&gt;
+&lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
+  &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;poly.edu.appTest&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ASM_CART_TESTCASE&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ASM_LOGIN_TESTCASE&quot;/&gt;
-      &lt;class name=&quot;poly.edu.CalculatorTest&quot;/&gt;
-      &lt;class name=&quot;poly.edu.GoogleTest&quot;/&gt;
-      &lt;class name=&quot;poly.edu.Lifecycle_Junit5&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ParameterizedTestDemo&quot;/&gt;
-      &lt;class name=&quot;poly.edu.Ps39199NguyenNhutKhaAssignmentApplicationTests&quot;/&gt;
-      &lt;class name=&quot;poly.edu.Ps39199NguyenNhutKhaAssignmentApplication&quot;/&gt;
-      &lt;class name=&quot;poly.edu.ServletInitializer&quot;/&gt;
+      &lt;class name=&quot;poly.edu.ASM_Resgter_TESTCASE&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- TestNGTests --&gt;
-&lt;/suite&gt; &lt;!-- TestSuite --&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
             </pre>
-            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="testlist-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Tests for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <ul>
-                    <li>
-                        <span class="test-name">TestNGTests (10 classes)</span>
-                    </li>
-                </ul>
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="group-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Groups for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="test-group">
-                    <span class="test-group-name">regression</span>
-                    <br/>
-                    <div class="method-in-group">
-                        <span class="method-in-group-name">testIsEvenNumber2</span>
-                        <br/>
-                    </div> <!-- method-in-group -->
-                    <div class="method-in-group">
-                        <span class="method-in-group-name">testIsEvenNumber4</span>
-                        <br/>
-                    </div> <!-- method-in-group -->
-                </div> <!-- test-group -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="times-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Times for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="times-div">
-                    <script type="text/javascript">
-                        suiteTableInitFunctions.push('tableData_TestSuite');
-                        function tableData_TestSuite() {
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('number', 'Number');
-                        data.addColumn('string', 'Method');
-                        data.addColumn('string', 'Class');
-                        data.addColumn('number', 'Time (ms)');
-                        data.addRows(2);
-                        data.setCell(0, 0, 0)
-                        data.setCell(0, 1, 'testIsEvenNumber2')
-                        data.setCell(0, 2, 'poly.edu.appTest')
-                        data.setCell(0, 3, 10);
-                        data.setCell(1, 0, 1)
-                        data.setCell(1, 1, 'testIsEvenNumber4')
-                        data.setCell(1, 2, 'poly.edu.appTest')
-                        data.setCell(1, 3, 1);
-                        window.suiteTableData['TestSuite']= { tableData: data, tableDiv: 'times-div-TestSuite'}
-                        return data;
-                        }
-                    </script>
-                    <span class="suite-total-time">Total running time: 11 ms</span>
-                    <div id="times-div-TestSuite">
-                    </div> <!-- times-div-TestSuite -->
-                </div> <!-- times-div -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(4);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'testRegister')
+data.setCell(0, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(0, 3, 8811);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testRegister')
+data.setCell(1, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(1, 3, 8699);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testRegister')
+data.setCell(2, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(2, 3, 8677);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'testRegister')
+data.setCell(3, 2, 'poly.edu.ASM_Resgter_TESTCASE')
+data.setCell(3, 3, 6818);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 33 seconds</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="reporter-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Reporter output for TestSuite</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="ignored-methods-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">8 ignored methods</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.appTest</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testIsEvenNumber3</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.GoogleTest</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testFindElement</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.ASM_LOGIN_TESTCASE</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testLogin</span>
-                        <br/>
-                        <span class="ignored-method-name">testRememberMe</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-                <div class="ignored-class-div">
-                    <span class="ignored-class-name">poly.edu.ASM_CART_TESTCASE</span>
-                    <div class="ignored-methods-div">
-                        <span class="ignored-method-name">testRemoveFromCart</span>
-                        <br/>
-                        <span class="ignored-method-name">testUpdateCartQuantity</span>
-                        <br/>
-                        <span class="ignored-method-name">testApplyDiscount</span>
-                        <br/>
-                        <span class="ignored-method-name">testAddToCart</span>
-                        <br/>
-                    </div> <!-- ignored-methods-div -->
-                </div> <!-- ignored-class-div -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
-        <div panel-name="chronological-TestSuite" class="panel">
-            <div class="main-panel-header rounded-window-top">
-                <span class="header-content">Methods in chronological order</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-                <div class="chronological-class">
-                    <div class="chronological-class-name">poly.edu.appTest</div> <!-- chronological-class-name -->
-                    <div class="test-method">
-                        <span class="method-name">testIsEvenNumber2</span>
-                        <span class="method-start">0 ms</span>
-                    </div> <!-- test-method -->
-                    <div class="test-method">
-                        <span class="method-name">testIsEvenNumber4</span>
-                        <span class="method-start">16 ms</span>
-                    </div> <!-- test-method -->
-                </div> <!-- main-panel-content rounded-window-bottom -->
-            </div> <!-- panel -->
-        </div> <!-- main-panel-root -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">poly.edu.ASM_Resgter_TESTCASE</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">setup</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testRegister(newuser1, newuser1@gmail.com, password123, password123, Nguyen Van A, 0123456789, Hanoi, true, , TC_...)</span>
+                <span class="method-start">3466 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testRegister(newuser1, newuser2@gmail.com, password123, password123, Nguyen Van B, 0123456789, HCMC, false, Tên đ...)</span>
+                <span class="method-start">10289 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testRegister(newuser3, newuser1@gmail.com, password123, password123, Nguyen Van E, 0123456789, Can Tho, false, Em...)</span>
+                <span class="method-start">19102 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testRegister(newuser4, newuser12@gmail.com, password123, password456, Nguyen Van L, 0123456789, Hue, false, Mật k...)</span>
+                <span class="method-start">27805 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">36485 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
     </div> <!-- wrapper -->
-</body>
+  </body>
 <script type="text/javascript" src="testng-reports2.js"></script>
 </html>
