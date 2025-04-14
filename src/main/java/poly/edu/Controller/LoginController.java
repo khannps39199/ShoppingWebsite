@@ -1,11 +1,18 @@
 package poly.edu.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import poly.edu.Entity.User;
+import poly.edu.Entity.UserDetail;
 import poly.edu.Repository.UserRepository;
 import poly.edu.Service.*;
 
@@ -16,7 +23,7 @@ public class LoginController {
     private final ParamService paramService;
     private final SessionService sessionService;
     private final UserRepository userRepo;
-
+    private SecurityContextHolder security; 
     public LoginController(CookieService cookieService, ParamService paramService,
                            SessionService sessionService, UserRepository userRepo) {
         this.cookieService = cookieService;
@@ -34,7 +41,7 @@ public class LoginController {
     }
 
     @PostMapping("/account/login")
-    public String login(Model model) {
+    public String login(Model model) throws Exception {
         String email = paramService.getString("email", "");
         String password = paramService.getString("password", "");
         boolean rememberMe = paramService.getBoolean("remember", false);
@@ -50,6 +57,11 @@ public class LoginController {
             model.addAttribute("error", "Mật khẩu không đúng!");
             return "login";
         }
+        UserDetail userDetail = new UserDetail(loginUser);
+        Authentication auth = new UsernamePasswordAuthenticationToken(userDetail, null, userDetail.getAuthorities());
+        System.out.println(auth.getAuthorities());
+        security.getContext().setAuthentication(auth);
+        System.out.println("Authorities: " + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 
         sessionService.set("login", loginUser);
         if (rememberMe) {
