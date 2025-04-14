@@ -125,7 +125,7 @@ public class UsersController {
         newUser.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         model.addAttribute("newUser", newUser);
-        return "redirect:/getUser?page=" + page + "&size=" + size;
+        return "redirect:/admin/getUser?page=" + page + "&size=" + size;
     }
 
     // Lưu hoặc cập nhật người dùng
@@ -182,6 +182,6 @@ public class UsersController {
         if (us.existsById(id)) {
             us.deleteById(id);
         }
-        return "redirect:/getUser?page=" + page + "&size=" + size;
+        return "redirect:/admin/getUser?page=" + page + "&size=" + size;
     }
 }

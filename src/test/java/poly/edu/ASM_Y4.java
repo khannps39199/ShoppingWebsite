@@ -3,14 +3,15 @@ package poly.edu;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+
 import org.testng.annotations.*;
 
 
@@ -67,31 +68,37 @@ public class ASM_Y4 {
 		webDriver.findElement(By.name("password")).sendKeys("123");
 		Thread.sleep(300);
 		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
-		Thread.sleep(300);
-		webDriver.get("");
-		webDriver.findElement(By.name("name")).sendKeys("Điện thoại thông minh");
-		Thread.sleep(300);
-		webDriver.findElement(By.name("description")).sendKeys("Điện thoại siêu thông minh dẫn đầu xu hướng");
-		Thread.sleep(300);
-		webDriver.findElement(By.name("price")).sendKeys("500.99");
-		Thread.sleep(300);
-		webDriver.findElement(By.name("discount")).sendKeys("10");
-		Thread.sleep(300);
-		WebElement selectElement = webDriver.findElement(By.name("category.categoryID"));
-		webDriver.findElement(By.cssSelector("type[submit]")).click();
-		Thread.sleep(300);
-		Select CartSelect = new Select(selectElement);
-		CartSelect.selectByIndex(1);
-		Thread.sleep(300);
-		// Tìm trong bảng có tên sản phẩm vừa thêm
-		String tenSanPham = "Dining Chair L";
-		WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-		    By.xpath("//td[contains(text(), 'Dining Chair L')]")
-		));
-		WebElement sanPhamMoi = webDriver.findElement(By.xpath("//td[contains(text(), '" + tenSanPham + "')]"));
-		Assert.assertTrue(sanPhamMoi.isDisplayed());
+		Thread.sleep(500);
+		webDriver.findElement(By.cssSelector("a[href='/admin/getUser']")).click();
+		Thread.sleep(500);
+		webDriver.findElement(By.id("username")).sendKeys("LochuuBui");
+		Thread.sleep(500);
+		webDriver.findElement(By.id("passwordHash")).sendKeys("123");
+		Thread.sleep(500);
+		webDriver.findElement(By.id("fullName")).sendKeys("Bùi Hữu Lộc");
+		Thread.sleep(500);
+		webDriver.findElement(By.id("email")).sendKeys("Loclocloc@gmail.com");
+		Thread.sleep(500);
+		Select select = new Select(webDriver.findElement(By.id("role")));
+		select.selectByValue("Admin");
+		Thread.sleep(500);
+		//sao khi an vao submit se la phan tu cuoi cung va nam o trang 7
+		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
+		webDriver.findElement(By.cssSelector("a[href='/admin/getUser?page=6&size=5']")).click();
+		Thread.sleep(700);
+		webDriver.findElement(By.cssSelector("a[href='/users/edit/40?page=6&size=5']")).click();
+		Thread.sleep(700);
+		webDriver.findElement(By.id("username")).clear();
+		webDriver.findElement(By.id("username")).sendKeys("aaaaaaaa");
+		Thread.sleep(700);
+		webDriver.findElement(By.cssSelector("button[type='submit']")).click();
+		Thread.sleep(700);
+		webDriver.findElement(By.cssSelector("a[href='/users/delete/40']")).click();
+		// Chuyển sang alert
+		Alert alert = webDriver.switchTo().alert();
 
+		// Nhấn OK (chấp nhận alert)
+		alert.accept();
 	}
 	private boolean isLoggedIn() {
         return webDriver.getCurrentUrl().equals("http://localhost:8080/user/products") ||
