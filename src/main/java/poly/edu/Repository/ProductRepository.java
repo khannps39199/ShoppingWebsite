@@ -15,13 +15,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxPrice") Double maxPrice,
             Pageable pageable
     );
+    @Query(value = "SELECT * FROM Products WHERE name LIKE %:keyword%", nativeQuery = true)
+    Page<Product> findByKeywords(@Param("keyword") String name, Pageable pageable);
+
 
     Page<Product> findByCategory_IdAndPriceBetween(Long id, Double minPrice, Double maxPrice, Pageable pageable);
 
     Page<Product> findByCategory_Id(Long id, Pageable pageable);
-
-    @Query(value = "SELECT * FROM Products WHERE name LIKE %:keyword%", nativeQuery = true)
-    Page<Product> findByKeywords(@Param("keyword") String name, Pageable pageable);
 
     Product findByProductID(Long productID);
 
